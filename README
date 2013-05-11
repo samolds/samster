@@ -1,4 +1,4 @@
-samsite
-=======
+SAMSITE
 
-My personal website.
+This is my personal Django website.
+Running on Django 1.4 and Python 2.6 because that's what I'm familiar with.
