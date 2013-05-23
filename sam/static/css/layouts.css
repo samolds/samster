@@ -1,0 +1,97 @@
+/* http://www.w3schools.com/html/html_colors.asp */
+/* http://www.w3schools.com/cssref/css_selectors.asp */
+
+/* -------------- GENERAL -------------- */
+
+/*
+black = #000
+white = #fff
+light grey = #c0c0c0
+dark grey = #444
+*/
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #444;
+  color: #000;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 12px;
+}
+
+ul, li, p, a {
+  color: #000;
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+a:hover {color: #fff}
+
+/* -------------- NAVBAR -------------- */
+
+#navbar {
+  background-color: #000;
+  color: #fff;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* ---FIX or CLEAN UP--- */
+
+#navbar > ul { display: inline; }
+#navbar a { padding: 3px; color: #fff; }
+#navbar a:hover { background-color: #444; }
+
+.navtop.right {
+  position: absolute;
+  right: 10px;
+}
+
+.navtop li {
+  position: relative;
+  margin-top: 6px;
+  display: inline;
+}
+
+.navtop ul li {
+  display: block;
+}
+
+.navtop ul {
+  white-space: nowrap;
+  position: absolute;
+  left: -9999px;
+}
+
+.navtop li:hover ul { left: 0px; }
+.navtop li:hover a { background-color: #000; }
+.navtop a:hover { background-color: #444; }
+
+.navtop .navsub {
+  display: none;
+  text-align: right;
+  position: inherit;
+}
+
+.navtop ul li:hover .navsub {
+  display: block;
+}
+
+/* ---FIX or CLEAN UP--- */
+
+/* -------------- BODY -------------- */
+
+#body {
+  background-color: #c0c0c0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 90px;
+  margin-right: 90px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
