@@ -3,3 +3,4 @@
 *.pyc
 bin/*
 lib/*
+.DS_Store
