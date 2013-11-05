@@ -1,7 +1,7 @@
 *.swp
 *.db
 *.pyc
-bin/*
-lib/*
-include/*
+/bin/
+/lib/
+/include/
 .DS_Store
