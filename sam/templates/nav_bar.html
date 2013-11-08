@@ -1,6 +1,6 @@
 <ul id="navbar">
   <ul class="navtop">
-    <li><a href="/">samolds.com</a>
+    <li><a href="{% url sam.views.home.home %}">samolds.com</a>
       <ul>
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
@@ -34,12 +34,12 @@
             <li><a href="http://www.flickr.com/samolds">Flickr</a></li>
             <li><a href="#">Drawings</a></li>
             <li><a href="https://github.com/samolds">GitHub</a></li>
-            <li><a href="/">samolds.com</a></li>
+            <li><a href="{% url sam.views.home.home %}">samolds.com</a></li>
           </ul>
         </li>
-        <li><a href="/around_the_web">Around The Web</a>
+        <li><a href="{% url sam.views.around_the_web.around_the_web %}">Around The Web</a>
           <ul class="navsub">
-            <li><a href="/around_the_web">Overview</a></li>
+            <li><a href="{% url sam.views.around_the_web.around_the_web %}">Overview</a></li>
             <li><a href="http://www.facebook.com/samolds">Facebook</a></li>
             <li><a href="http://www.twitter.com/sam_olds">Twitter</a></li>
             <li><a href="http://www.flickr.com/samolds">Flickr</a></li>
