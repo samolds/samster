@@ -39,16 +39,19 @@ a:hover {color: #fff}
   padding-right: 10px;
 }
 
+#navbar .left {
+  left: 10px;
+}
+
+#navbar .right {
+  right: 10px;
+}
+
 /* ---FIX or CLEAN UP--- */
 
 #navbar > ul { display: inline; }
 #navbar a { padding: 3px; color: #fff; }
 #navbar a:hover { background-color: #444; }
-
-.navtop.right {
-  position: absolute;
-  right: 10px;
-}
 
 .navtop li {
   position: relative;

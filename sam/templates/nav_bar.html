@@ -1,9 +1,9 @@
-<ul id="navbar">
-  <ul class="navtop">
+<div id="navbar">
+  <ul class="navtop left">
     <li><a href="{% url sam.views.home.home %}">samolds.com</a>
       <ul>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="{% url sam.views.about.about %}">About</a></li>
+        <li><a href="{% url sam.views.contact.contact %}">Contact</a></li>
       </ul>
     </li>
     {#% if admin %#}
@@ -22,17 +22,16 @@
   </ul>
 
   <ul class="navtop right">
-    <li><a href="#">Personal</a>
+    <li><a href="{% url sam.views.personal.personal %}">Personal</a>
       <ul>
-        <li><a href="#">Education</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Google Reader</a></li>
-        <li><a href="#">Favorite Quotes</a></li>
-        <li><a href="#">Projects</a>
+        <li><a href="{% url sam.views.education.education %}">Education</a></li>
+        <li><a href="#{#% url sam.views. %}">Blog</a></li>
+        <li><a href="#{#% url sam.views. %}">Favorite Quotes</a></li>
+        <li><a href="#{#% url sam.views. %}">Projects</a>
           <ul class="navsub">
-            <li><a href="#">Photoshop</a></li>
+            <li><a href="#{#% url sam.views. %}">Photoshop</a></li>
             <li><a href="http://www.flickr.com/samolds">Flickr</a></li>
-            <li><a href="#">Drawings</a></li>
+            <li><a href="#{#% url sam.views. %}">Drawings</a></li>
             <li><a href="https://github.com/samolds">GitHub</a></li>
             <li><a href="{% url sam.views.home.home %}">samolds.com</a></li>
           </ul>
@@ -50,11 +49,11 @@
         </li>
       </ul>
     </li>
-    <li><a href="#">Professional</a>
+    <li><a href="{% url sam.views.professional.professional %}">Professional</a>
       <ul>
         <li><a href="http://www.linkedin.com/in/samolds">LinkedIn</a></li>
         <li><a href="https://github.com/samolds">GitHub</a></li>
       </ul>
     </li>
   </ul>
-</ul>
+</div>
