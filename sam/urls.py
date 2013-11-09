@@ -9,7 +9,7 @@ urlpatterns = patterns('sam.views',
     url(r'^profesional$', 'professional.professional'),
     url(r'^education$', 'education.education'),
     #url(r'^blog$', 'blog.blog'),
-    #url(r'^quotes$', 'quotes.quotes'),
+    url(r'^favorite_quotes$', 'quote.quote'),
     #url(r'^art$', 'art.art'),
     #url(r'^projects$', 'projects.projects'),
 
