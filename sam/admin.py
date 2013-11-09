@@ -2,6 +2,12 @@ from django.contrib import admin
 from sam.models import *
 
 
+class TagAdmin(admin.ModelAdmin):
+    """ The admin model for an Imager
+    """
+admin.site.register(Tag, TagAdmin)
+
+
 class ImageAdmin(admin.ModelAdmin):
     """ The admin model for an Image.
     Content-type, width, and height, are all filled in on Image save.
@@ -36,10 +42,11 @@ class PostAdmin(admin.ModelAdmin):
     """ The admin model for a Blog Post.
     """
     list_display = ("title",
-                    "tags",
+                    "creation_date",
                     "content")
     list_filter = ["title",
                    "tags",
+                   "creation_date",
                    "content"]
 
     actions = ['delete_model']
