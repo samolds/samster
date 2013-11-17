@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if exists %}
+<h1>{{ post.title }}</h1>
+<small>{{ post.creation_date }}</small>
+<br />
+
+<p>{{ post.content }}</p>
+<br />
+
+<p>{{ post.tags }}</p>
+<br />
+
+<p>{{ post.image }}</p>
+<br />
+
+<br />
+<br />
+{% else %}
+<h1>This blog post has been moved or deleted! Oops.</h1>
+{% endif %}
+
+<a href="/blog">Back To Blog</a>
+
+{% endblock %}

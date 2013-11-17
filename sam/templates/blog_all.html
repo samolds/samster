@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Here are all of my blog posts.</h1>
+
+{% for post in posts %}
+<p><a href="post/{{ post.pk }}">{{ post.title }}</a> <small>{{ post.creation_date }}</small>
+<br />
+{{ post.tags }}</p>
+<br />
+<br />
+{% endfor %}
+
+{% endblock %}

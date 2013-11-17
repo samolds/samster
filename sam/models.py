@@ -13,6 +13,7 @@ class Image(models.Model):
     """ Description of the Image model
     """
     name = models.CharField(max_length=50)
+    slug = models.CharField(max_length=50, blank=True, null=True)
     description = models.CharField(max_length=200, blank=True, null=True)
     image = models.ImageField(upload_to="images", height_field="height", width_field="width")
     content_type = models.CharField(max_length=40)
