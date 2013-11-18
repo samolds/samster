@@ -7,7 +7,7 @@
 <p><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a><br /><small>{{ post.creation_date }}</small></p>
 <br />
 
-<p>{{ post.content }}</p>
+<p>{{ post.content|safe}}</p>
 <br />
 
 <br />
