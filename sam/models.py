@@ -15,11 +15,13 @@ class Image(models.Model):
     name = models.CharField(max_length=50)
     slug = models.CharField(max_length=50, blank=True, null=True)
     description = models.CharField(max_length=200, blank=True, null=True)
+    tags = models.ManyToManyField(Tag, max_length=50, related_name='image', blank=True, null=True)
     image = models.ImageField(upload_to="images", height_field="height", width_field="width")
     content_type = models.CharField(max_length=40)
     width = models.IntegerField()
     height = models.IntegerField()
     creation_date = models.DateTimeField(auto_now_add=True)
+    tags = models.ManyToManyField(Tag, max_length=50, related_name='image', blank=True, null=True)
 
     def __unicode__(self):
         return "%s" % self.name
@@ -51,6 +53,7 @@ class Quote(models.Model):
     author = models.CharField(max_length=50)
     quote = models.TextField()
     tags = models.ManyToManyField(Tag, max_length=50, related_name='quote', blank=True, null=True)
+    private = models.BooleanField()
 
     def __unicode__(self):
         if self.name:
@@ -66,7 +69,10 @@ class Post(models.Model):
     content = models.TextField()
     tags = models.ManyToManyField(Tag, max_length=50, related_name='post', blank=True, null=True)
     image = models.ForeignKey(Image, blank=True, null=True)
+    embedded_link = models.CharField(max_length=200, blank=True, null=True)
+    private = models.BooleanField()
     creation_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return "%s" % self.title
@@ -78,6 +84,7 @@ class Art(models.Model):
     title = models.CharField(max_length=100)
     tags = models.ManyToManyField(Tag, max_length=50, related_name='art', blank=True, null=True)
     image = models.ForeignKey(Image)
+    private = models.BooleanField()
 
     def __unicode__(self):
         return "%s" % self.title
