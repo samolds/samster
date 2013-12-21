@@ -16,7 +16,6 @@ def contact(request):
             message = form.cleaned_data['message']
             bot_test = form.cleaned_data['email_confirmation']
 
-            #browser = request.META.get('HTTP_USER_AGENT', 'Unknown')
 
             email_message = "%s \n\n - %s (%s)" % (message, name, sender)
 

@@ -13,13 +13,17 @@ dark grey = #444
 body {
   margin: 0px;
   padding: 0px;
+  background-image: url('/static/img/backgrounds/27.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center top;
   background-color: #444;
   color: #000;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 12px;
 }
 
-ul, li, p, a {
+div, ul, li, p, a {
   color: #000;
   margin: 0px;
   padding: 0px;
@@ -35,8 +39,13 @@ a:hover {color: #fff}
   background-color: #000;
   color: #fff;
   padding: 3px;
+  padding-bottom: 2px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+#navbar > ul {
+  display: inline-block;
 }
 
 #navbar .left {
@@ -47,11 +56,10 @@ a:hover {color: #fff}
   right: 10px;
 }
 
-/* ---FIX or CLEAN UP--- */
-
-#navbar > ul { display: inline; }
 #navbar a { padding: 3px; color: #fff; }
 #navbar a:hover { background-color: #444; }
+
+/* ---FIX or CLEAN UP--- */
 
 .navtop li {
   position: relative;
@@ -66,34 +74,24 @@ a:hover {color: #fff}
 .navtop ul {
   white-space: nowrap;
   position: absolute;
-  left: -9999px;
-}
-
-.navtop li:hover ul { left: 0px; }
-.navtop li:hover a { background-color: #000; }
-.navtop a:hover { background-color: #444; }
-
-.navtop .navsub {
   display: none;
-  text-align: right;
-  position: inherit;
-}
-
-.navtop ul li:hover .navsub {
-  display: block;
 }
 
 /* ---FIX or CLEAN UP--- */
 
+.navtop li:hover ul { left: 0px; display: block; }
+.navtop li:hover a { background-color: #000; }
+.navtop a:hover { background-color: #444; }
+
 /* -------------- BODY -------------- */
 
 #body {
-  background-color: #c0c0c0;
-  margin-top: 20px;
+  background-color: #e0e0e0;
+  margin-top: 10px;
   margin-bottom: 20px;
   margin-left: 90px;
   margin-right: 90px;
-  padding-top: 10px;
+  padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;

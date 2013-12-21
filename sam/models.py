@@ -3,14 +3,14 @@ from PIL import Image
 
 
 class Tag(models.Model):
-    tag = models.CharField(max_length=50)
+    tag = models.SlugField(max_length=50)
 
     def __unicode__(self):
         return "%s" % self.tag
 
 
-class Image(models.Model):
-    """ Description of the Image model
+class SiteImage(models.Model):
+    """ Description of the SiteImage model
     """
     name = models.CharField(max_length=50)
     slug = models.CharField(max_length=50, blank=True, null=True)
@@ -21,7 +21,7 @@ class Image(models.Model):
     width = models.IntegerField()
     height = models.IntegerField()
     creation_date = models.DateTimeField(auto_now_add=True)
-    tags = models.ManyToManyField(Tag, max_length=50, related_name='image', blank=True, null=True)
+    tags = models.ManyToManyField(Tag, max_length=50, related_name='siteimage', blank=True, null=True)
 
     def __unicode__(self):
         return "%s" % self.name
@@ -38,12 +38,12 @@ class Image(models.Model):
 
         self.content_type = content_types[img.format]
 
-        super(Image, self).save(*args, **kwargs)
+        super(SiteImage, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
         self.image.delete(save=False)
 
-        super(Image, self).delete(*args, **kwargs)
+        super(SiteImage, self).delete(*args, **kwargs)
 
 
 class Quote(models.Model):
@@ -68,8 +68,8 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     tags = models.ManyToManyField(Tag, max_length=50, related_name='post', blank=True, null=True)
-    image = models.ForeignKey(Image, blank=True, null=True)
-    embedded_link = models.CharField(max_length=200, blank=True, null=True)
+    images = models.ManyToManyField(SiteImage, related_name='post', blank=True, null=True)
+    embedded_link = models.CharField(max_length=500, blank=True, null=True)
     private = models.BooleanField()
     creation_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
@@ -83,7 +83,7 @@ class Art(models.Model):
     """
     title = models.CharField(max_length=100)
     tags = models.ManyToManyField(Tag, max_length=50, related_name='art', blank=True, null=True)
-    image = models.ForeignKey(Image)
+    image = models.ForeignKey(SiteImage)
     private = models.BooleanField()
 
     def __unicode__(self):

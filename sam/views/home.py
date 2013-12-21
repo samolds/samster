@@ -7,4 +7,5 @@ from django.template import RequestContext
 #@login_required
 def home(request):
     context = RequestContext(request, {})
+    #browser = request.META.get('HTTP_USER_AGENT', 'Unknown')
     return render_to_response('home.html', {}, context)

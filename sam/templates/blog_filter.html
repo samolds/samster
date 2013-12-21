@@ -1,25 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Here are all of my blog posts.</h1>
+<h1>All posts tagged with "{{ tag }}"</h1>
 <br />
 <br />
 <hr />
 <br />
 
+
+{% if exists %}
 {% for post in posts %}
 <h2><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h2>
 <small>{{ post.creation_date }}</small>
 <br />
 
-<p>
+Tags: 
 {% for tag_data in post.tags.values %}
-<a href="/blog/filter/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
+<a href="/blog/filter/{{ tag_data.tag }}">{{ tag_data.tag }}</a> 
 {% endfor %}
 </p>
+
 <br />
 <hr />
 <br />
 {% endfor %}
+{% else %}
+<p>There are no posts with that tag</p>
+<br />
+<hr />
+<br />
+{% endif %}
+
+<a href="/blog">Back To Blog</a>
 
 {% endblock %}

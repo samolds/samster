@@ -6,7 +6,8 @@
         <li><a href="{% url sam.views.contact.contact %}">Contact</a></li>
       </ul>
     </li>
-    {#% if admin %#}
+    <!--
+    {% if False %}
       <li><a href="/admin">Admin</a>
         <ul>
           <li><a href="/admin/sam/post">Blog</a></li>
@@ -15,16 +16,18 @@
           <li><a href="/admin/logout">Log Out</a></li>
         </ul>
       </li>
-    {#% endif %#}
+    {% endif %}
+    -->
   </ul>
 
   <ul class="navtop right">
     <li><a href="{% url sam.views.personal.personal %}">Personal</a>
       <ul>
-        <li><a href="{% url sam.views.education.education %}">Education</a></li>
         <li><a href="{% url sam.views.blog.blog %}">Blog</a></li>
         <li><a href="{% url sam.views.quote.quote %}">Favorite Quotes</a></li>
-        <li><a href="#{#% url sam.views. %}">Projects</a>
+        <li><a href="{% url sam.views.education.education %}">Education</a></li>
+        <li><a href="#{#% url sam.views. %}">Projects</a><!--
+          {% if False %}
           <ul class="navsub">
             <li><a href="#{#% url sam.views. %}">Photoshop</a></li>
             <li><a href="http://www.flickr.com/samolds">Flickr</a></li>
@@ -32,8 +35,10 @@
             <li><a href="https://github.com/samolds">GitHub</a></li>
             <li><a href="{% url sam.views.home.home %}">samolds.com</a></li>
           </ul>
-        </li>
-        <li><a href="{% url sam.views.around_the_web.around_the_web %}">Around The Web</a>
+          {% endif %}
+        --></li>
+        <li><a href="{% url sam.views.around_the_web.around_the_web %}">Around The Web</a><!--
+          {% if False %}
           <ul class="navsub">
             <li><a href="{% url sam.views.around_the_web.around_the_web %}">Overview</a></li>
             <li><a href="http://www.facebook.com/samolds">Facebook</a></li>
@@ -43,7 +48,8 @@
             <li><a href="http://www.linkedin.com/in/samolds">LinkedIn</a></li>
             <li><a href="https://github.com/samolds">GitHub</a></li>
           </ul>
-        </li>
+          {% endif %}
+        --></li>
       </ul>
     </li>
     <li><a href="{% url sam.views.professional.professional %}">Professional</a>

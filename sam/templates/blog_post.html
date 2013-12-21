@@ -3,27 +3,42 @@
 {% block content %}
 
 {% if exists %}
-<h1>{{ post.title }}</h1>
-<small>Created on {{ post.creation_date }}</small>
-<small>Updated on {{ post.updated_date }}</small>
-<br />
+  <h1>{{ post.title }}</h1>
 
-<p>{{ post.content|safe }}</p>
-<br />
+  <small>Created on {{ post.creation_date }}</small>
 
-<p>{{ post.tags }}</p>
-<br />
+  {% if not post.creation_date.ctime == post.updated_date.ctime %}
+    <br />
+    <small>Updated on {{ post.updated_date }}</small>
+  {% endif %}
+  <br />
 
-<p>{{ post.image }}</p>
-<br />
+  <small>
+    Tags: 
+    {% for tag_data in post.tags.values %}
+      <a href="/blog/filter/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
+    {% endfor %}
+  </small>
+  <br />
+  <br />
 
-<p>{{ post.embedded_link|safe }}</p>
-<br />
+  <p>{{ post.content|safe }}</p>
+  <br />
 
-<br />
-<br />
+  {% if post.image.image %}
+    <p><img src="/{{ post.image.image }}" /></p>
+    <br />
+  {% endif %}
+
+  {% if post.embedded_link %}
+    <p>{{ post.embedded_link|safe }}</p>
+    <br />
+  {% endif %}
+
+  <br />
 {% else %}
-<h1>This blog post has been moved or deleted! Oops.</h1>
+  <h1>This blog post has been moved or deleted! Oops.</h1>
+  <br />
 {% endif %}
 
 <a href="/blog">Back To Blog</a>

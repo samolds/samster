@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Here are my 5 most recent blog posts.</h1>
+<h1>My 5 most recent blog posts.</h1>
+<br />
+<br />
+<hr />
+<br />
 
 {% for post in posts %}
-<p><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a><br /><small>{{ post.creation_date }}</small></p>
+<h2><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h2>
+<small>{{ post.creation_date }}</small></p>
 <br />
 
 <p>{{ post.content|safe}}</p>
 <br />
 
 <br />
+<hr />
 <br />
 {% endfor %}
 

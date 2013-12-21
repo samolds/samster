@@ -11,6 +11,7 @@ urlpatterns = patterns('sam.views',
     url(r'^blog$', 'blog.blog'),
     url(r'^blog/all$', 'blog.all_posts'),
     url(r'^blog/post(?:/(?P<post_id>\d+))?$', 'blog.post'),
+    url(r'^blog/filter(?:/(?P<tag>\w+))?$', 'blog.filter'),
     url(r'^favorite_quotes$', 'quote.quote'),
     #url(r'^art$', 'art.art'),
     #url(r'^projects$', 'projects.projects'),
@@ -22,4 +23,8 @@ urlpatterns = patterns('sam.views',
     #url(r'thankyou(?:/(?P<spot_id>\d+))?/$', 'contact.thank_you'),
     #url(r'space/(?P<spot_id>\d+)$', 'spot.SpotView'),
     #url(r'space/(?P<spot_id>\d+)/json/$', 'spot.SpotView', {'return_json': True}),
+)
+
+urlpatterns += patterns('',
+    (r'^admin/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
 )

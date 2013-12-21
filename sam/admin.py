@@ -3,32 +3,32 @@ from sam.models import *
 
 
 class TagAdmin(admin.ModelAdmin):
-    """ The admin model for an Imager
+    """ The admin model for an Tag
     """
 admin.site.register(Tag, TagAdmin)
 
 
-class ImageAdmin(admin.ModelAdmin):
-    """ The admin model for an Image.
+class SiteImageAdmin(admin.ModelAdmin):
+    """ The admin model for an SiteImage.
     Content-type, width, and height, are all filled in on Image save.
     """
     exclude = ('content_type', 'width', 'height')
     actions = ['delete_model']
 
     def get_actions(self, request):
-        actions = super(ImageAdmin, self).get_actions(request)
+        actions = super(SiteImageAdmin, self).get_actions(request)
         del actions['delete_selected']
         return actions
 
     def delete_model(self, request, queryset):
-        if type(queryset) == Image:
+        if type(queryset) == SiteImage:
             queryset.delete()
         else:
             for image in queryset.all():
                 image.delete()
     delete_model.short_description = "Delete selected images"
 
-admin.site.register(Image, ImageAdmin)
+admin.site.register(SiteImage, SiteImageAdmin)
 
 
 class QuoteAdmin(admin.ModelAdmin):
