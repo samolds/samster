@@ -7,7 +7,7 @@ from sam.models import Post, Tag
 
 #@login_required
 def blog(request):
-    posts = Post.objects.all()
+    posts = list(Post.objects.filter(private=False))
     if len(posts) > 5:
         posts = posts[len(posts) - 5:]
     posts.reverse()
@@ -15,7 +15,7 @@ def blog(request):
 
 
 def all_posts(request):
-    posts = list(Post.objects.all())
+    posts = list(Post.objects.filter(private=False))
     posts.reverse()
     return render_to_response('blog_all.html', {"posts": posts}, context_instance=RequestContext(request))
 
@@ -25,6 +25,8 @@ def post(request, post_id=None):
         exists = True
         if Post.objects.filter(pk=post_id):
             post = Post.objects.get(pk=post_id)
+            if post.private:
+              post = None
         else:
             post = None
             exists = False
@@ -39,7 +41,7 @@ def filter(request, tag=None):
         exists = True
         if Tag.objects.filter(tag=tag):
             tag_object = Tag.objects.filter(tag=tag)
-            posts = list(Post.objects.filter(tags=tag_object))
+            posts = list(Post.objects.filter(tags=tag_object, private=False))
             posts.reverse()
         else:
             posts = None

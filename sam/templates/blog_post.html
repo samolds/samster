@@ -3,44 +3,57 @@
 {% block content %}
 
 {% if exists %}
-  <h1>{{ post.title }}</h1>
+  {% if post %}
+    <div class="content">
+    <h1>{{ post.title }}</h1>
 
-  <small>Created on {{ post.creation_date }}</small>
+    <small>Created on {{ post.creation_date }}</small>
 
-  {% if not post.creation_date.ctime == post.updated_date.ctime %}
+    {% if not post.creation_date.ctime == post.updated_date.ctime %}
+      <br />
+      <small>Updated on {{ post.updated_date }}</small>
+    {% endif %}
     <br />
-    <small>Updated on {{ post.updated_date }}</small>
-  {% endif %}
-  <br />
 
-  <small>
-    Tags: 
-    {% for tag_data in post.tags.values %}
-      <a href="/blog/filter/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
-    {% endfor %}
-  </small>
-  <br />
-  <br />
+    <small>
+      Tags: 
+      {% for tag_data in post.tags.values %}
+        <a href="/blog/filter/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
+      {% endfor %}
+    </small>
+    <br />
+    <br />
 
-  <p>{{ post.content|safe }}</p>
-  <br />
+    <p>{{ post.content|safe }}</p>
+    <br />
 
-  {% if post.image.image %}
-    <p><img src="/{{ post.image.image }}" /></p>
+    {% if post.image.image %}
+      <p><img src="/{{ post.image.image }}" /></p>
+      <br />
+    {% endif %}
+
+    {% if post.embedded_link %}
+      <p>{{ post.embedded_link|safe }}</p>
+      <br />
+    {% endif %}
+    </div>
+
+    <br />
+  {% else %}
+    <div class="content">
+    <h1>This blog post has been marked as private!</h1>
+    </div>
     <br />
   {% endif %}
-
-  {% if post.embedded_link %}
-    <p>{{ post.embedded_link|safe }}</p>
-    <br />
-  {% endif %}
-
-  <br />
 {% else %}
+  <div class="content">
   <h1>This blog post has been moved or deleted! Oops.</h1>
+  </div>
   <br />
 {% endif %}
 
+<div class="content">
 <a href="/blog">Back To Blog</a>
+</div>
 
 {% endblock %}

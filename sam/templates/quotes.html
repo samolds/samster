@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="content">
 <h1>Here are all of my Favorite Quotes!</h1>
+</div>
+
+<br />
 
 {% for quote in quotes %}
+<div class="content">
 <p>"{{ quote.quote }}"</p>
 <p>- {{ quote.author }}</p>
+</div>
 <br />
 {% endfor %}
 

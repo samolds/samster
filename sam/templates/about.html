@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="content">
 <h1>About</h1>
 
 <p>
@@ -20,4 +21,28 @@ Anyway, I'm just brainstorming here on what to include in the "About" page:
 I feel like a lot of the site is going to be redundant.
 Did I divide it up too much?
 </p>
+
+
+{% if post %}
+  <h1>{{ post.title }}</h1>
+  <br />
+
+  <p>{{ post.content|safe }}</p>
+  <br />
+
+  {% if post.image.image %}
+    <p><img src="/{{ post.image.image }}" /></p>
+    <br />
+  {% endif %}
+
+  {% if post.embedded_link %}
+    <p>{{ post.embedded_link|safe }}</p>
+    <br />
+  {% endif %}
+
+  <br />
+{% endif %}
+</div>
+
+
 {% endblock %}

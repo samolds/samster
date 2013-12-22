@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="content">
 <h1>All posts tagged with "{{ tag }}"</h1>
-<br />
-<br />
-<hr />
+</div>
 <br />
 
 
 {% if exists %}
 {% for post in posts %}
+<div class="content">
 <h2><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h2>
 <small>{{ post.creation_date }}</small>
 <br />
@@ -19,18 +19,20 @@ Tags:
 <a href="/blog/filter/{{ tag_data.tag }}">{{ tag_data.tag }}</a> 
 {% endfor %}
 </p>
+</div>
 
-<br />
-<hr />
 <br />
 {% endfor %}
 {% else %}
+<div class="content">
 <p>There are no posts with that tag</p>
-<br />
-<hr />
+</div>
 <br />
 {% endif %}
 
+
+<div class="content">
 <a href="/blog">Back To Blog</a>
+</div>
 
 {% endblock %}

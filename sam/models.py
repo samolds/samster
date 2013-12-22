@@ -4,6 +4,7 @@ from PIL import Image
 
 class Tag(models.Model):
     tag = models.SlugField(max_length=50)
+    description = models.CharField(max_length=200, blank=True, null=True)
 
     def __unicode__(self):
         return "%s" % self.tag
@@ -82,6 +83,7 @@ class Art(models.Model):
     """Description of the Art model
     """
     title = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
     tags = models.ManyToManyField(Tag, max_length=50, related_name='art', blank=True, null=True)
     image = models.ForeignKey(SiteImage)
     private = models.BooleanField()

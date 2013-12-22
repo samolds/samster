@@ -1,9 +1,58 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="content">
 <h1>Welcome to samolds.com!</h1>
 <p>A quick little blurb about me with link to about me?</p>
 <p>Put one of my favorite flickr photos here</p>
 <p>Include one of my favorite quotes picked at random</p>
 <p>Include my most recent blog post</p>
+
+{% if home_post %}
+  <h1>{{ home_post.title }}</h1>
+  <br />
+
+  <p>{{ home_post.content|safe }}</p>
+  <br />
+
+  {% if home_post.image.image %}
+    <p><img src="/{{ home_post.image.image }}" /></p>
+    <br />
+  {% endif %}
+
+  {% if home_post.embedded_link %}
+    <p>{{ home_post.embedded_link|safe }}</p>
+  {% endif %}
+{% endif %}
+</div>
+
+<br />
+
+{% if quote %}
+  <div class="content">
+    <small>"{{ quote.quote }}"</small>
+    <small>- {{ quote.author }}</small>
+  </div>
+{% endif %}
+
+<br />
+
+{% if recent_post %}
+  <div class="content">
+  <h1>{{ recent_post.title }}</h1>
+  <br />
+
+  <p>{{ recent_post.content|safe }}</p>
+  <br />
+
+  {% if recent_post.image.image %}
+    <p><img src="/{{ recent_post.image.image }}" /></p>
+    <br />
+  {% endif %}
+
+  {% if recent_post.embedded_link %}
+    <p>{{ recent_post.embedded_link|safe }}</p>
+  {% endif %}
+  </div>
+{% endif %}
 {% endblock %}

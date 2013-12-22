@@ -13,7 +13,7 @@ dark grey = #444
 body {
   margin: 0px;
   padding: 0px;
-  background-image: url('/static/img/backgrounds/27.jpg');
+  background-image: url('/static/img/backgrounds/2.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center top;
@@ -44,22 +44,22 @@ a:hover {color: #fff}
   padding-right: 10px;
 }
 
-#navbar > ul {
-  display: inline-block;
-}
-
 #navbar .left {
-  left: 10px;
+  padding-left: 10px;
+  float: left;
 }
 
 #navbar .right {
-  right: 10px;
+  padding-right: 10px;
+  float: right;
+}
+
+#navbar .clear {
+  clear: both;
 }
 
 #navbar a { padding: 3px; color: #fff; }
 #navbar a:hover { background-color: #444; }
-
-/* ---FIX or CLEAN UP--- */
 
 .navtop li {
   position: relative;
@@ -77,8 +77,6 @@ a:hover {color: #fff}
   display: none;
 }
 
-/* ---FIX or CLEAN UP--- */
-
 .navtop li:hover ul { left: 0px; display: block; }
 .navtop li:hover a { background-color: #000; }
 .navtop a:hover { background-color: #444; }
@@ -86,13 +84,22 @@ a:hover {color: #fff}
 /* -------------- BODY -------------- */
 
 #body {
-  background-color: #e0e0e0;
   margin-top: 10px;
   margin-bottom: 20px;
   margin-left: 90px;
   margin-right: 90px;
+}
+
+#body .content {
   padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
+
+  /* background-image: url('/static/img/backgrounds/27.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center top; */
+  background-color: #e0e0e0;
+  word-wrap: break-word;
 }
