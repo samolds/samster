@@ -10,17 +10,18 @@ light grey = #c0c0c0
 dark grey = #444
 */
 
-body {
+html, body {
   margin: 0px;
   padding: 0px;
-  background-image: url('/static/img/backgrounds/2.jpg');
+  /* background-image: url('/static/img/backgrounds/2.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-position: center top;
+  background-position: center top; */
   background-color: #444;
   color: #000;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 12px;
+  height: 100%;
 }
 
 div, ul, li, p, a {
@@ -44,17 +45,17 @@ a:hover {color: #fff}
   padding-right: 10px;
 }
 
-#navbar .left {
+.left {
   padding-left: 10px;
   float: left;
 }
 
-#navbar .right {
+.right {
   padding-right: 10px;
   float: right;
 }
 
-#navbar .clear {
+.clear {
   clear: both;
 }
 
@@ -62,6 +63,7 @@ a:hover {color: #fff}
 #navbar a:hover { background-color: #444; }
 
 .navtop li {
+  color: #fff;
   position: relative;
   margin-top: 5px;
   display: inline;
@@ -86,9 +88,12 @@ a:hover {color: #fff}
 
 #body {
   margin-top: 10px;
-  margin-bottom: 10px;
   margin-left: 90px;
   margin-right: 90px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #ffffff;
+  border-radius: 5px;
 }
 
 #body .content {
@@ -108,3 +113,36 @@ a:hover {color: #fff}
 #body .inbetween {
   opacity: 0.8;
 }
+
+/* -------------- FOOTER -------------- */
+
+#wrap {
+  min-height: 100%;
+}
+
+#footspace {
+  padding: 50px;
+}
+
+#footer {
+  position: relative;
+  margin-top: -20px;
+  height: 20px;
+  clear: both;
+}
+
+#footbar {
+  background-color: #000;
+  color: #fff;
+  padding: 3px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#footbar li {
+  padding: 3px;
+}
+
+#footbar a { padding: 3px; color: #fff; }
+#footbar a:hover { background-color: #444; }
