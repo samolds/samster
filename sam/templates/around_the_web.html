@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="body-normal">
 <div class="content">
 <h1>Around the Web</h1>
 <p>A comprehensive list of everything I am on the interwebs</p>
@@ -9,7 +10,7 @@
 <div class="content inbetween"></div>
 
 <div class="content">
-<ul>
+<ul class="content">
 <li><a href="http://samolds.com">Sam Olds</a></li>
 <li><a href="http://facebook.com/samolds">Facebook</a></li>
 <li><a href="http://plus.google.com/+samolds">Google+</a></li>
@@ -51,8 +52,8 @@
 <div class="content inbetween"></div>
 
 <div class="content">
-<p>Here are the websites that I maintain but are not personally mine</p>
-<ul>
+<p>The sites are not personally mine, but I help maintain them</p>
+<ul class="content">
 <li><a href="http://students.washington.edu/sonnis">UW Sonnis Club</a></li>
 </ul>
 </div>
@@ -60,9 +61,10 @@
 <div class="content inbetween"></div>
 
 <div class="content">
-<p>These sites that I have helped develop while employed</p>
-<ul>
+<p>Sites that I have helped develop while employed</p>
+<ul class="content">
 <li><a href="http://spacescout.uw.edu">SpaceScout</a></li>
 </ul>
+</div>
 </div>
 {% endblock %}

@@ -13,10 +13,10 @@ dark grey = #444
 html, body {
   margin: 0px;
   padding: 0px;
-  /* background-image: url('/static/img/backgrounds/2.jpg');
+  background-image: url('/static/img/backgrounds/6.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-position: center top; */
+  background-position: center top;
   background-color: #444;
   color: #000;
   font-family: verdana, arial, helvetica, sans-serif;
@@ -24,7 +24,7 @@ html, body {
   height: 100%;
 }
 
-div, ul, li, p, a {
+div, ul, li, p, a, table, tr, td {
   color: #000;
   margin: 0px;
   padding: 0px;
@@ -32,7 +32,10 @@ div, ul, li, p, a {
   text-decoration: none;
 }
 
-a:hover {color: #fff}
+a:hover {color: #fff;}
+
+table {width: 100%;}
+.tdtitle {width: 80%;}
 
 /* -------------- NAVBAR -------------- */
 
@@ -86,7 +89,7 @@ a:hover {color: #fff}
 
 /* -------------- BODY -------------- */
 
-#body {
+.body-normal {
   margin-top: 10px;
   margin-left: 90px;
   margin-right: 90px;
@@ -96,7 +99,17 @@ a:hover {color: #fff}
   border-radius: 5px;
 }
 
-#body .content {
+.body-narrow {
+  margin-top: 10px;
+  margin-left: 180px;
+  margin-right: 180px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #ffffff;
+  border-radius: 5px;
+}
+
+.content {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 20px;
@@ -110,13 +123,16 @@ a:hover {color: #fff}
   word-wrap: break-word;
 }
 
-#body .inbetween {
+.textleft {text-align: left;}
+.textright {text-align: right;}
+
+.inbetween {
   opacity: 0.8;
 }
 
 /* -------------- FOOTER -------------- */
 
-#wrap {
+#bodywrap {
   min-height: 100%;
 }
 

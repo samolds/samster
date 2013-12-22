@@ -1,58 +1,82 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="content">
-<!--
-<h1>Welcome to samolds.com!</h1>
-<p>A quick little blurb about me with link to about me?</p>
-<p>Put one of my favorite flickr photos here</p>
-<p>Include one of my favorite quotes picked at random</p>
-<p>Include my most recent blog post</p>
--->
+<div class="body-normal">
+  <div class="content">
+    <!--
+    <h1>Welcome to samolds.com!</h1>
+    <p>A quick little blurb about me with link to about me?</p>
+    <p>Put one of my favorite flickr photos here</p>
+    <p>Include one of my favorite quotes picked at random</p>
+    <p>Include my most recent blog post</p>
+    -->
+    {% if home_post %}
+      <h1>{{ home_post.title }}</h1>
 
-{% if home_post %}
-  <h1>{{ home_post.title }}</h1>
-  <br />
+      <div class="content">
+        <p>{{ home_post.content|safe }}</p>
+        <div class="clear"></div>
+        <br />
 
-  <p>{{ home_post.content|safe }}</p>
-  <br />
+        {% if home_post.image.image %}
+          <p><img src="/{{ home_post.image.image }}" /></p>
+          <br />
+        {% endif %}
 
-  {% if home_post.image.image %}
-    <p><img src="/{{ home_post.image.image }}" /></p>
-    <br />
-  {% endif %}
+        {% if home_post.embedded_link %}
+          <p>{{ home_post.embedded_link|safe }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
 
-  {% if home_post.embedded_link %}
-    <p>{{ home_post.embedded_link|safe }}</p>
-  {% endif %}
-{% endif %}
+  <div class="content inbetween"></div>
+
+  <div class="content">
+    {% if recent_post %}
+        <table>
+          <tr>
+            <td class="textleft tdtitle" rowspan=2><h2><a href="/blog/post/{{ recent_post.pk }}">{{ recent_post.title }}</a></h2></td>
+            <td class="textright"><small>{{ recent_post.creation_date }}</small></td>
+          </tr>
+          {% if not recent_post.creation_date.ctime == recent_post.updated_date.ctime %}
+          <tr>
+            <td class="textright"><small>{{ recent_post.updated_date }}</small></td>
+          </tr>
+          {% endif %}
+        </table>
+
+        <p class="textright"><small>
+          {% for tag_data in recent_post.tags.values %}
+            <a href="/blog/filter/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
+          {% endfor %}
+        </small></p>
+
+        <div class="content">
+          <p>
+            {{ recent_post.content|safe }}
+          </p>
+
+          {% if recent_post.image.image %}
+            <p><img src="/{{ recent_post.image.image }}" /></p>
+            <br />
+          {% endif %}
+
+          {% if recent_post.embedded_link %}
+            <p>{{ recent_post.embedded_link|safe }}</p>
+          {% endif %}
+        </div>
+    {% endif %}
+  </div>
+
+  <div class="content inbetween"></div>
+
+  <div class="content textright">
+    {% if quote %}
+        <small>"{{ quote.quote }}"</small>
+        <small>- {{ quote.author }}</small>
+    {% endif %}
+  </div>
 </div>
 
-{% if quote %}
-  <div class="content">
-    <small>"{{ quote.quote }}"</small>
-    <small>- {{ quote.author }}</small>
-  </div>
-{% endif %}
-
-<div class="content inbetween"></div>
-
-{% if recent_post %}
-  <div class="content">
-  <h1><a href="/blog/post/{{ recent_post.id }}">{{ recent_post.title }}</a></h1>
-  <br />
-
-  <p>{{ recent_post.content|safe }}</p>
-  <br />
-
-  {% if recent_post.image.image %}
-    <p><img src="/{{ recent_post.image.image }}" /></p>
-    <br />
-  {% endif %}
-
-  {% if recent_post.embedded_link %}
-    <p>{{ recent_post.embedded_link|safe }}</p>
-  {% endif %}
-  </div>
-{% endif %}
 {% endblock %}

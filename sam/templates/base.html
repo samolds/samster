@@ -13,11 +13,9 @@
     {% block extra_js %}{% endblock %}
 </head>
 <body>
-    <div id="wrap">
+    <div id="bodywrap">
       {% include "nav_bar.html" %}
-      <div id="body">
-          {% block content %}{% endblock %}
-      </div>
+      {% block content %}{% endblock %}
       <div id="footspace"></div>
     </div>
     <div id="footer">

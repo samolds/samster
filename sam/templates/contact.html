@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="body-narrow">
 <div class="content">
 <h1>Need to Contact Me?</h1>
+<div class="content">
 <p>Here will be a form for contacting me</p>
 <p>Put something about hiring me to show up at your event, even though I have no special skills.</p>
 <p>Photography bookings?</p>
@@ -17,7 +19,12 @@
 <li>Send to thanks page?</li>
 </ul>
 </p>
+</div>
+</div>
 
+<div class="content inbetween"></div>
+
+<div class="content">
 <form action="/contact" method="post">{% csrf_token %}
     <div class="fieldWrapper">
     </div>
@@ -38,6 +45,7 @@
     {% endfor %}
     <input type="submit" value="Send" />
 </form>
+</div>
 </div>
 
 {% endblock %}

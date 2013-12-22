@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="body-narrow">
 <div class="content">
 <!--
 <h1>About</h1>
@@ -26,24 +27,30 @@ Did I divide it up too much?
 
 
 {% if post %}
-  <h1>{{ post.title }}</h1>
-  <br />
 
-  <p>{{ post.content|safe }}</p>
-  <br />
+  <div class="content">
+    <h1>{{ post.title }}</h1>
 
-  {% if post.image.image %}
-    <p><img src="/{{ post.image.image }}" /></p>
-    <br />
-  {% endif %}
+    <div class="content">
+      <p>
+        {{ post.content|safe }}
+        <div class="clear"></div>
+      </p>
 
-  {% if post.embedded_link %}
-    <p>{{ post.embedded_link|safe }}</p>
-    <br />
-  {% endif %}
 
-  <br />
+      {% if post.image.image %}
+        <img src="/{{ post.image.image }}" />
+        <br />
+      {% endif %}
+
+      {% if post.embedded_link %}
+        {{ post.embedded_link|safe }}
+        <br />
+      {% endif %}
+    </div>
+  </div>
 {% endif %}
+</div>
 </div>
 
 
