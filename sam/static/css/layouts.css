@@ -63,12 +63,13 @@ a:hover {color: #fff}
 
 .navtop li {
   position: relative;
-  margin-top: 6px;
+  margin-top: 5px;
   display: inline;
 }
 
 .navtop ul li {
   display: block;
+  z-index: 10;
 }
 
 .navtop ul {
@@ -85,16 +86,16 @@ a:hover {color: #fff}
 
 #body {
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-left: 90px;
   margin-right: 90px;
 }
 
 #body .content {
-  padding-top: 5px;
+  padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 
   /* background-image: url('/static/img/backgrounds/27.jpg');
   background-attachment: fixed;
@@ -102,4 +103,8 @@ a:hover {color: #fff}
   background-position: center top; */
   background-color: #e0e0e0;
   word-wrap: break-word;
+}
+
+#body .inbetween {
+  opacity: 0.8;
 }

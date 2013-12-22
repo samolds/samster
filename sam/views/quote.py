@@ -7,5 +7,5 @@ from sam.models import Quote
 
 #@login_required
 def quote(request):
-    context = RequestContext(request, {})
-    return render_to_response('quotes.html', {"quotes": Quote.objects.all()}, context)
+  quotes = list(Quote.objects.filter(private=False))
+  return render_to_response('quotes.html', {"quotes": quotes}, context_instance=RequestContext(request))

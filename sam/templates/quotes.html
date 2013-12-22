@@ -5,14 +5,19 @@
 <h1>Here are all of my Favorite Quotes!</h1>
 </div>
 
-<br />
+<div class="content inbetween"></div>
 
 {% for quote in quotes %}
 <div class="content">
 <p>"{{ quote.quote }}"</p>
 <p>- {{ quote.author }}</p>
 </div>
-<br />
+
+<div class="content inbetween"></div>
 {% endfor %}
+
+<div class="content">
+<p>That's all quotes.</p>
+</div>
 
 {% endblock %}
