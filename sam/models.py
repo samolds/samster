@@ -63,6 +63,20 @@ class Quote(models.Model):
             return "%s" % self.author
 
 
+class Comment(models.Model):
+    """Description of the Comment model
+    """
+    private = models.BooleanField()
+    name = models.CharField(max_length=100)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    subject = models.CharField(max_length=100, blank=True, null=True)
+    message = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return "%s" % self.name
+
+
 class Post(models.Model):
     """Description of the Post model
     """
@@ -72,6 +86,7 @@ class Post(models.Model):
     images = models.ManyToManyField(SiteImage, related_name='post', blank=True, null=True)
     embedded_link = models.CharField(max_length=500, blank=True, null=True)
     private = models.BooleanField()
+    comments = models.ManyToManyField(Comment, related_name='post', blank=True, null=True)
     creation_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -85,7 +100,8 @@ class Art(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     tags = models.ManyToManyField(Tag, max_length=50, related_name='art', blank=True, null=True)
-    image = models.ForeignKey(SiteImage)
+    image = models.ForeignKey(SiteImage, blank=True, null=True)
+    embedded_link = models.CharField(max_length=500, blank=True, null=True)
     private = models.BooleanField()
 
     def __unicode__(self):

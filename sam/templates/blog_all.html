@@ -3,7 +3,22 @@
 {% block content %}
 <div class="body-narrow">
 <div class="content">
-<h1>Here are all of my blog posts.</h1>
+  <div class="inline">
+    <form class="right" action="/blog/all" method="post">{% csrf_token %}
+        {{ form.non_field_errors }}
+        <table>
+        <tr>
+        <td><small>{{ form.tag.label_tag }} {{ form.tag }}</small></td>
+        <td rowspan=2><input type="submit" value="Filter" /></td>
+        </tr>
+        <tr>
+        <td><small>{{ form.date.label_tag }} {{ form.date }}</small></td>
+        </tr>
+        </table>
+    </form>
+    <h1 class="left">All Blog Posts</h1>
+    <div class="clear"></div>
+  </div>
 </div>
 
 <div class="content inbetween"></div>

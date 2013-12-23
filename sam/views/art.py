@@ -1,8 +1,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from sam.models import Post, Tag, Comment
+from sam.models import Post, Tag
 from sam.forms.blog_filter import BlogFilterForm
-from sam.forms.contact import ContactForm
 #from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 #from django.conf import settings
@@ -31,20 +30,6 @@ def all_posts(request):
 
 
 def post(request, post_id=None):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            private = form.cleaned_data['private']
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            subject = form.cleaned_data['subject']
-            message = form.cleaned_data['message']
-            bot_test = form.cleaned_data['email_confirmation']
-
-            if post_id:
-                comment = Comment.objects.create(private=private, name=name, email=email, subject=subject, message=message)
-                post = Post.objects.get(pk=post_id)
-                post.comments.add(comment)
     if post_id:
         exists = True
         if Post.objects.filter(pk=post_id):
@@ -57,13 +42,7 @@ def post(request, post_id=None):
     else:
         post = None
         exists = False
-    form = ContactForm()
-
-    return render_to_response('blog_post.html', {
-        "post": post,
-        "exists": exists,
-        "form": form,
-    }, context_instance=RequestContext(request))
+    return render_to_response('blog_post.html', {"post": post, "exists": exists}, context_instance=RequestContext(request))
 
 
 def filter(request, tag=None):

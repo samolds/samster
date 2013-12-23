@@ -3,7 +3,24 @@
 {% block content %}
 <div class="body-narrow">
 <div class="content">
-<h1>All posts tagged with "{{ tag }}"</h1>
+
+  <div class="inline">
+    <form class="right" action="/blog/filter" method="post">{% csrf_token %}
+        {{ form.non_field_errors }}
+        <table>
+        <tr>
+        <td><small>{{ form.tag.label_tag }} {{ form.tag }}</small></td>
+        <td rowspan=2><input type="submit" value="Filter" /></td>
+        </tr>
+        <tr>
+        <td><small>{{ form.date.label_tag }} {{ form.date }}</small></td>
+        </tr>
+        </table>
+    </form>
+    <h1 class="left">All posts tagged with '{{ tag }}'</h1>
+    <div class="clear"></div>
+  </div>
+
 </div>
 
 <div class="content inbetween"></div>
@@ -49,7 +66,7 @@
 
 
 <div class="content">
-<a href="/blog">Back To Blog</a>
+<a href="/blog/all">Back To Blog</a>
 </div>
 </div>
 

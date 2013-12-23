@@ -38,16 +38,43 @@ class QuoteAdmin(admin.ModelAdmin):
 admin.site.register(Quote, QuoteAdmin)
 
 
+class CommentAdmin(admin.ModelAdmin):
+    """ The admin model for a Comment.
+    """
+    list_display = ("name",
+                    "subject",
+                    "email",
+                    "date")
+    list_filter = ["name",
+                   "email",
+                   "date"]
+
+    actions = ['delete_model']
+
+    def get_actions(self, request):
+        actions = super(CommentAdmin, self).get_actions(request)
+        del actions['delete_selected']
+        return actions
+
+    def delete_model(self, request, comments):
+        if type(comments) is Comment:
+            comments.delete()
+        else:
+            for comment in comments.all():
+                comment.delete()
+    delete_model.short_description = "Delete selected commentss"
+
+admin.site.register(Comment, CommentAdmin)
+
+
 class PostAdmin(admin.ModelAdmin):
     """ The admin model for a Blog Post.
     """
     list_display = ("title",
-                    "creation_date",
-                    "content")
+                    "creation_date")
     list_filter = ["title",
                    "tags",
-                   "creation_date",
-                   "content"]
+                   "creation_date"]
 
     actions = ['delete_model']
 
