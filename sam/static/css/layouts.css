@@ -62,14 +62,15 @@ table {width: 100%;}
   clear: both;
 }
 
-#navbar a { padding: 3px; color: #fff; }
-#navbar a:hover { background-color: #444; }
+#navbar a { color: #fff; }
+#navbar li { padding: 3px; }
+#navbar li:hover { background-color: #444; }
 
 .navtop li {
   color: #fff;
   position: relative;
-  margin-top: 5px;
   display: inline;
+  padding: 3px;
 }
 
 .navtop ul li {
@@ -81,11 +82,15 @@ table {width: 100%;}
   white-space: nowrap;
   position: absolute;
   display: none;
+  margin-top: 1px;
 }
 
-.navtop li:hover ul { left: 0px; display: block; }
-.navtop li:hover a { background-color: #000; }
-.navtop a:hover { background-color: #444; }
+.navtop li:hover ul {
+  left: 0px;
+  display: block;
+  z-index:10;
+  background-color: #000;
+}
 
 /* -------------- BODY -------------- */
 

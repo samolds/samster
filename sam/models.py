@@ -92,17 +92,3 @@ class Post(models.Model):
 
     def __unicode__(self):
         return "%s" % self.title
-
-
-class Art(models.Model):
-    """Description of the Art model
-    """
-    title = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
-    tags = models.ManyToManyField(Tag, max_length=50, related_name='art', blank=True, null=True)
-    image = models.ForeignKey(SiteImage, blank=True, null=True)
-    embedded_link = models.CharField(max_length=500, blank=True, null=True)
-    private = models.BooleanField()
-
-    def __unicode__(self):
-        return "%s" % self.title

@@ -92,10 +92,3 @@ class PostAdmin(admin.ModelAdmin):
     delete_model.short_description = "Delete selected posts"
 
 admin.site.register(Post, PostAdmin)
-
-
-class ArtAdmin(admin.ModelAdmin):
-    """ The admin model for Art.
-    """
-    list_filter = ('title', 'tags')
-admin.site.register(Art, ArtAdmin)
