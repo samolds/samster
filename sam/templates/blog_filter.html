@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}<title>samolds.com - Filter Blog Posts</title>{% endblock %}
+
 {% block content %}
 <div class="body-narrow">
 <div class="content">
@@ -17,7 +19,15 @@
         </tr>
         </table>
     </form>
-    <h1 class="left">All posts tagged with '{{ tag }}'</h1>
+    {% if kind == "tag" %}
+      <h1 class="left">All posts tagged with '{{ tag }}'</h1>
+    {% elif kind == "date" %}
+      <h1 class="left">All posts created or updated on '{{ tag }}'</h1>
+    {% elif kind == "date*tag" %}
+      <h2 class="left">All posts tagged with '{{ tag }}' and created or updated on '{{ tag }}'</h1>
+    {% else %}
+      <h1 class="left">Nothing to filter</h1>
+    {% endif %}
     <div class="clear"></div>
   </div>
 
@@ -26,42 +36,50 @@
 <div class="content inbetween"></div>
 
 {% if exists %}
-{% for post in posts %}
-  <div class="content">
-  <table>
-    <tr>
-      <td class="textleft tdtitle" rowspan=2><h2><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h2></td>
-      <td class="textright"><small>{{ post.creation_date }}</small></td>
-    </tr>
-    {% if not post.creation_date.ctime == post.updated_date.ctime %}
-    <tr>
-      <td class="textright"><small>{{ post.updated_date }}</small></td>
-    </tr>
-    {% endif %}
-  </table>
+  {% if posts %}
+    {% for post in posts %}
+      <div class="content">
+      <table>
+        <tr>
+          <td class="textleft tdtitle" rowspan=2><h2><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h2></td>
+          {% load time_localization %}
+          <td class="textright"><small><a href="/blog/filter/date/{{ post.creation_date|mtn_time:"month" }}-{{ post.creation_date|mtn_time:"day" }}-{{ post.creation_date|mtn_time:"year" }}">{{ post.creation_date|mtn_time }}</a></small></td>
+        </tr>
+        {% if not post.creation_date.ctime == post.updated_date.ctime %}
+          <tr>
+            <td class="textright"><small><a href="/blog/filter/date/{{ post.updated_date|mtn_time:"month" }}-{{ post.updated_date|mtn_time:"day" }}-{{ post.updated_date|mtn_time:"year" }}">{{ post.updated_date|mtn_time }}</a></small></td>
+          </tr>
+        {% endif %}
+      </table>
+      <p class="textright"><small>Tags: 
+      {% for tag_data in post.tags.values %}
+      <a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
+      {% endfor %}
+      </small></p>
 
-  <p class="textright"><small>Tags: 
-  {% for tag_data in post.tags.values %}
-  <a href="/blog/filter/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
-  {% endfor %}
-  </small></p>
+        <div class="content">
+          <p>
+            {{ post.content|slice:":300"|safe }}...
+            <div class="clear"></div>
+          </p>
+        </div>
+      </div>
 
+      <div class="content inbetween"></div>
+    {% endfor %}
+  {% else %}
     <div class="content">
-      <p>
-        {{ post.content|slice:":300"|safe }}...
-        <div class="clear"></div>
-      </p>
+    <p>The posts with that tag are private</p>
     </div>
+
+    <div class="content inbetween"></div>
+  {% endif %}
+{% else %}
+  <div class="content">
+  <p>There are no posts with that tag</p>
   </div>
 
   <div class="content inbetween"></div>
-{% endfor %}
-{% else %}
-<div class="content">
-<p>There are no posts with that tag</p>
-</div>
-
-<div class="content inbetween"></div>
 {% endif %}
 
 

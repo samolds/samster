@@ -1,49 +1,54 @@
 {% extends 'base.html' %}
 
+{% block title %}<title>samolds.com - Blog</title>{% endblock %}
+
 {% block content %}
 <div class="body-normal">
-<div class="content">
-<div class="inline">
-  <a class="right" href="/blog/all">View All Posts</a>
-  <h1 class="left">Thoughts, Stories, Ideas</h1>
-  <div class="clear"></div>
-</div>
-</div>
+  <div class="content">
+    <div class="inline">
+      <a class="right" href="/blog/all">View All Posts</a>
+      <h1 class="left">Thoughts, Stories, Ideas</h1>
+      <div class="clear"></div>
+    </div>
+  </div>
 
-<div class="content inbetween"></div>
+  <div class="content inbetween"></div>
 
-{% for post in posts %}
-<div class="content">
-<table>
-  <tr>
-    <td class="textleft tdtitle" rowspan=2><h2><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h2></td>
-    <td class="textright"><small>{{ post.creation_date }}</small></td>
-  </tr>
-  {% if not post.creation_date.ctime == post.updated_date.ctime %}
-    <tr>
-      <td class="textright"><small>{{ post.updated_date }}</small></td>
-    </tr>
-  {% endif %}
-</table>
+  {% for post in posts %}
+    <div class="content">
+      <table>
+        <tr>
+          <td class="textleft tdtitle" rowspan=2><h2><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h2></td>
+          {% load time_localization %}
+          <td class="textright"><small><a href="/blog/filter/date/{{ post.creation_date|mtn_time:"month" }}-{{ post.creation_date|mtn_time:"day" }}-{{ post.creation_date|mtn_time:"year" }}">{{ post.creation_date|mtn_time }}</a></small></td>
+        </tr>
+        {% if not post.creation_date.ctime == post.updated_date.ctime %}
+          <tr>
+            <td class="textright"><small><a href="/blog/filter/date/{{ post.updated_date|mtn_time:"month" }}-{{ post.updated_date|mtn_time:"day" }}-{{ post.updated_date|mtn_time:"year" }}">{{ post.updated_date|mtn_time }}</a></small></td>
+          </tr>
+        {% endif %}
+      </table>
 
-<p class="textright"><small>
-{% for tag_data in post.tags.values %}
-<a href="/blog/filter/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
-{% endfor %}
-</small></p>
+      <p class="textright">
+        <small>
+          {% for tag_data in post.tags.values %}
+            <a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
+          {% endfor %}
+        </small>
+      </p>
 
-<div class="content">
-<p>{{ post.content|safe}}</p>
-<div class="clear"></div>
-</div>
-</div>
+      <div class="content">
+        <p>{{ post.content|safe}}</p>
+        <div class="clear"></div>
+      </div>
+    </div>
 
-<div class="content inbetween"></div>
-{% endfor %}
+    <div class="content inbetween"></div>
+  {% endfor %}
 
-<div class="content">
-<a href="/blog/all">View All Posts</a>
-</div>
+  <div class="content">
+    <a href="/blog/all">View All Posts</a>
+  </div>
 </div>
 
 {% endblock %}

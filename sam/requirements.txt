@@ -2,3 +2,4 @@ Django==1.4
 oauth2
 simplejson
 PIL
+pytz

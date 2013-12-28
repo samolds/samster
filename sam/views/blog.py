@@ -5,6 +5,9 @@ from sam.forms.blog_filter import BlogFilterForm
 from sam.forms.contact import ContactForm
 #from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from pytz import timezone
+from datetime import datetime
+import re
 #from django.conf import settings
 
 #@login_required
@@ -13,7 +16,10 @@ def blog(request):
     if len(posts) > 5:
         posts = posts[len(posts) - 5:]
     posts.reverse()
-    return render_to_response('blog.html', {"posts": posts}, context_instance=RequestContext(request))
+
+    return render_to_response('blog.html', {
+        "posts": posts,
+    }, context_instance=RequestContext(request))
 
 
 def all_posts(request):
@@ -66,16 +72,52 @@ def post(request, post_id=None):
     }, context_instance=RequestContext(request))
 
 
-def filter(request, tag=None):
+def filter(request, kind=None, tag=None):
     if request.method == 'POST':
         return filterHelp(request)
     else:
-        if tag:
+        if kind and tag:
             exists = True
-            if Tag.objects.filter(tag=tag):
-                tag_object = Tag.objects.filter(tag=tag)
-                posts = list(Post.objects.filter(tags=tag_object, private=False))
-                posts.reverse()
+            tags = tag.split('*')
+            posts = Post.objects.filter(private=False)
+            if kind == "tag":
+                if posts:
+                    for piece in tags:
+                        posts = posts.filter(tags__tag=piece)
+                    posts = list(posts.reverse())
+                else:
+                    posts = None
+                    exists = False
+            elif kind == "date":
+                utc = timezone('UTC').localize
+                if posts:
+                    postscd = posts
+                    postsud = posts
+                    for piece in tags:
+                        parts = piece.split('-')
+                        date = utc(datetime(month=int(parts[0]), day=int(parts[1]), year=int(parts[2])))
+                        # import pdb; pdb.set_trace()
+                        postscd = postscd.filter(creation_date__month=date.month).filter(creation_date__day=date.day).filter(creation_date__year=date.year)
+                        postsud = postsud.filter(updated_date__month=date.month).filter(updated_date__day=date.day).filter(updated_date__year=date.year)
+                    posts = list(postscd) + list(postsud)
+                    posts = posts.reverse()
+                else:
+                    posts = None
+                    exists = False
+            elif kind == "date*tag":
+                dates = tag.split('_')[0]
+                dates = dates.split('*')
+                tags = tag.split('_')[1]
+                tags = tags.split('*')
+                if posts:
+                    for piece in dates:
+                        posts = posts.filter(tags__tag=piece)
+                    for piece in tags:
+                        posts = posts.filter(tags__tag=piece)
+                    posts = list(posts.reverse())
+                else:
+                    posts = None
+                    exists = False
             else:
                 posts = None
                 exists = False
@@ -88,6 +130,7 @@ def filter(request, tag=None):
     return render_to_response('blog_filter.html', {
         'posts': posts,
         'exists': exists,
+        'kind': kind,
         'tag': tag,
         'form': form,
     }, context_instance=RequestContext(request))
@@ -98,16 +141,14 @@ def filterHelp(request):
     if form.is_valid():
         tag = form.cleaned_data['tag']
         date = form.cleaned_data['date']
-
-
-        # do a bunch of regex here
-
-
         if not tag and not date:
             return HttpResponseRedirect('/blog/all')
         elif not tag and date:
-            return HttpResponseRedirect('/blog/filter/date%s' % date) # should be /blog/filter/tag/{{ tag }}
+            # regex stuff for date
+            return HttpResponseRedirect('/blog/filter/date/%s' % date) # should be /blog/filter/tag/{{ tag }}
         elif tag and not date:
-            return HttpResponseRedirect('/blog/filter/tag%s' % tag) # should be /blog/filter/date/{{ date }}
+            # regex stuff for tags
+            return HttpResponseRedirect('/blog/filter/tag/%s' % tag) # should be /blog/filter/date/{{ date }}
         elif tag and date:
-            return HttpResponseRedirect('/blog/filter/tagdate%s%s' % (tag, date)) # should be /blog/filter/date/{{ date }}/tag/{{ tag }}
+            # regex stuff for both
+            return HttpResponseRedirect('/blog/filter/date*tag/%s_%s' % (tag, date)) # should be /blog/filter/date/{{ date }}/tag/{{ tag }}

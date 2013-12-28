@@ -42,19 +42,16 @@ table {width: 100%;}
 #navbar {
   background-color: #000;
   color: #fff;
-  padding: 3px;
-  padding-bottom: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 2px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .left {
-  padding-left: 10px;
   float: left;
 }
 
 .right {
-  padding-right: 10px;
   float: right;
 }
 
@@ -62,15 +59,18 @@ table {width: 100%;}
   clear: both;
 }
 
-#navbar a { color: #fff; }
+#navbar a { color: #fff; padding: 0px; }
 #navbar li { padding: 3px; }
 #navbar li:hover { background-color: #444; }
+
+.navtop a {
+  padding: 2px;
+}
 
 .navtop li {
   color: #fff;
   position: relative;
   display: inline;
-  padding: 3px;
 }
 
 .navtop ul li {
@@ -82,7 +82,7 @@ table {width: 100%;}
   white-space: nowrap;
   position: absolute;
   display: none;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
 .navtop li:hover ul {
@@ -148,23 +148,22 @@ table {width: 100%;}
 
 #footer {
   position: relative;
-  margin-top: -20px;
-  height: 20px;
+  margin-top: -19px;
+  height: 19px;
   clear: both;
 }
 
 #footbar {
   background-color: #000;
   color: #fff;
-  padding: 3px;
-  padding-bottom: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 2px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #footbar li {
-  padding: 3px;
+  padding: 2px;
 }
 
-#footbar a { padding: 3px; color: #fff; }
+#footbar a { padding: 2px; color: #fff; }
 #footbar a:hover { background-color: #444; }

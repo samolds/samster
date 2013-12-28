@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}<title>samolds.com - Welcome</title>{% endblock %}
+
 {% block content %}
 <div class="body-normal">
   <div class="content">
@@ -34,38 +36,38 @@
 
   <div class="content">
     {% if recent_post %}
-        <table>
+      <table>
+        <tr>
+          <td class="textleft tdtitle" rowspan=2><h2><a href="/blog/post/{{ recent_post.pk }}">{{ recent_post.title }}</a></h2></td>
+          {% load time_localization %}
+          <td class="textright"><small><a href="/blog/filter/date/{{ recent_post.creation_date|mtn_time:"month" }}-{{ recent_post.creation_date|mtn_time:"day" }}-{{ recent_post.creation_date|mtn_time:"year" }}">{{ recent_post.creation_date|mtn_time }}</a></small></td>
+        </tr>
+        {% if not recent_post.creation_date.ctime == recent_post.updated_date.ctime %}
           <tr>
-            <td class="textleft tdtitle" rowspan=2><h2><a href="/blog/post/{{ recent_post.pk }}">{{ recent_post.title }}</a></h2></td>
-            <td class="textright"><small>{{ recent_post.creation_date }}</small></td>
+            <td class="textright"><small><a href="/blog/filter/date/{{ recent_post.updated_date|mtn_time:"month" }}-{{ recent_post.updated_date|mtn_time:"day" }}-{{ recent_post.updated_date|mtn_time:"year" }}">{{ recent_post.updated_date|mtn_time }}</a></small></td>
           </tr>
-          {% if not recent_post.creation_date.ctime == recent_post.updated_date.ctime %}
-          <tr>
-            <td class="textright"><small>{{ recent_post.updated_date }}</small></td>
-          </tr>
-          {% endif %}
-        </table>
+        {% endif %}
+      </table>
+      <p class="textright"><small>
+        {% for tag_data in recent_post.tags.values %}
+          <a href="/blog/filter/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
+        {% endfor %}
+      </small></p>
 
-        <p class="textright"><small>
-          {% for tag_data in recent_post.tags.values %}
-            <a href="/blog/filter/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
-          {% endfor %}
-        </small></p>
+      <div class="content">
+        <p>
+          {{ recent_post.content|safe }}
+        </p>
 
-        <div class="content">
-          <p>
-            {{ recent_post.content|safe }}
-          </p>
+        {% if recent_post.image.image %}
+          <p><img src="/{{ recent_post.image.image }}" /></p>
+          <br />
+        {% endif %}
 
-          {% if recent_post.image.image %}
-            <p><img src="/{{ recent_post.image.image }}" /></p>
-            <br />
-          {% endif %}
-
-          {% if recent_post.embedded_link %}
-            <p>{{ recent_post.embedded_link|safe }}</p>
-          {% endif %}
-        </div>
+        {% if recent_post.embedded_link %}
+          <p>{{ recent_post.embedded_link|safe }}</p>
+        {% endif %}
+      </div>
     {% endif %}
   </div>
 

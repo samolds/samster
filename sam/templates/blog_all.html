@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}<title>samolds.com - All Blog Posts</title>{% endblock %}
+
 {% block content %}
 <div class="body-narrow">
 <div class="content">
@@ -28,18 +30,19 @@
 <table>
   <tr>
     <td class="textleft tdtitle" rowspan=2><h2><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h2></td>
-    <td class="textright"><small>{{ post.creation_date }}</small></td>
+    {% load time_localization %}
+    <td class="textright"><small><a href="/blog/filter/date/{{ post.creation_date|mtn_time:"month" }}-{{ post.creation_date|mtn_time:"day" }}-{{ post.creation_date|mtn_time:"year" }}">{{ post.creation_date|mtn_time }}</a></small></td>
   </tr>
   {% if not post.creation_date.ctime == post.updated_date.ctime %}
-  <tr>
-    <td class="textright"><small>{{ post.updated_date }}</small></td>
-  </tr>
+    <tr>
+      <td class="textright"><small><a href="/blog/filter/date/{{ post.updated_date|mtn_time:"month" }}-{{ post.updated_date|mtn_time:"day" }}-{{ post.updated_date|mtn_time:"year" }}">{{ post.updated_date|mtn_time }}</a></small></td>
+    </tr>
   {% endif %}
 </table>
 
 <p class="textright"><small>
 {% for tag_data in post.tags.values %}
-<a href="/blog/filter/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
+<a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
 {% endfor %}
 </small></p>
 

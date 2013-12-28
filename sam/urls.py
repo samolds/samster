@@ -11,7 +11,7 @@ urlpatterns = patterns('sam.views',
     url(r'^blog$', 'blog.blog'),
     url(r'^blog/all$', 'blog.all_posts'),
     url(r'^blog/post(?:/(?P<post_id>\d+))?$', 'blog.post'),
-    url(r'^blog/filter(?:/(?P<tag>\w+))?$', 'blog.filter'),
+    url(r'^blog/filter(?:/(?P<kind>(\w+[*]*)*))?(?:/(?P<tag>(\w+[-*]*)*))?$', 'blog.filter'),
     url(r'^front_page$', 'front_page.front_page'),
     url(r'^favorite_quotes$', 'quote.quote'),
 )
