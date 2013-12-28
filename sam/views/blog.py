@@ -5,8 +5,9 @@ from sam.forms.blog_filter import BlogFilterForm
 from sam.forms.contact import ContactForm
 #from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from pytz import timezone
+from pytz import timezone, utc
 from datetime import datetime
+from django.db.models import Q
 import re
 #from django.conf import settings
 
@@ -51,6 +52,9 @@ def post(request, post_id=None):
                 comment = Comment.objects.create(private=private, name=name, email=email, subject=subject, message=message)
                 post = Post.objects.get(pk=post_id)
                 post.comments.add(comment)
+    else:
+        form = ContactForm()
+
     if post_id:
         exists = True
         if Post.objects.filter(pk=post_id):
@@ -63,7 +67,6 @@ def post(request, post_id=None):
     else:
         post = None
         exists = False
-    form = ContactForm()
 
     return render_to_response('blog_post.html', {
         "post": post,
@@ -73,57 +76,69 @@ def post(request, post_id=None):
 
 
 def filter(request, kind=None, tag=None):
+    posts = None
+    exists = False
+    dates = []
+    tags = []
     if request.method == 'POST':
         return filterHelp(request)
     else:
         if kind and tag:
-            exists = True
             tags = tag.split('*')
-            posts = Post.objects.filter(private=False)
+            posts = Post.objects.all()
             if kind == "tag":
                 if posts:
                     for piece in tags:
                         posts = posts.filter(tags__tag=piece)
-                    posts = list(posts.reverse())
-                else:
-                    posts = None
-                    exists = False
+                    if posts:
+                        exists = True
+                        posts = posts.filter(private=False)
+                    posts = list(posts)
+                    posts.reverse()
             elif kind == "date":
-                utc = timezone('UTC').localize
                 if posts:
-                    postscd = posts
-                    postsud = posts
-                    for piece in tags:
-                        parts = piece.split('-')
-                        date = utc(datetime(month=int(parts[0]), day=int(parts[1]), year=int(parts[2])))
-                        # import pdb; pdb.set_trace()
-                        postscd = postscd.filter(creation_date__month=date.month).filter(creation_date__day=date.day).filter(creation_date__year=date.year)
-                        postsud = postsud.filter(updated_date__month=date.month).filter(updated_date__day=date.day).filter(updated_date__year=date.year)
-                    posts = list(postscd) + list(postsud)
-                    posts = posts.reverse()
-                else:
-                    posts = None
-                    exists = False
-            elif kind == "date*tag":
-                dates = tag.split('_')[0]
-                dates = dates.split('*')
-                tags = tag.split('_')[1]
-                tags = tags.split('*')
-                if posts:
+                    temp = posts
+                    dates = tags
                     for piece in dates:
-                        posts = posts.filter(tags__tag=piece)
-                    for piece in tags:
-                        posts = posts.filter(tags__tag=piece)
-                    posts = list(posts.reverse())
-                else:
-                    posts = None
-                    exists = False
-            else:
-                posts = None
-                exists = False
-        else:
-            posts = None
-            exists = False
+                        parts = piece.split('-')
+                        if len(parts) == 3:
+                            date = utc.localize(datetime(month=int(parts[0]), day=int(parts[1]), year=int(parts[2])))
+                            creation_filter = Q(creation_date__month=date.month, creation_date__day=date.day, creation_date__year=date.year)
+                            updated_filter = Q(updated_date__month=date.month, updated_date__day=date.day, updated_date__year=date.year)
+                            temp = temp.filter(creation_filter | updated_filter)
+                        else:
+                            temp = None
+                    if temp:
+                        exists = True
+                        temp = temp.filter(private=False)
+                        posts = list(set(temp))
+                        posts.reverse()
+                    else:
+                        posts = temp
+            elif kind == "date*tag":
+                if tag and len(tag.split('_')) == 2:
+                    dates = tag.split('_')[0]
+                    dates = dates.split('*')
+                    tags = tag.split('_')[1]
+                    tags = tags.split('*')
+                    if posts:
+                        for piece in dates:
+                            parts = piece.split('-')
+                            if len(parts) == 3:
+                                date = utc.localize(datetime(month=int(parts[0]), day=int(parts[1]), year=int(parts[2])))
+                                creation_filter = Q(creation_date__month=date.month, creation_date__day=date.day, creation_date__year=date.year)
+                                updated_filter = Q(updated_date__month=date.month, updated_date__day=date.day, updated_date__year=date.year)
+                                posts = posts.filter(creation_filter | updated_filter)
+                            else:
+                                posts = None
+                        if posts:
+                            for piece in tags:
+                                posts = posts.filter(tags__tag=piece)
+                            if posts:
+                                exists = True
+                                posts = posts.filter(private=False)
+                                posts = list(set(posts))
+                                posts.reverse()
 
         form = BlogFilterForm()
 
@@ -132,6 +147,8 @@ def filter(request, kind=None, tag=None):
         'exists': exists,
         'kind': kind,
         'tag': tag,
+        'tags': tags,
+        'dates': dates,
         'form': form,
     }, context_instance=RequestContext(request))
 
@@ -151,4 +168,4 @@ def filterHelp(request):
             return HttpResponseRedirect('/blog/filter/tag/%s' % tag) # should be /blog/filter/date/{{ date }}
         elif tag and date:
             # regex stuff for both
-            return HttpResponseRedirect('/blog/filter/date*tag/%s_%s' % (tag, date)) # should be /blog/filter/date/{{ date }}/tag/{{ tag }}
+            return HttpResponseRedirect('/blog/filter/date*tag/%s_%s' % (date, tag)) # should be /blog/filter/date/{{ date }}/tag/{{ tag }}

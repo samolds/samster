@@ -8,7 +8,7 @@ def mtn_time(value, arg=None):
     mtn_time = timezone('US/Mountain')
     date = value.astimezone(mtn_time)
     if not arg:
-        return mtn_time.localize(date.replace(tzinfo=None))
+        return date
     elif arg == "month":
         return date.month
     elif arg == "day":

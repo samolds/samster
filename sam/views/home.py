@@ -32,4 +32,8 @@ def home(request):
         quote = None
 
     #browser = request.META.get('HTTP_USER_AGENT', 'Unknown')
-    return render_to_response('home.html', {"home_post": home_post, "recent_post": recent_post, "quote": quote}, context_instance=RequestContext(request))
+    return render_to_response('home.html', {
+        "home_post": home_post,
+        "recent_post": recent_post,
+        "quote": quote
+    }, context_instance=RequestContext(request))

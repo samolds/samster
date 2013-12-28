@@ -13,7 +13,7 @@ dark grey = #444
 html, body {
   margin: 0px;
   padding: 0px;
-  background-image: url('/static/img/backgrounds/13.jpg');
+  background-image: url('/static/img/backgrounds/25.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center top;
@@ -72,7 +72,6 @@ table {width: 100%;}
   position: relative;
   display: inline;
 }
-
 .navtop ul li {
   display: block;
   z-index: 10;
@@ -94,24 +93,28 @@ table {width: 100%;}
 
 /* -------------- BODY -------------- */
 
-.body-normal {
-  margin-top: 10px;
-  margin-left: 90px;
-  margin-right: 90px;
+.body {
+  margin: 10px;
   border-style: solid;
   border-width: 5px;
   border-color: #ffffff;
   border-radius: 5px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, .5);
 }
 
-.body-narrow {
-  margin-top: 10px;
+.wide {
+  margin-left: 90px;
+  margin-right: 90px;
+}
+
+.medium {
   margin-left: 180px;
   margin-right: 180px;
-  border-style: solid;
-  border-width: 5px;
-  border-color: #ffffff;
-  border-radius: 5px;
+}
+
+.narrow {
+  margin-left: 270px;
+  margin-right: 270px;
 }
 
 .content {
@@ -128,9 +131,36 @@ table {width: 100%;}
   word-wrap: break-word;
 }
 
+.helpbox {
+  text-align: left;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 5px;
+  border-color: #ffffff;
+  padding: 5px;
+  z-index: 20;
+  background-color: #e0e0e0;
+  float: right;
+  position: absolute;
+  display: none;
+}
+
+.hbnarrow {
+  width: 140px;
+}
+
+.hbwide {
+  width: 300px;
+}
+
+.hoverhelp:hover .helpbox {
+  display: block;
+}
+
 .inline {display: inline;}
 .textleft {text-align: left;}
 .textright {text-align: right;}
+.filterwidth {width: 185px;}
 
 .inbetween {
   opacity: 0.8;

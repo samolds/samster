@@ -3,7 +3,7 @@
 {% block title %}<title>samolds.com - Contact</title>{% endblock %}
 
 {% block content %}
-<div class="body-narrow">
+<div class="body medium">
 <!--
 <div class="content">
 <h1>Need to Contact Me?</h1>
@@ -53,24 +53,7 @@
 
 <div class="content">
 <form action="/contact" method="post">{% csrf_token %}
-    <div class="fieldWrapper">
-    </div>
-    {{ form.non_field_errors }}
-    {% for field in form %}
-        {% if field.name == "email_confirmation" %}
-            <div style="display: None;">
-                LEAVE BLANK {{ field }}
-            </div>
-        {% else %}
-            <div class="fieldWrapper">
-                {{ field.label_tag }}{{ field }}
-                {% for error in field.errors %}
-                    <strong class="alert">{{ error|escape }}</strong>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endfor %}
-    <input type="submit" value="Send" />
+  {% include "comment_inners.html" %}
 </form>
 </div>
 

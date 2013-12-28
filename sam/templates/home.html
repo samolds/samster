@@ -3,7 +3,7 @@
 {% block title %}<title>samolds.com - Welcome</title>{% endblock %}
 
 {% block content %}
-<div class="body-normal">
+<div class="body medium">
   <div class="content">
     <!--
     <h1>Welcome to samolds.com!</h1>
@@ -34,6 +34,15 @@
 
   <div class="content inbetween"></div>
 
+  <div class="content textright">
+    {% if quote %}
+        <small>"{{ quote.quote }}"</small>
+        <small>- {{ quote.author }}</small>
+    {% endif %}
+  </div>
+</div>
+
+<div class="body medium">
   <div class="content">
     {% if recent_post %}
       <table>
@@ -68,15 +77,6 @@
           <p>{{ recent_post.embedded_link|safe }}</p>
         {% endif %}
       </div>
-    {% endif %}
-  </div>
-
-  <div class="content inbetween"></div>
-
-  <div class="content textright">
-    {% if quote %}
-        <small>"{{ quote.quote }}"</small>
-        <small>- {{ quote.author }}</small>
     {% endif %}
   </div>
 </div>
