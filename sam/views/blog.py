@@ -1,12 +1,12 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from sam.models import Post, Tag, Comment
+from django.db.models import Q
 from sam.forms.blog_filter import BlogFilterForm
 from sam.forms.contact import ContactForm
 from django.http import HttpResponseRedirect
 from pytz import timezone, utc
 from datetime import datetime
-from django.db.models import Q
 import re
 
 

@@ -1,0 +1,47 @@
+<div class="body narrow">
+  <div class="content">
+    {% if post %}
+      <h1>{{ post.title }}</h1>
+
+      <div class="content">
+        <p>{{ post.content|safe }}</p>
+        <div class="clear"></div>
+        <br />
+
+        {% if post.image.image %}
+          <p><img src="/{{ post.image.image }}" /></p>
+          <br />
+        {% endif %}
+
+        {% if post.embedded_link %}
+          <p>{{ post.embedded_link|safe }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+
+<div class="body narrow">
+  {% for post in posts %}
+    <div class="content">
+
+      {% include "blog_post_header.html" %}
+
+      <p class="textright">
+        <small>
+          {% for tag_data in post.tags.values %}
+            <a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
+          {% endfor %}
+        </small>
+      </p>
+
+      <div class="content">
+        <p>{{ post.content|safe}}</p>
+        <div class="clear"></div>
+      </div>
+    </div>
+
+    <div class="content inbetween"></div>
+  {% endfor %}
+</div>
