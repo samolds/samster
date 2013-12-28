@@ -13,10 +13,10 @@ dark grey = #444
 html, body {
   margin: 0px;
   padding: 0px;
-  background-image: url('/static/img/backgrounds/25.jpg');
+  /* background-image: url('/static/img/backgrounds/25.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-position: center top;
+  background-position: center top; */
   background-color: #444;
   color: #000;
   font-family: verdana, arial, helvetica, sans-serif;
@@ -24,7 +24,7 @@ html, body {
   height: 100%;
 }
 
-div, ul, li, p, a, table, tr, td {
+div, ul, li, p, a, table, tr, td, form {
   color: #000;
   margin: 0px;
   padding: 0px;
@@ -45,18 +45,6 @@ table {width: 100%;}
   padding: 2px;
   padding-left: 20px;
   padding-right: 20px;
-}
-
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
-}
-
-.clear {
-  clear: both;
 }
 
 #navbar a { color: #fff; padding: 0px; }
@@ -82,6 +70,7 @@ table {width: 100%;}
   position: absolute;
   display: none;
   margin-top: 2px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
 }
 
 .navtop li:hover ul {
@@ -140,9 +129,9 @@ table {width: 100%;}
   padding: 5px;
   z-index: 20;
   background-color: #e0e0e0;
-  float: right;
   position: absolute;
   display: none;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, .5);
 }
 
 .hbnarrow {
@@ -157,6 +146,10 @@ table {width: 100%;}
   display: block;
 }
 
+.left {float: left;}
+.right {float: right;}
+.clear {clear: both;}
+
 .inline {display: inline;}
 .textleft {text-align: left;}
 .textright {text-align: right;}
@@ -164,6 +157,43 @@ table {width: 100%;}
 
 .inbetween {
   opacity: 0.8;
+}
+
+.fieldWrapper {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.contactform input {
+  width: 375px;
+  display: block;
+  border: 1px solid #999;
+}
+
+.contactform textarea {
+  width: 375px;
+  height: 150px;
+  display: block;
+  max-width: 100%;
+}
+
+.contactform input:focus, .contactform textarea:focus {
+  border: 1px solid #ffffff;
+}
+
+.alert input, .alert textarea {
+  border-color: red;
+}
+
+.contactform .submitbtn {
+  padding: 5px;
+  width: 100px;
+  display: inline;
+}
+
+.contactform #id_private {
+  padding: 5px;
+  display: inline;
 }
 
 /* -------------- FOOTER -------------- */

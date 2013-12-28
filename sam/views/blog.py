@@ -3,15 +3,13 @@ from django.template import RequestContext
 from sam.models import Post, Tag, Comment
 from sam.forms.blog_filter import BlogFilterForm
 from sam.forms.contact import ContactForm
-#from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from pytz import timezone, utc
 from datetime import datetime
 from django.db.models import Q
 import re
-#from django.conf import settings
 
-#@login_required
+
 def blog(request):
     posts = list(Post.objects.filter(private=False))
     if len(posts) > 5:
@@ -161,11 +159,8 @@ def filterHelp(request):
         if not tag and not date:
             return HttpResponseRedirect('/blog/all')
         elif not tag and date:
-            # regex stuff for date
-            return HttpResponseRedirect('/blog/filter/date/%s' % date) # should be /blog/filter/tag/{{ tag }}
+            return HttpResponseRedirect('/blog/filter/date/%s' % date)
         elif tag and not date:
-            # regex stuff for tags
-            return HttpResponseRedirect('/blog/filter/tag/%s' % tag) # should be /blog/filter/date/{{ date }}
+            return HttpResponseRedirect('/blog/filter/tag/%s' % tag)
         elif tag and date:
-            # regex stuff for both
-            return HttpResponseRedirect('/blog/filter/date*tag/%s_%s' % (date, tag)) # should be /blog/filter/date/{{ date }}/tag/{{ tag }}
+            return HttpResponseRedirect('/blog/filter/date*tag/%s_%s' % (date, tag))

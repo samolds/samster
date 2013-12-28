@@ -6,24 +6,26 @@
         </div>
     {% else %}
         <div class="fieldWrapper">
-            {{ field.label_tag }}{{ field }}
-            {% for error in field.errors %}
-                <strong class="alert">{{ error|escape }}</strong>
-            {% endfor %}
+            {% load form_placeholder %}
+            {% if field.errors %}
+              {% for error in field.errors %}
+                  <div class="alert">{{ field.label_tag }}{{ field|updt_plchdr:error|escape }}</div>
+              {% endfor %}
+            {% else %}
+              {{ field.label_tag }}{{ field }}
+            {% endif %}
         </div>
     {% endif %}
 {% endfor %}
 <div class="hoverhelp">
-  <input type="submit" value="Comment" />
+  <input class="submitbtn" type="submit" value="Comment" />
   <div class="helpbox hbwide">
     <ul>
       <li>Every comment posted will send me an email.</li>
       <br />
-      <li>Leaving <i>private</i> unchecked will allow for the comment to be publicly displayed here, under my blog post.</li>
-      <br />
-      <li>Otherwise, only an email will be sent to me and the comment will not be publicly displayed above.</li>
-      <br />
       <li>If you would like me to reply, please let me know and include your email address.</li>
+      <br />
+      <li>Leaving <i>private</i> unchecked will allow for the comment to be publicly displayed here, under my blog post. Otherwise, only an email will be sent to me and the comment will not be publicly displayed above.</li>
     </ul>
   </div>
 </div>
