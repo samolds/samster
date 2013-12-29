@@ -20,8 +20,8 @@
         <div class="clear"></div>
         <br />
 
-        {% if home_post.image.image %}
-          <p><img src="/{{ home_post.image.image }}" /></p>
+        {% if home_post.image %}
+          <p><img src="/{{ home_post.image }}" /></p>
           <br />
         {% endif %}
 
@@ -68,8 +68,8 @@
           {{ recent_post.content|safe }}
         </p>
 
-        {% if recent_post.image.image %}
-          <p><img src="/{{ recent_post.image.image }}" /></p>
+        {% if recent_post.image %}
+          <p><img src="/{{ recent_post.image }}" /></p>
           <br />
         {% endif %}
 

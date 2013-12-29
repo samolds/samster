@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}<title>samolds.com - Filter Blog Posts</title>{% endblock %}
+{% block title %}<title>samolds.com - Blog Post Filter</title>{% endblock %}
 
 {% block content %}
 <div class="body medium">
@@ -49,12 +49,6 @@
       <div class="content">
 
       {% include "blog_post_header.html" %}
-
-      <p class="textright"><small>Tags: 
-      {% for tag_data in post.tags.values %}
-      <a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
-      {% endfor %}
-      </small></p>
 
         <div class="content">
           <p>

@@ -1,41 +1,54 @@
 from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect
 from django.template import RequestContext
-from sam.models import Post, Tag, Comment
+from sam.models import SiteImage, Tag, Comment
 from django.db.models import Q
 from sam.forms.tag_filter import TagFilterForm
 from sam.forms.contact import ContactForm
-from django.http import HttpResponseRedirect
 from pytz import timezone, utc
 from datetime import datetime
 import re
 
 
-def blog(request):
-    posts = list(Post.objects.filter(private=False))
-    if len(posts) > 5:
-        posts = posts[len(posts) - 5:]
-    posts.reverse()
+def art(request):
+    public = Q(private=False)
+    art_tag = Q(tags__tag="art")
+    drawing = Q(tags__tag="drawing")
+    sketch = Q(tags__tag="sketch")
+    photography = Q(tags__tag="photography")
+    art = SiteImage.objects.filter(art_tag | drawing | sketch | photography)
+    art = list(set(art.filter(public)))
+    
+    if len(art) > 5:
+        art = art[len(art) - 5:]
+    art.reverse()
 
-    return render_to_response('blog.html', {
-        "posts": posts,
+    return render_to_response('art.html', {
+        "art": art,
     }, context_instance=RequestContext(request))
 
 
-def all_posts(request):
+def all_art(request):
     if request.method == 'POST':
         return filterHelp(request)
     else:
+        public = Q(private=False)
+        art_tag = Q(tags__tag="art")
+        drawing = Q(tags__tag="drawing")
+        sketch = Q(tags__tag="sketch")
+        photography = Q(tags__tag="photography")
+        art = SiteImage.objects.filter(art_tag | drawing | sketch | photography)
+        art = list(set(art.filter(public)))
+        art.reverse()
         form = TagFilterForm()
-        posts = list(Post.objects.filter(private=False))
-        posts.reverse()
 
-    return render_to_response('blog_all.html', {
-        'posts': posts,
+    return render_to_response('art_all.html', {
+        'art': art,
         'form': form,
     }, context_instance=RequestContext(request))
 
 
-def post(request, post_id=None):
+def art_work(request, image_id=None):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -46,31 +59,31 @@ def post(request, post_id=None):
             message = form.cleaned_data['message']
             bot_test = form.cleaned_data['email_confirmation']
 
-            if post_id and bot_test == '':
+            if image_id and bot_test == '':
                 comment = Comment.objects.create(private=private, name=name, email=email, subject=subject, message=message)
-                post = Post.objects.get(pk=post_id)
-                post.comments.add(comment)
+                image = SiteImage.objects.get(pk=image_id)
+                image.comments.add(comment)
     else:
         form = ContactForm()
 
-    post = None
+    work = None
     exists = False
-    if post_id:
-        post = Post.objects.filter(pk=post_id)
-    if post:
+    if image_id:
+        work = SiteImage.objects.filter(pk=image_id)
+    if work:
         exists = True
-        if post.filter(pk=post_id, private=False):
-            post = post.get(pk=post_id, private=False)
+        if work.filter(pk=image_id, private=False):
+            work = work.get(pk=image_id, private=False)
 
-    return render_to_response('blog_post.html', {
-        "post": post,
+    return render_to_response('art_work.html', {
+        "work": work,
         "exists": exists,
         "form": form,
     }, context_instance=RequestContext(request))
 
 
 def filter(request, kind=None, tag=None):
-    posts = None
+    art = None
     exists = False
     dates = []
     tags = []
@@ -79,62 +92,65 @@ def filter(request, kind=None, tag=None):
     else:
         if kind and tag:
             tags = tag.split('*')
-            posts = Post.objects.all()
+            public = Q(private=False)
+            art_tag = Q(tags__tag="art")
+            drawing = Q(tags__tag="drawing")
+            sketch = Q(tags__tag="sketch")
+            photography = Q(tags__tag="photography")
+            art = SiteImage.objects.filter(art_tag | drawing | sketch | photography)
             if kind == "tag":
-                if posts:
+                if art:
                     for piece in tags:
-                        posts = posts.filter(tags__tag=piece)
-                    if posts:
+                        art = art.filter(tags__tag=piece)
+                    if art:
                         exists = True
-                        posts = posts.filter(private=False)
-                    posts = list(posts)
-                    posts.reverse()
+                        art = art.filter(public)
+                    art = list(set(art))
+                    art.reverse()
             elif kind == "date":
                 dates = tags
-                if posts:
+                if art:
                     for piece in dates:
                         parts = piece.split('-')
                         if len(parts) == 3:
                             date = utc.localize(datetime(month=int(parts[0]), day=int(parts[1]), year=int(parts[2])))
                             creation_filter = Q(creation_date__month=date.month, creation_date__day=date.day, creation_date__year=date.year)
-                            updated_filter = Q(updated_date__month=date.month, updated_date__day=date.day, updated_date__year=date.year)
-                            posts = posts.filter(creation_filter | updated_filter)
+                            art = art.filter(creation_filter)
                         else:
-                            posts = None
-                    if posts:
+                            art = None
+                    if art:
                         exists = True
-                        posts = posts.filter(private=False)
-                        posts = list(set(posts))
-                        posts.reverse()
+                        art = art.filter(public)
+                        art = list(set(art))
+                        art.reverse()
             elif kind == "date*tag":
                 if tag and len(tag.split('_')) == 2:
                     dates = tag.split('_')[0]
                     dates = dates.split('*')
                     tags = tag.split('_')[1]
                     tags = tags.split('*')
-                    if posts:
+                    if art:
                         for piece in dates:
                             parts = piece.split('-')
                             if len(parts) == 3:
                                 date = utc.localize(datetime(month=int(parts[0]), day=int(parts[1]), year=int(parts[2])))
                                 creation_filter = Q(creation_date__month=date.month, creation_date__day=date.day, creation_date__year=date.year)
-                                updated_filter = Q(updated_date__month=date.month, updated_date__day=date.day, updated_date__year=date.year)
-                                posts = posts.filter(creation_filter | updated_filter)
+                                art = art.filter(creation_filter)
                             else:
-                                posts = None
-                        if posts:
+                                art = None
+                        if art:
                             for piece in tags:
-                                posts = posts.filter(tags__tag=piece)
-                            if posts:
+                                art = art.filter(tags__tag=piece)
+                            if art:
                                 exists = True
-                                posts = posts.filter(private=False)
-                                posts = list(set(posts))
-                                posts.reverse()
+                                art = art.filter(public)
+                                art = list(set(art))
+                                art.reverse()
 
         form = TagFilterForm()
 
-    return render_to_response('blog_filter.html', {
-        'posts': posts,
+    return render_to_response('art_filter.html', {
+        'art': art,
         'exists': exists,
         'kind': kind,
         'tag': tag,
@@ -150,10 +166,10 @@ def filterHelp(request):
         tag = form.cleaned_data['tag']
         date = form.cleaned_data['date']
         if not tag and not date:
-            return HttpResponseRedirect('/blog/all')
+            return HttpResponseRedirect('/art/all')
         elif not tag and date:
-            return HttpResponseRedirect('/blog/filter/date/%s' % date)
+            return HttpResponseRedirect('/art/filter/date/%s' % date)
         elif tag and not date:
-            return HttpResponseRedirect('/blog/filter/tag/%s' % tag)
+            return HttpResponseRedirect('/art/filter/tag/%s' % tag)
         elif tag and date:
-            return HttpResponseRedirect('/blog/filter/date*tag/%s_%s' % (date, tag))
+            return HttpResponseRedirect('/art/filter/date*tag/%s_%s' % (date, tag))

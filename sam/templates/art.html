@@ -1,26 +1,27 @@
 {% extends 'base.html' %}
 
-{% block title %}<title>samolds.com - Blog</title>{% endblock %}
+{% block title %}<title>samolds.com - Art</title>{% endblock %}
 
 {% block content %}
 <div class="body wide">
   <div class="content">
     <div class="inline">
-      <a class="right" href="/blog/all">View All Posts</a>
-      <h1 class="left">Thoughts, Stories, Ideas</h1>
+      <a class="right" href="/art/all">View All Art Work</a>
+      <h1 class="left">Some of my Doodles</h1>
       <div class="clear"></div>
     </div>
   </div>
 
   <div class="content inbetween"></div>
 
-  {% for post in posts %}
+  {% for work in art %}
     <div class="content">
 
-      {% include "blog_post_header.html" %}
+      {% include "art_work_header.html" %}
 
       <div class="content">
-        <p>{{ post.content|safe }}</p>
+        <img src="/{{ work.image }}" width=50% class="left" />
+        <p>{{ work.description|safe }}</p>
         <div class="clear"></div>
       </div>
     </div>
@@ -29,8 +30,7 @@
   {% endfor %}
 
   <div class="content">
-    <a href="/blog/all">View All Posts</a>
+    <a href="/art/all">View All Art Work</a>
   </div>
 </div>
-
 {% endblock %}

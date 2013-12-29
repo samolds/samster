@@ -10,19 +10,34 @@ class Tag(models.Model):
         return "%s" % self.tag
 
 
+class Comment(models.Model):
+    """Description of the Comment model
+    """
+    private = models.BooleanField()
+    name = models.CharField(max_length=100)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    subject = models.CharField(max_length=100, blank=True, null=True)
+    message = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return "%s" % self.name
+
+
 class SiteImage(models.Model):
     """ Description of the SiteImage model
     """
     name = models.CharField(max_length=50)
     slug = models.CharField(max_length=50, blank=True, null=True)
-    description = models.CharField(max_length=200, blank=True, null=True)
-    tags = models.ManyToManyField(Tag, max_length=50, related_name='image', blank=True, null=True)
-    image = models.ImageField(upload_to="images", height_field="height", width_field="width")
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to="images/", height_field="height", width_field="width")
     content_type = models.CharField(max_length=40)
     width = models.IntegerField()
     height = models.IntegerField()
     creation_date = models.DateTimeField(auto_now_add=True)
+    comments = models.ManyToManyField(Comment, related_name='siteimage', blank=True, null=True)
     tags = models.ManyToManyField(Tag, max_length=50, related_name='siteimage', blank=True, null=True)
+    private = models.BooleanField()
 
     def __unicode__(self):
         return "%s" % self.name
@@ -61,20 +76,6 @@ class Quote(models.Model):
             return "%s" % self.name
         else:
             return "%s" % self.author
-
-
-class Comment(models.Model):
-    """Description of the Comment model
-    """
-    private = models.BooleanField()
-    name = models.CharField(max_length=100)
-    email = models.CharField(max_length=100, blank=True, null=True)
-    subject = models.CharField(max_length=100, blank=True, null=True)
-    message = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
-
-    def __unicode__(self):
-        return "%s" % self.name
 
 
 class Post(models.Model):

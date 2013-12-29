@@ -1,0 +1,20 @@
+<table>
+  <tr>
+    <td class="textleft tdtitle" rowspan=2><h2><a href="/art/work/{{ work.pk }}">{{ work.name }}</a></h2></td>
+    {% load time_localization %}
+    <td class="textright"><small><a href="/art/filter/date/{{ work.creation_date.month }}-{{ work.creation_date.day }}-{{ work.creation_date.year }}">{{ work.creation_date|mtn_time }}</a></small></td>
+  </tr>
+  <tr>
+    <td class="textright">
+      {% if work.tags.values %}
+        <small>Tags: 
+          {% for tag_data in work.tags.values %}
+            <a href="/art/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
+          {% endfor %}
+        </small>
+      {% endif %}
+    </td>
+  </tr>
+</table>
+
+<div class="clear"></div>

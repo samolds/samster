@@ -14,6 +14,10 @@ urlpatterns = patterns('sam.views',
     url(r'^blog/filter(?:/(?P<kind>(\w+[*]*)*))?(?:/(?P<tag>(\w+[-*]*)*))?$', 'blog.filter'),
     url(r'^front_page$', 'front_page.front_page'),
     url(r'^favorite_quotes$', 'quote.quote'),
+    url(r'^art$', 'art.art'),
+    url(r'^art/all$', 'art.all_art'),
+    url(r'^art/work(?:/(?P<image_id>\d+))?$', 'art.art_work'),
+    url(r'^art/filter(?:/(?P<kind>(\w+[*]*)*))?(?:/(?P<tag>(\w+[-*]*)*))?$', 'art.filter'),
 )
 
 urlpatterns += patterns('',

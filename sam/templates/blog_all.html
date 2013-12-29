@@ -4,41 +4,33 @@
 
 {% block content %}
 <div class="body medium">
-<div class="content">
-  <table>
-    <tr>
-      <td class="textleft" rowspan=2><h1>All Blog Posts</h1></td>
-      <td class="textright filterwidth">{% include "blog_filter_form.html" %}</td>
-    </tr>
-  </table>
+  <div class="content">
+    <table>
+      <tr>
+        <td class="textleft" rowspan=2><h1>All Blog Posts</h1></td>
+        <td class="textright filterwidth">{% include "blog_filter_form.html" %}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="content inbetween"></div>
+
+  {% for post in posts %}
+    <div class="content">
+
+      {% include "blog_post_header.html" %}
+
+      <div class="content">
+        <p>
+          {{ post.content|slice:":300"|safe }}...
+          <div class="clear"></div>
+        </p>
+      </div>
+    </div>
+
+    <div class="content inbetween"></div>
+  {% endfor %}
+
+  <div class="content"><br /></div>
 </div>
-
-<div class="content inbetween"></div>
-
-{% for post in posts %}
-<div class="content">
-
-{% include "blog_post_header.html" %}
-
-<p class="textright"><small>
-{% for tag_data in post.tags.values %}
-<a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
-{% endfor %}
-</small></p>
-
-<div class="content">
-<p>
-{{ post.content|slice:":300"|safe }}...
-<div class="clear"></div>
-</p>
-</div>
-</div>
-
-<div class="content inbetween"></div>
-{% endfor %}
-
-<div class="content">
-</div>
-</div>
-
 {% endblock %}

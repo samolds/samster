@@ -10,4 +10,11 @@ urlpatterns = patterns('',
     url(r'', include('sam.urls')),
 )
 
+if settings.DEBUG:
+    urlpatterns += patterns('',
+      url(r'^images/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT,
+      }),
+    )
+
 urlpatterns += staticfiles_urlpatterns()

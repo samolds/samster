@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>samolds.com - Art Work Filter</title>{% endblock %}
+
+{% block content %}
+<div class="body medium">
+
+  <div class="content">
+    <table>
+      <tr>
+        <td class="textleft" rowspan=2>
+          {% if kind == "tag" %}
+            {% if tags %}
+              <h1>All art work tagged with {% for tag in tags %}'{{ tag }}' {% endfor %}</h1>
+            {% else %}
+              <h1>All art work tagged with 'None'</h1>
+            {% endif %}
+          {% elif kind == "date" %}
+            {% if dates %}
+              <h1>All art work uploaded on {% for date in dates %}'{{ date }}' {% endfor %}</h1>
+              <small>in <a href="http://time.is/UTC">UTC</a> (Coordinated Universal Time)</small>
+            {% else %}
+              <h1>All art work uploaded on 'None'</h1>
+            {% endif %}
+          {% elif kind == "date*tag" %}
+            {% if dates and tags %}
+              <h1>All art work tagged with {% for tag in tags %}'{{ tag }}' {% endfor %}</h1>
+              <h1>and uploaded on {% for date in dates %}'{{ date }}' {% endfor %}</h1>
+              <small>in <a href="http://time.is/UTC">UTC</a> (Coordinated Universal Time)</small>
+            {% else %}
+              <h1>All art work tagged with 'None'</h1>
+              <h1>and uploaded on 'None'</h1>
+            {% endif %}
+          {% else %}
+            <h1>Nothing to filter</h1>
+          {% endif %}
+        </td>
+        <td class="textright filterwidth">{% include "art_filter_form.html" %}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="content inbetween"></div>
+
+  {% if exists %}
+    {% if art %}
+      {% for work in art %}
+        <div class="content">
+
+          {% include "art_work_header.html" %}
+
+          <div class="content">
+            <p>
+              {{ work.description|slice:":300"|safe }}...
+              <div class="clear"></div>
+            </p>
+          </div>
+        </div>
+
+        <div class="content inbetween"></div>
+      {% endfor %}
+    {% else %}
+      <div class="content">
+        <p>The art work with that tag are private</p>
+      </div>
+
+      <div class="content inbetween"></div>
+    {% endif %}
+  {% else %}
+    <div class="content">
+      <p>There is no art work with that tag</p>
+    </div>
+
+    <div class="content inbetween"></div>
+  {% endif %}
+
+
+  <div class="content">
+    <a href="/art/all">Back To All Art Work</a>
+  </div>
+
+</div>
+{% endblock %}

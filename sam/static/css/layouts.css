@@ -24,7 +24,7 @@ html, body {
   height: 100%;
 }
 
-div, ul, li, p, a, table, tr, td, form {
+img, div, ul, li, p, a, table, tr, td, form {
   color: #000;
   margin: 0px;
   padding: 0px;
@@ -35,7 +35,8 @@ div, ul, li, p, a, table, tr, td, form {
 a:hover {color: #fff;}
 
 table {width: 100%;}
-.tdtitle {width: 80%;}
+img {max-width: 100%;}
+.tdtitle {width: 75%;}
 
 /* -------------- NAVBAR -------------- */
 
@@ -166,6 +167,7 @@ table {width: 100%;}
 
 .contactform input {
   width: 375px;
+  max-width: 100%;
   display: block;
   border: 1px solid #999;
 }
