@@ -4,65 +4,64 @@
 
 {% block content %}
 <div class="body medium">
-<div class="content">
-<!--
-<h1>About</h1>
-
-<p>
-Sam Olds is a kind and caring soul. He is compassionate and... okay this isn't a dating site. I've been working on building this site forever. I've been squatting on this domain for the last 2 years and haven't even put up a work in progress site. I'm not sure what I'm doing, heh heh heh.
-</p>
-
-<p>
-Anyway, I'm just brainstorming here on what to include in the "About" page:
-<ul>
-<li>My current activities</li>
-<li>Going to school</li>
-<li>Working</li>
-<li>Single ;)</li>
-<li>Very simple</li>
-<li>Input some images?</li>
-</ul>
-I feel like a lot of the site is going to be redundant.
-Did I divide it up too much?
-</p>
--->
-<h1>About</h1>
-<div class="content">
-<h2>Sam</h2>
-<p></p>
-</div>
-
-<div class="content">
-<h2>The Site</h2>
-<p></p>
-</div>
-
-{% if post %}
-
+  <!--
   <div class="content">
-    <h1>{{ post.title }}</h1>
+    <h1>About</h1>
+
+    <p>
+    Sam Olds is a kind and caring soul. He is compassionate and... okay this isn't a dating site. I've been working on building this site forever. I've been squatting on this domain for the last 2 years and haven't even put up a work in progress site. I'm not sure what I'm doing, heh heh heh.
+    </p>
+
+    <p>
+    Anyway, I'm just brainstorming here on what to include in the "About" page:
+    <ul>
+    <li>My current activities</li>
+    <li>Going to school</li>
+    <li>Working</li>
+    <li>Single ;)</li>
+    <li>Very simple</li>
+    <li>Input some images?</li>
+    </ul>
+    I feel like a lot of the site is going to be redundant.
+    Did I divide it up too much?
+    </p>
+    <h1>About</h1>
+    <div class="content">
+      <h2>Sam</h2>
+      <p></p>
+    </div>
 
     <div class="content">
-      <p>
-        {{ post.content|safe }}
-        <div class="clear"></div>
-      </p>
-
-
-      {% if post.image %}
-        <img src="/{{ post.image }}" />
-        <br />
-      {% endif %}
-
-      {% if post.embedded_link %}
-        {{ post.embedded_link|safe }}
-        <br />
-      {% endif %}
+      <h2>The Site</h2>
+      <p></p>
     </div>
   </div>
-{% endif %}
-</div>
-</div>
+  -->
 
+  {% if post %}
+
+    <div class="content">
+      <h1>{{ post.title }}</h1>
+
+      <div class="content">
+        <p>
+          {{ post.content|safe }}
+          <div class="clear"></div>
+        </p>
+
+
+        {% if post.image %}
+          <img src="/{{ post.image }}" />
+          <br />
+        {% endif %}
+
+        {% if post.embedded_link %}
+          {{ post.embedded_link|safe }}
+          <br />
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</div>
 
 {% endblock %}

@@ -4,125 +4,143 @@
 
 {% block content %}
 
-<div class="body wide">
 {% if exists %}
   {% if post %}
-    <div class="content">
-
-      <table>
-        <tr>
-          <td class="textleft tdtitle" rowspan=2><h1><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h1></td>
-          {% load time_localization %}
-          <td class="textright"><small>Created on <a href="/blog/filter/date/{{ post.creation_date.month }}-{{ post.creation_date.day }}-{{ post.creation_date.year }}">{{ post.creation_date|mtn_time }}</a></small></td>
-        </tr>
-        <tr>
-          <td class="textright">
-            <small>
-              {% if not post.creation_date.ctime == post.updated_date.ctime %}
-                Updated on <a href="/blog/filter/date/{{ post.updated_date.month }}-{{ post.updated_date.day }}-{{ post.updated_date.year }}">{{ post.updated_date|mtn_time }}</a>
-              {% elif post.tags.values %}
-                Tags: 
-                {% for tag_data in post.tags.values %}
-                  <a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
-                {% endfor %}
-              {% endif %}
-            </small>
-          </td>
-        </tr>
-      </table>
-
-      {% if not post.creation_date.ctime == post.updated_date.ctime and post.tags.values %}
-      <p class="textright">
-        <small>Tags: 
-          {% for tag_data in post.tags.values %}
-            <a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
-          {% endfor %}
-        </small>
-      </p>
-      {% endif %}
-
-      <div class="clear"></div>
-
+    <div class="body wide">
       <div class="content">
-        <p>{{ post.content|safe }}</p>
-        <br />
+
+        <table>
+          <tr>
+            <td class="textleft tdtitle" rowspan=2><h1><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h1></td>
+            {% load time_localization %}
+            <td class="textright"><small>Created on <a href="/blog/filter/date/{{ post.creation_date.month }}-{{ post.creation_date.day }}-{{ post.creation_date.year }}">{{ post.creation_date|mtn_time }}</a></small></td>
+          </tr>
+          <tr>
+            <td class="textright">
+              <small>
+                {% if not post.creation_date.ctime == post.updated_date.ctime %}
+                  Updated on <a href="/blog/filter/date/{{ post.updated_date.month }}-{{ post.updated_date.day }}-{{ post.updated_date.year }}">{{ post.updated_date|mtn_time }}</a>
+                {% elif post.tags.values %}
+                  Tags: 
+                  {% for tag_data in post.tags.values %}
+                    <a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
+                  {% endfor %}
+                {% endif %}
+              </small>
+            </td>
+          </tr>
+        </table>
+
+        {% if not post.creation_date.ctime == post.updated_date.ctime and post.tags.values %}
+        <p class="textright">
+          <small>Tags: 
+            {% for tag_data in post.tags.values %}
+              <a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
+            {% endfor %}
+          </small>
+        </p>
+        {% endif %}
+
         <div class="clear"></div>
 
-        {% if post.image %}
-          <p><img src="/{{ post.image }}" /></p>
+        <div class="content">
+          <p>{{ post.content|safe }}</p>
           <br />
           <div class="clear"></div>
-        {% endif %}
 
-        {% if post.embedded_link %}
-          <p>{{ post.embedded_link|safe }}</p>
-          <br />
-          <div class="clear"></div>
-        {% endif %}
+          {% if post.image %}
+            <p><img src="/{{ post.image }}" /></p>
+            <br />
+            <div class="clear"></div>
+          {% endif %}
+
+          {% if post.embedded_link %}
+            <p>{{ post.embedded_link|safe }}</p>
+            <br />
+            <div class="clear"></div>
+          {% endif %}
+        </div>
+        
+        <a class="right" href="/blog">Back To Blog</a>
+        <div class="clear"></div>
+
       </div>
-      
-      <a class="right" href="/blog">Back To Blog</a>
-      <div class="clear"></div>
-
     </div>
-    <div class="content inbetween"><br /></div>
 
-    {% if post.comments.values %}
+    <div class="body medium">
+      {% if post.comments.values %}
+        <div class="content">
+          <div class="content">
+            <div class="content">
+              <h2>Comments</h2>
+              {% for comment_data in post.comments.values %}
+                {% if not comment_data.private %}
+                  <div class="content">
+                    <table>
+                      <tr>
+                        <td class="textleft tdtitle" rowspan=2><h3>{{ comment_data.subject }}</h3></td>
+                        <td class="textright"><small>{{ comment_data.name }}</small></td>
+                      </tr>
+                      <tr>
+                        <td class="textright"><small>{{ comment_data.date }}</small></td>
+                      </tr>
+                    </table>
+                    <div class="content">{{ comment_data.message }}</div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="content inbetween"></div>
+      {% endif %}
+
       <div class="content">
         <div class="content">
           <div class="content">
-            <h2>Comments</h2>
-            {% for comment_data in post.comments.values %}
-              {% if not comment_data.private %}
-                <div class="content">
-                  <table>
-                    <tr>
-                      <td class="textleft tdtitle" rowspan=2><h3>{{ comment_data.subject }}</h3></td>
-                      <td class="textright"><small>{{ comment_data.name }}</small></td>
-                    </tr>
-                    <tr>
-                      <td class="textright"><small>{{ comment_data.date }}</small></td>
-                    </tr>
-                  </table>
-                  <div class="content">{{ comment_data.message }}</div>
-                </div>
-              {% endif %}
-            {% endfor %}
+            <h2>Leave a Comment</h2>
+            <div class="content">
+              <form class="contactform" action="/blog/post/{{ post.pk }}" method="post">{% csrf_token %}
+                {% include "comment_inners.html" %}
+              </form>
+            </div>
           </div>
         </div>
       </div>
+
       <div class="content inbetween"></div>
-    {% endif %}
 
-    <div class="content">
       <div class="content">
-        <div class="content">
-          <h2>Leave a Comment</h2>
-          <div class="content">
-            <form class="contactform" action="/blog/post/{{ post.pk }}" method="post">{% csrf_token %}
-              {% include "comment_inners.html" %}
-            </form>
-          </div>
-        </div>
+      <a href="/blog">Back To Blog</a>
       </div>
+
     </div>
 
   {% else %}
-    <div class="content">
-    <h1>This blog post has been marked as private!</h1>
+    <div class="body narrow">
+      <div class="content">
+        <h1>This blog post has been marked as private!</h1>
+      </div>
+
+      <div class="content inbetween"></div>
+
+      <div class="content">
+        <a href="/blog">Back To Blog</a>
+      </div>
     </div>
   {% endif %}
 {% else %}
-  <div class="content">
-  <h1>This blog post has been moved or deleted! Oops.</h1>
+  <div class="body narrow">
+    <div class="content">
+      <h1>This blog post has been moved or deleted! Oops.</h1>
+    </div>
+
+    <div class="content inbetween"></div>
+
+    <div class="content">
+      <a href="/blog">Back To Blog</a>
+    </div>
   </div>
 {% endif %}
-
-<div class="content inbetween"></div>
-
-<div class="content">
-<a href="/blog">Back To Blog</a>
-</div>
-</div>
 
 {% endblock %}

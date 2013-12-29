@@ -4,24 +4,22 @@
 
 {% block content %}
 <div class="body narrow">
-<div class="content">
-<h1>My Favorite Quotes</h1>
-</div>
+  <div class="content">
+    <h1>My Favorite Quotes</h1>
+  </div>
 
-<div class="content inbetween"></div>
+  <div class="content inbetween"></div>
 
-{% for quote in quotes %}
-<div class="content">
-<p>"{{ quote.quote }}"</p>
-<p>- {{ quote.author }}</p>
-</div>
+  {% for quote in quotes %}
+    <div class="content">
+      <p>"{{ quote.quote }}"</p>
+      <p>- {{ quote.author }}</p>
+    </div>
 
-<div class="content inbetween"></div>
-{% endfor %}
+    <div class="content inbetween"></div>
+  {% endfor %}
 
-<div class="content">
-<p>That's all quotes.</p>
-</div>
+  <div class="content"><br /></div>
 </div>
 
 {% endblock %}

@@ -3,7 +3,7 @@ from PIL import Image
 
 
 class Tag(models.Model):
-    tag = models.SlugField(max_length=50)
+    tag = models.SlugField(max_length=50, unique=True)
     description = models.CharField(max_length=200, blank=True, null=True)
 
     def __unicode__(self):

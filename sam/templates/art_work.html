@@ -4,98 +4,113 @@
 
 {% block content %}
 
-<div class="body medium">
 {% if exists %}
   {% if work %}
-    <div class="content">
-      <table>
-        <tr>
-          <td class="textleft tdtitle" rowspan=2><h1><a href="/art/work/{{ work.pk }}">{{ work.name }}</a></h1></td>
-          {% load time_localization %}
-          <td class="textright"><small>Uploaded <a href="/art/filter/date/{{ work.creation_date.month }}-{{ work.creation_date.day }}-{{ work.creation_date.year }}">{{ work.creation_date|mtn_time }}</a></small></td>
-        </tr>
-        <tr>
-          <td class="textright">
-            {% if work.tags.values %}
-              <small>Tags: 
-                {% for tag_data in work.tags.values %}
-                  <a href="/art/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
-                {% endfor %}
-              </small>
-            {% endif %}
-          </td>
-        </tr>
-      </table>
-
-      <div class="clear"></div>
-
+    <div class="body wide">
       <div class="content">
-        <img src="/{{ work.image }}" class="left" /></p>
-        <p>{{ work.description|safe }}</p>
+        <table>
+          <tr>
+            <td class="textleft tdtitle" rowspan=2><h1><a href="/art/work/{{ work.pk }}">{{ work.name }}</a></h1></td>
+            {% load time_localization %}
+            <td class="textright"><small>Uploaded <a href="/art/filter/date/{{ work.creation_date.month }}-{{ work.creation_date.day }}-{{ work.creation_date.year }}">{{ work.creation_date|mtn_time }}</a></small></td>
+          </tr>
+          <tr>
+            <td class="textright">
+              {% if work.tags.values %}
+                <small>Tags: 
+                  {% for tag_data in work.tags.values %}
+                    <a href="/art/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
+                  {% endfor %}
+                </small>
+              {% endif %}
+            </td>
+          </tr>
+        </table>
+
+        <div class="clear"></div>
+
+        <div class="content">
+          <img src="/{{ work.image }}" class="left" /></p>
+          <p>{{ work.description|safe }}</p>
+          <div class="clear"></div>
+        </div>
+        
+        <a class="right" href="/art">Back To Main Art Page</a>
         <div class="clear"></div>
       </div>
-      
-      <a class="right" href="/art">Back To Main Art Page</a>
-      <div class="clear"></div>
     </div>
-    <div class="content inbetween"><br /></div>
+    
+    <div class="body medium">
+      {% if work.comments.values %}
+        <div class="content">
+          <div class="content">
+            <div class="content">
+              <h2>Comments</h2>
+              {% for comment_data in work.comments.values %}
+                {% if not comment_data.private %}
+                  <div class="content">
+                    <table>
+                      <tr>
+                        <td class="textleft tdtitle" rowspan=2><h3>{{ comment_data.subject }}</h3></td>
+                        <td class="textright"><small>{{ comment_data.name }}</small></td>
+                      </tr>
+                      <tr>
+                        <td class="textright"><small>{{ comment_data.date }}</small></td>
+                      </tr>
+                    </table>
+                    <div class="content">{{ comment_data.message }}</div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="content inbetween"></div>
+      {% endif %}
 
-    {% if work.comments.values %}
       <div class="content">
         <div class="content">
           <div class="content">
-            <h2>Comments</h2>
-            {% for comment_data in work.comments.values %}
-              {% if not comment_data.private %}
-                <div class="content">
-                  <table>
-                    <tr>
-                      <td class="textleft tdtitle" rowspan=2><h3>{{ comment_data.subject }}</h3></td>
-                      <td class="textright"><small>{{ comment_data.name }}</small></td>
-                    </tr>
-                    <tr>
-                      <td class="textright"><small>{{ comment_data.date }}</small></td>
-                    </tr>
-                  </table>
-                  <div class="content">{{ comment_data.message }}</div>
-                </div>
-              {% endif %}
-            {% endfor %}
+            <h2>Leave a Comment</h2>
+            <div class="content">
+              <form class="contactform" action="/art/work/{{ work.pk }}" method="post">{% csrf_token %}
+                {% include "comment_inners.html" %}
+              </form>
+            </div>
           </div>
         </div>
       </div>
       <div class="content inbetween"></div>
-    {% endif %}
-
-    <div class="content">
       <div class="content">
-        <div class="content">
-          <h2>Leave a Comment</h2>
-          <div class="content">
-            <form class="contactform" action="/art/work/{{ work.pk }}" method="post">{% csrf_token %}
-              {% include "comment_inners.html" %}
-            </form>
-          </div>
-        </div>
+        <a href="/art">Back To Main Art Page</a>
       </div>
     </div>
 
   {% else %}
-    <div class="content">
-    <h1>This art work has been marked as private!</h1>
+    <div class="body narrow">
+      <div class="content">
+        <h1>This art work has been marked as private!</h1>
+      </div>
+
+      <div class="content inbetween"></div>
+
+      <div class="content">
+        <a href="/art">Back To Main Art Page</a>
+      </div>
     </div>
   {% endif %}
 {% else %}
-  <div class="content">
-  <h1>This art work has been moved or deleted! Oops.</h1>
+  <div class="body narrow">
+    <div class="content">
+      <h1>This art work has been moved or deleted! Oops.</h1>
+    </div>
+
+    <div class="content inbetween"></div>
+
+    <div class="content">
+      <a href="/art">Back To Main Art Page</a>
+    </div>
   </div>
 {% endif %}
-
-<div class="content inbetween"></div>
-
-<div class="content">
-<a href="/art">Back To Main Art Page</a>
-</div>
-</div>
 
 {% endblock %}
