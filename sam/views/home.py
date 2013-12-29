@@ -21,9 +21,9 @@ def home(request):
     posts = list(Post.objects.filter(private=False))
     posts.reverse()
     if posts:
-        recent_post = posts[0]
+        post = posts[0]
     else:
-        recent_post = None
+        post = None
 
     quotes = list(Quote.objects.filter(private=False))
     if quotes:
@@ -34,6 +34,6 @@ def home(request):
     #browser = request.META.get('HTTP_USER_AGENT', 'Unknown')
     return render_to_response('home.html', {
         "home_post": home_post,
-        "recent_post": recent_post,
+        "post": post,
         "quote": quote
     }, context_instance=RequestContext(request))

@@ -62,20 +62,7 @@
     <h1>Site Comments</h1>
 
     {% for comment_data in post.comments.values %}
-      {% if not comment_data.private %}
-        <div class="content">
-          <table>
-            <tr>
-              <td class="textleft tdtitle" rowspan=2><h3>{{ comment_data.subject }}</h3></td>
-              <td class="textright"><small>{{ comment_data.name }}</small></td>
-            </tr>
-            <tr>
-              <td class="textright"><small>{{ comment_data.date }}</small></td>
-            </tr>
-          </table>
-          <div class="content">{{ comment_data.message }}</div>
-        </div>
-      {% endif %}
+      {% include "comment_data.html" %}
     {% endfor %}
   </div>
 </div>
