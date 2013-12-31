@@ -45,6 +45,8 @@
           <p>{{ post.embedded_link|safe }}</p>
         {% endif %}
       </div>
+    {% else %}
+      <h2>This part has yet to be written</h2>
     {% endif %}
   </div>
 </div>
@@ -57,13 +59,15 @@
   <div class="clear"></div>
   </div>
 
-  <div class="content inbetween"></div>
-  <div class="content">
-    <h1>Site Comments</h1>
+  {% if post.comments.values %}
+    <div class="content inbetween"></div>
+    <div class="content">
+      <h1>Site Comments</h1>
 
-    {% for comment_data in post.comments.values %}
-      {% include "comment_data.html" %}
-    {% endfor %}
-  </div>
+      {% for comment_data in post.comments.values %}
+        {% include "comment_data.html" %}
+      {% endfor %}
+    </div>
+  {% endif %}
 </div>
 {% endblock %}

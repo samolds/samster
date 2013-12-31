@@ -17,6 +17,8 @@
           <p>{{ post.embedded_link|safe }}</p>
         {% endif %}
       </div>
+    {% else %}
+      <h2>This part has yet to be written</h2>
     {% endif %}
   </div>
 </div>
@@ -36,5 +38,5 @@
 
     <div class="content inbetween"></div>
   {% endfor %}
-  <div class="content"><br /></div>
+  <div class="content"></div>
 </div>

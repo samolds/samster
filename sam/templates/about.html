@@ -38,9 +38,9 @@
   </div>
   -->
 
-  {% if post %}
+  <div class="content">
+    {% if post %}
 
-    <div class="content">
       <h1>{{ post.title }}</h1>
 
       <div class="content">
@@ -60,8 +60,10 @@
           <br />
         {% endif %}
       </div>
-    </div>
-  {% endif %}
+    {% else %}
+      <h2>This part has yet to be written</h2>
+    {% endif %}
+  </div>
 </div>
 
 {% endblock %}

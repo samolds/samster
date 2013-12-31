@@ -4,6 +4,9 @@
 
 {% block content %}
 <div class="body wide">
+  {% if home_post.image %}
+    <img src="/{{ home_post.image }}" class="bannerphoto" />
+  {% endif %}
   <div class="content">
     <!--
     <h1>Welcome to samolds.com!</h1>
@@ -20,33 +23,27 @@
         <div class="clear"></div>
         <br />
 
-        {% if home_post.image %}
-          <p><img src="/{{ home_post.image }}" /></p>
-          <br />
-        {% endif %}
-
         {% if home_post.embedded_link %}
           <p>{{ home_post.embedded_link|safe }}</p>
         {% endif %}
       </div>
+    {% else %}
+      <h2>This part has yet to be written</h2>
     {% endif %}
   </div>
 
-  <div class="content inbetween"></div>
+  {% if quote %}
+    <div class="content inbetween"></div>
 
-  <div class="content textright">
-    {% if quote %}
-        <a href="/favorite_quotes">
-        <small>"{{ quote.quote }}"</small><br />
-        <small>- {{ quote.author }}</small>
-        </a>
-    {% endif %}
-  </div>
+    <div class="content textright">
+        <a href="/favorite_quotes"><small>"{{ quote.quote }}"</small><br /><small>- {{ quote.author }}</small></a>
+    </div>
+  {% endif %}
 </div>
 
-<div class="body wide">
-  <div class="content">
-    {% if post %}
+{% if post %}
+  <div class="body wide">
+    <div class="content">
       {% include "blog_post_header.html" %}
 
       <div class="content">
@@ -63,8 +60,8 @@
           <p>{{ post.embedded_link|safe }}</p>
         {% endif %}
       </div>
-    {% endif %}
+    </div>
   </div>
-</div>
+{% endif %}
 
 {% endblock %}

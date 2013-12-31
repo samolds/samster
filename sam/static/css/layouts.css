@@ -121,6 +121,10 @@ img {max-width: 100%;}
   word-wrap: break-word;
 }
 
+.bannerphoto {
+  width: 100%;
+}
+
 .helpbox {
   text-align: left;
   border-style: solid;
