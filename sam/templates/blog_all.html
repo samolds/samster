@@ -8,7 +8,10 @@
     <table>
       <tr>
         <td class="textleft" rowspan=2><h1>All Blog Posts</h1></td>
-        <td class="textright filterwidth">{% include "blog_filter_form.html" %}</td>
+        <td class="textright filterwidth">
+          <form class="right" action="/blog/filter" method="post">{% csrf_token %}
+            {% include "inner_filter_form.html" %}</td>
+          </form>
       </tr>
     </table>
   </div>

@@ -5,9 +5,6 @@ from django.db.models import Q
 from sam.forms.tag_filter import TagFilterForm
 from sam.forms.contact import ContactForm
 from django.http import HttpResponseRedirect
-from pytz import timezone, utc
-from datetime import datetime
-import re
 
 
 def blog(request):
@@ -92,19 +89,33 @@ def filter(request, kind=None, tag=None):
             elif kind == "date":
                 dates = tags
                 if posts:
+                    creation = posts
+                    updated = posts
                     for piece in dates:
                         parts = piece.split('-')
                         if len(parts) == 3:
-                            date = utc.localize(datetime(month=int(parts[0]), day=int(parts[1]), year=int(parts[2])))
-                            creation_filter = Q(creation_date__month=date.month, creation_date__day=date.day, creation_date__year=date.year)
-                            updated_filter = Q(updated_date__month=date.month, updated_date__day=date.day, updated_date__year=date.year)
-                            posts = posts.filter(creation_filter | updated_filter)
+                            year = parts[2]
+                            day = parts[1]
+                            month = parts[0]
+                            if num_or_all(year) and num_or_all(day) and num_or_all(month):
+                                if not year == "all":
+                                    creation = creation.filter(creation_date__year=int(year))
+                                    updated = updated.filter(updated_date__year=int(year))
+                                if not day == "all":
+                                    creation = creation.filter(creation_date__day=int(day))
+                                    updated = updated.filter(updated_date__day=int(day))
+                                if not month == "all":
+                                    creation = creation.filter(creation_date__month=int(month))
+                                    updated = updated.filter(updated_date__month=int(month))
+                            else:
+                                posts = None
                         else:
                             posts = None
-                    if posts:
+                    if (creation or updated) and posts:
                         exists = True
-                        posts = posts.filter(private=False)
-                        posts = list(set(posts))
+                        creation = creation.filter(private=False)
+                        updated = updated.filter(private=False)
+                        posts = list(set(list(creation) + list(updated)))
                         posts.reverse()
             elif kind == "date*tag":
                 if tag and len(tag.split('_')) == 2:
@@ -113,24 +124,38 @@ def filter(request, kind=None, tag=None):
                     tags = tag.split('_')[1]
                     tags = tags.split('*')
                     if posts:
+                        creation = posts
+                        updated = posts
                         for piece in dates:
                             parts = piece.split('-')
                             if len(parts) == 3:
-                                date = utc.localize(datetime(month=int(parts[0]), day=int(parts[1]), year=int(parts[2])))
-                                creation_filter = Q(creation_date__month=date.month, creation_date__day=date.day, creation_date__year=date.year)
-                                updated_filter = Q(updated_date__month=date.month, updated_date__day=date.day, updated_date__year=date.year)
-                                posts = posts.filter(creation_filter | updated_filter)
+                                year = parts[2]
+                                day = parts[1]
+                                month = parts[0]
+                                if num_or_all(year) and num_or_all(day) and num_or_all(month):
+                                    if not year == "all":
+                                        creation = creation.filter(creation_date__year=int(year))
+                                        updated = updated.filter(updated_date__year=int(year))
+                                    if not day == "all":
+                                        creation = creation.filter(creation_date__day=int(day))
+                                        updated = updated.filter(updated_date__day=int(day))
+                                    if not month == "all":
+                                        creation = creation.filter(creation_date__month=int(month))
+                                        updated = updated.filter(updated_date__month=int(month))
+                                else:
+                                    posts = None
                             else:
                                 posts = None
-                        if posts:
+                        if (creation or updated) and posts:
                             for piece in tags:
-                                posts = posts.filter(tags__tag=piece)
-                            if posts:
+                                creation = creation.filter(tags__tag=piece)
+                                updated = updated.filter(tags__tag=piece)
+                            if creation or updated:
                                 exists = True
-                                posts = posts.filter(private=False)
-                                posts = list(set(posts))
+                                creation = creation.filter(private=False)
+                                updated = updated.filter(private=False)
+                                posts = list(set(list(creation) + list(updated)))
                                 posts.reverse()
-
         form = TagFilterForm()
 
     return render_to_response('blog_filter.html', {
@@ -142,6 +167,16 @@ def filter(request, kind=None, tag=None):
         'dates': dates,
         'form': form,
     }, context_instance=RequestContext(request))
+
+
+def num_or_all(x):
+    if x == "all":
+        return True
+    try:
+        int(x)
+        return True
+    except ValueError:
+        return False
 
 
 def filterHelp(request):

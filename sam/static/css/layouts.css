@@ -127,6 +127,7 @@ img {max-width: 100%;}
   border-radius: 5px;
   border-width: 5px;
   border-color: #ffffff;
+  margin-top: 2px;
   padding: 5px;
   z-index: 20;
   background-color: #e0e0e0;
@@ -137,6 +138,10 @@ img {max-width: 100%;}
 
 .hbnarrow {
   width: 140px;
+}
+
+.hbmedium {
+  width: 200px;
 }
 
 .hbwide {
@@ -154,6 +159,7 @@ img {max-width: 100%;}
 .inline {display: inline;}
 .textleft {text-align: left;}
 .textright {text-align: right;}
+.textcenter {text-align: center;}
 .filterwidth {width: 185px;}
 
 .inbetween {

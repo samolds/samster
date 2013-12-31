@@ -1,0 +1,25 @@
+{{ form.non_field_errors }}
+<table>
+  <tr>
+    <td class="right"><small>{{ form.tag.label_tag }} {{ form.tag }}</small></td>
+    <td class="hoverhelp textcenter"><small><a href="#">Help</a></small>
+      <div class="helpbox hbmedium">
+        <ul>
+          <li>To filter multiple tags or dates, separate tags or dates with an asterisk (*)</li>
+          <br />
+          <li>Enter dates in the format of <i>mm-dd-yyyy</i></li>
+          <br />
+          <li>Use the keyword <i>all</i> instead of a number value to return all posts in that period.</li>
+          <br />
+          <li><i>all-all-2013</i>: all posts in 2013</li>
+          <li><i>03-all-2013</i>: all posts in March of 2013</li>
+          <li><i>03-all-all</i>: all posts in March of any year</li>
+        </ul>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td><small>{{ form.date.label_tag }} {{ form.date }}</small></td>
+    <td><input type="submit" value="Filter" /></td>
+  </tr>
+</table>

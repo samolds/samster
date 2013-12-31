@@ -5,9 +5,6 @@ from sam.models import SiteImage, Tag, Comment
 from django.db.models import Q
 from sam.forms.tag_filter import TagFilterForm
 from sam.forms.contact import ContactForm
-from pytz import timezone, utc
-from datetime import datetime
-import re
 
 
 def art(request):
@@ -110,19 +107,31 @@ def filter(request, kind=None, tag=None):
             elif kind == "date":
                 dates = tags
                 if art:
+                    good_request = True
                     for piece in dates:
                         parts = piece.split('-')
                         if len(parts) == 3:
-                            date = utc.localize(datetime(month=int(parts[0]), day=int(parts[1]), year=int(parts[2])))
-                            creation_filter = Q(creation_date__month=date.month, creation_date__day=date.day, creation_date__year=date.year)
-                            art = art.filter(creation_filter)
+                            year = parts[2]
+                            day = parts[1]
+                            month = parts[0]
+                            if num_or_all(year) and num_or_all(day) and num_or_all(month):
+                                if not year == "all":
+                                    art = art.filter(creation_date__year=int(year))
+                                if not day == "all":
+                                    art = art.filter(creation_date__day=int(day))
+                                if not month == "all":
+                                    art = art.filter(creation_date__month=int(month))
+                            else:
+                                good_request = False
                         else:
-                            art = None
-                    if art:
+                            good_request = False
+                    if art and good_request:
                         exists = True
                         art = art.filter(public)
                         art = list(set(art))
                         art.reverse()
+                    else:
+                        art = None
             elif kind == "date*tag":
                 if tag and len(tag.split('_')) == 2:
                     dates = tag.split('_')[0]
@@ -130,15 +139,25 @@ def filter(request, kind=None, tag=None):
                     tags = tag.split('_')[1]
                     tags = tags.split('*')
                     if art:
+                        good_request = True
                         for piece in dates:
                             parts = piece.split('-')
                             if len(parts) == 3:
-                                date = utc.localize(datetime(month=int(parts[0]), day=int(parts[1]), year=int(parts[2])))
-                                creation_filter = Q(creation_date__month=date.month, creation_date__day=date.day, creation_date__year=date.year)
-                                art = art.filter(creation_filter)
+                                year = parts[2]
+                                day = parts[1]
+                                month = parts[0]
+                                if num_or_all(year) and num_or_all(day) and num_or_all(month):
+                                    if not year == "all":
+                                        art = art.filter(creation_date__year=int(year))
+                                    if not day == "all":
+                                        art = art.filter(creation_date__day=int(day))
+                                    if not month == "all":
+                                        art = art.filter(creation_date__month=int(month))
+                                else:
+                                    good_request = False
                             else:
-                                art = None
-                        if art:
+                                good_request = False
+                        if art and good_request:
                             for piece in tags:
                                 art = art.filter(tags__tag=piece)
                             if art:
@@ -146,7 +165,8 @@ def filter(request, kind=None, tag=None):
                                 art = art.filter(public)
                                 art = list(set(art))
                                 art.reverse()
-
+                        else:
+                            art = None
         form = TagFilterForm()
 
     return render_to_response('art_filter.html', {
@@ -158,6 +178,16 @@ def filter(request, kind=None, tag=None):
         'dates': dates,
         'form': form,
     }, context_instance=RequestContext(request))
+
+
+def num_or_all(x):
+    if x == "all":
+        return True
+    try:
+        int(x)
+        return True
+    except ValueError:
+        return False
 
 
 def filterHelp(request):

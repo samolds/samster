@@ -8,7 +8,11 @@
   <table>
     <tr>
       <td class="textleft" rowspan=2><h1>All Art Work</h1></td>
-      <td class="textright filterwidth">{% include "art_filter_form.html" %}</td>
+      <td class="textright filterwidth">
+        <form class="right" action="/art/filter" method="post">{% csrf_token %}
+          {% include "inner_filter_form.html" %}
+        </form
+      </td>
     </tr>
   </table>
 </div>
