@@ -5,7 +5,7 @@ from django.db.models import Q
 
 
 def personal(request):
-    tag = Tag.objects.filter(tag="personal_main")
+    tag = Tag.objects.filter(tag="top_personal")
     post = None
     if tag:
         posts = list(Post.objects.filter(tags=tag))
@@ -20,8 +20,8 @@ def personal(request):
     posts = Post.objects.filter(personal | thoughts | shower_thoughts)
     posts = list(posts.filter(public))
 
-    if len(posts) > 5:
-        posts = posts[len(posts) - 5:]
+    if len(posts) > 2:
+        posts = posts[len(posts) - 2:]
     posts.reverse()
 
     return render_to_response('personal.html', {

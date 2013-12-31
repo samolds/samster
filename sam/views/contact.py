@@ -8,7 +8,7 @@ from sam.models import Post, Tag, Comment
 
 
 def contact(request):
-    tag = Tag.objects.filter(tag="contact")
+    tag = Tag.objects.filter(tag="top_contact")
     if tag:
         posts = list(Post.objects.filter(tags=tag))
         posts.reverse()

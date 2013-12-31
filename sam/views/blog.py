@@ -18,16 +18,21 @@ def blog(request):
     }, context_instance=RequestContext(request))
 
 
-def all_posts(request):
+def post_archive(request):
     if request.method == 'POST':
         return filterHelp(request)
     else:
         form = TagFilterForm()
         posts = list(Post.objects.filter(private=False))
         posts.reverse()
+        archive = []
+        for post in posts:
+            archive.append({"month": post.creation_date.month, "year": post.creation_date.year})
 
-    return render_to_response('blog_all.html', {
-        'posts': posts,
+        archive = [dict(tupleized) for tupleized in set(tuple(item.items()) for item in archive)]
+
+    return render_to_response('blog_archive.html', {
+        'archive': archive,
         'form': form,
     }, context_instance=RequestContext(request))
 
@@ -185,7 +190,7 @@ def filterHelp(request):
         tag = form.cleaned_data['tag']
         date = form.cleaned_data['date']
         if not tag and not date:
-            return HttpResponseRedirect('/blog/all')
+            return HttpResponseRedirect('/blog/filter')
         elif not tag and date:
             return HttpResponseRedirect('/blog/filter/date/%s' % date)
         elif tag and not date:

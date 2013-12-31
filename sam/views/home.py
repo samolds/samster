@@ -8,8 +8,8 @@ import random
 
 #@login_required
 def home(request):
-    if Tag.objects.filter(tag="home"):
-        posts = list(Post.objects.filter(tags__tag="home"))
+    if Tag.objects.filter(tag="top_home"):
+        posts = list(Post.objects.filter(tags__tag="top_home"))
         posts.reverse()
         if posts:
             home_post = posts[0]

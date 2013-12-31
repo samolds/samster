@@ -5,7 +5,7 @@ from django.db.models import Q
 
 
 def professional(request):
-    tag = Tag.objects.filter(tag="professional_main")
+    tag = Tag.objects.filter(tag="top_professional")
     post = None
     if tag:
         posts = list(Post.objects.filter(tags=tag))
@@ -19,8 +19,8 @@ def professional(request):
 
     posts = Post.objects.filter(professional | work | job)
     posts = list(posts.filter(public))
-    if len(posts) > 5:
-        posts = posts[len(posts) - 5:]
+    if len(posts) > 2:
+        posts = posts[len(posts) - 2:]
     posts.reverse()
 
     return render_to_response('professional.html', {

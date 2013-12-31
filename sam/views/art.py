@@ -25,10 +25,11 @@ def art(request):
     }, context_instance=RequestContext(request))
 
 
-def all_art(request):
+def art_archive(request):
     if request.method == 'POST':
         return filterHelp(request)
     else:
+        form = TagFilterForm()
         public = Q(private=False)
         art_tag = Q(tags__tag="art")
         drawing = Q(tags__tag="drawing")
@@ -37,10 +38,15 @@ def all_art(request):
         art = SiteImage.objects.filter(art_tag | drawing | sketch | photography)
         art = list(set(art.filter(public)))
         art.reverse()
-        form = TagFilterForm()
 
-    return render_to_response('art_all.html', {
-        'art': art,
+        archive = []
+        for work in art:
+            archive.append({"month": work.creation_date.month, "year": work.creation_date.year})
+
+        archive = [dict(tupleized) for tupleized in set(tuple(item.items()) for item in archive)]
+
+    return render_to_response('art_archive.html', {
+        'archive': archive,
         'form': form,
     }, context_instance=RequestContext(request))
 
@@ -196,7 +202,7 @@ def filterHelp(request):
         tag = form.cleaned_data['tag']
         date = form.cleaned_data['date']
         if not tag and not date:
-            return HttpResponseRedirect('/art/all')
+            return HttpResponseRedirect('/art/filter')
         elif not tag and date:
             return HttpResponseRedirect('/art/filter/date/%s' % date)
         elif tag and not date:

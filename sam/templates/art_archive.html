@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>samolds.com - Art Work Archive</title>{% endblock %}
+
+{% block content %}
+<div class="body narrow">
+  <div class="content">
+    <table>
+      <tr>
+        <td class="textleft" rowspan=2><h1>Art Work Archive</h1></td>
+        <td class="textright filterwidth">
+          <form class="right" action="/art/filter" method="post">{% csrf_token %}
+            {% include "inner_filter_form.html" %}
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="content inbetween"></div>
+
+  {% if archive %}
+    {% load months %}
+    {% for entry in archive %}
+      <div class="content">
+        <h2><a href="/blog/filter/date/{{ entry.month }}-all-{{ entry.year }}">{{ entry.month|months }}, {{ entry.year }}</a></h2>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="content">There have been no blog posts!</div>
+  {% endif %}
+
+  <div class="content inbetween"></div>
+
+  <div class="content"><a href="/art">Back To Art Work</a></div>
+</div>
+
+{% endblock %}

@@ -7,8 +7,8 @@ from sam.models import Post, Tag
 
 #@login_required
 def about(request):
-    if Tag.objects.filter(tag="about"):
-        posts = list(Post.objects.filter(tags__tag="about"))
+    if Tag.objects.filter(tag="top_about"):
+        posts = list(Post.objects.filter(tags__tag="top_about"))
         posts.reverse()
         if posts:
             post = posts[0]
