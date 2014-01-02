@@ -17,7 +17,7 @@ html, body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center top; */
-  background-color: #444;
+  background-color: #888;
   color: #000;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 12px;
@@ -215,7 +215,7 @@ img {max-width: 100%;}
 }
 
 #footspace {
-  padding: 50px;
+  padding: 75px;
 }
 
 #footer {

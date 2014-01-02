@@ -53,17 +53,18 @@
 
 <div class="body medium">
   <div class="content">
-  <form class="contactform" action="/contact" method="post">{% csrf_token %}
-    {% include "comment_inners.html" %}
-  </form>
-  <div class="clear"></div>
+    <h1>Site Comments</h1>
+      <div class="content">
+        <form class="contactform" action="/contact" method="post">{% csrf_token %}
+          {% include "comment_inners.html" %}
+        </form>
+        <div class="clear"></div>
+      </div>
   </div>
 
   {% if post.comments.values %}
     <div class="content inbetween"></div>
     <div class="content">
-      <h1>Site Comments</h1>
-
       {% for comment_data in post.comments.values %}
         {% include "comment_data.html" %}
       {% endfor %}
