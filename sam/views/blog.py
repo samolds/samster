@@ -63,6 +63,8 @@ def post(request, post_id=None):
         exists = True
         if post.filter(pk=post_id, private=False):
             post = post.get(pk=post_id, private=False)
+        else:
+            post = None
 
     return render_to_response('blog_post.html', {
         "post": post,
