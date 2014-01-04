@@ -2,8 +2,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from sam.forms.contact import ContactForm
-from django.conf import settings
-from django.core.mail import send_mail
 from sam.models import Post, Tag, Comment
 
 
@@ -26,18 +24,10 @@ def contact(request):
             message = form.cleaned_data['message']
             bot_test = form.cleaned_data['email_confirmation']
 
-            comment = Comment.objects.create(private=private, name=name, email=email, subject=subject, message=message)
-            if post:
-                post.comments.add(comment)
-
-            email_message = "%s \n\n - %s (%s)" % (message, name, email)
-
             if bot_test == '':
-                try:
-                    #import pdb; pdb.set_trace()
-                    send_mail(subject, email_message, email, settings.CONTACT_EMAIL_RECIPIENT)
-                except Exception as e:
-                    print e
+                comment = Comment.objects.create(private=private, name=name, email=email, subject=subject, message=message)
+                if post:
+                    post.comments.add(comment)
             return HttpResponseRedirect('/contact')
     else:
         form = ContactForm()

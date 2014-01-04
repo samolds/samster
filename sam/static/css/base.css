@@ -15,7 +15,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-div, p, th, td, li, dd, dt, ul, ol, blockquote, q, acronym, abbr, a, input, select, textarea {
+div, p, th, td, dd, dt, ol, q, acronym, abbr, a, input, select, textarea {
     margin: 0;
     padding: 0;
     font: normal normal normal 1em/1.25 Arial, Helvetica, sans-serif;
