@@ -2,11 +2,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from sam.models import Post, Tag, Quote
 import random
-#from django.contrib.auth.decorators import login_required
-#from django.http import HttpResponse
-#from django.conf import settings
 
-#@login_required
+
 def home(request):
     if Tag.objects.filter(tag="top_home"):
         posts = list(Post.objects.filter(tags__tag="top_home"))
