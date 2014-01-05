@@ -13,12 +13,11 @@ dark grey = #444
 html, body {
   margin: 0px;
   padding: 0px;
-  /*
-  background-image: url('/static/img/backgrounds/25.jpg');
+  background-image: url('/static/img/backgrounds/34.jpg');
+  background-size: 100%;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-position: center top;
-  */
+  background-position: center bottom;
   background-color: #888;
   color: #000;
   font-family: verdana, arial, helvetica, sans-serif;
@@ -218,7 +217,12 @@ img {max-width: 100%;}
   min-height: 100%;
 }
 
-#footspace {
+.footspace {
+  background-image: url('/static/img/backgrounds/34.jpg');
+  background-size: 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center bottom;
   padding: 75px;
 }
 
