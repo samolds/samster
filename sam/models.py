@@ -34,13 +34,14 @@ class Comment(models.Model):
         return "%s" % self.name
 
     def save(self, *args, **kwargs):
-        if not self.email:
-            self.email = "no@reply.com"
-        self.subject = "samolds.com Comment - " + self.subject
+        if self.email:
+            sender = self.email
+        else:
+            sender = settings.DEFAULT_FROM_EMAIL
         try:
             #import pdb; pdb.set_trace()
-            email_message = "%s \n\n - %s (%s)" % (self.message, self.name, self.email)
-            send_mail(self.subject, email_message, self.email, settings.CONTACT_EMAIL_RECIPIENT)
+            email_message = "%s \n\n - %s (%s)" % (self.message, self.name, sender)
+            send_mail("samolds.com Comment - " + self.subject, email_message, sender, settings.CONTACT_EMAIL_RECIPIENT)
         except Exception as e:
             print e
         super(Comment, self).save(*args, **kwargs)

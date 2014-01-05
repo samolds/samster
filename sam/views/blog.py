@@ -52,6 +52,7 @@ def post(request, post_id=None):
                 comment = Comment.objects.create(private=private, name=name, email=email, subject=subject, message=message)
                 post = Post.objects.get(pk=post_id)
                 post.comments.add(comment)
+            return HttpResponseRedirect('/blog/post/%s' % post_id)
     else:
         form = ContactForm()
 

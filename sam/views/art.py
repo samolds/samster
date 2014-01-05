@@ -66,6 +66,7 @@ def art_work(request, image_id=None):
                 comment = Comment.objects.create(private=private, name=name, email=email, subject=subject, message=message)
                 image = SiteImage.objects.get(pk=image_id)
                 image.comments.add(comment)
+            return HttpResponseRedirect('/art/work/%s' % image_id)
     else:
         form = ContactForm()
 

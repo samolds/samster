@@ -13,10 +13,12 @@ dark grey = #444
 html, body {
   margin: 0px;
   padding: 0px;
-  /* background-image: url('/static/img/backgrounds/25.jpg');
+  /*
+  background-image: url('/static/img/backgrounds/25.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-position: center top; */
+  background-position: center top;
+  */
   background-color: #888;
   color: #000;
   font-family: verdana, arial, helvetica, sans-serif;
@@ -113,10 +115,12 @@ img {max-width: 100%;}
   padding-left: 20px;
   padding-right: 20px;
 
-  /* background-image: url('/static/img/backgrounds/27.jpg');
+  /*
+  background-image: url('/static/img/backgrounds/27.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-position: center top; */
+  background-position: center top;
+  */
   background-color: #e0e0e0;
   word-wrap: break-word;
 }
