@@ -5,10 +5,13 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    #(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('sam.urls')),
 )
+
+handler403 = 'sam.views.error.err_403'
+handler404 = 'sam.views.error.err_404'
+handler500 = 'sam.views.error.err_500'
 
 if settings.DEBUG:
     urlpatterns += patterns('',

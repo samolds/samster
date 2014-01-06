@@ -13,11 +13,6 @@ dark grey = #444
 html, body {
   margin: 0px;
   padding: 0px;
-  background-image: url('/static/img/backgrounds/34.jpg');
-  background-size: 100%;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: center bottom;
   background-color: #888;
   color: #000;
   font-family: verdana, arial, helvetica, sans-serif;
@@ -51,17 +46,18 @@ img {max-width: 100%;}
 
 #navbar a { color: #fff; padding: 0px; }
 #navbar li { padding: 3px; }
-#navbar li:hover { background-color: #444; }
+#navbar li:hover { background-color: #e0e0e0; }
+#navbar li:hover > a { color: #000; }
 
 .navtop a {
   padding: 2px;
 }
 
 .navtop li {
-  color: #fff;
   position: relative;
   display: inline;
 }
+
 .navtop ul li {
   display: block;
   z-index: 10;
@@ -72,7 +68,6 @@ img {max-width: 100%;}
   position: absolute;
   display: none;
   margin-top: 2px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
 }
 
 .navtop li:hover ul {
@@ -84,13 +79,22 @@ img {max-width: 100%;}
 
 /* -------------- BODY -------------- */
 
+#bodywrap {
+  background-image: url('/static/img/backgrounds/bg.jpg');
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center top;
+  min-height: 100%;
+}
+
 .body {
   margin: 10px;
   border-style: solid;
   border-width: 5px;
   border-color: #ffffff;
   border-radius: 5px;
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, .5);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
 }
 
 .wide {
@@ -140,7 +144,7 @@ img {max-width: 100%;}
   background-color: #e0e0e0;
   position: absolute;
   display: none;
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, .5);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
 }
 
 .hbnarrow {
@@ -213,16 +217,7 @@ img {max-width: 100%;}
 
 /* -------------- FOOTER -------------- */
 
-#bodywrap {
-  min-height: 100%;
-}
-
 .footspace {
-  background-image: url('/static/img/backgrounds/34.jpg');
-  background-size: 100%;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: center bottom;
   padding: 75px;
 }
 
@@ -243,7 +238,8 @@ img {max-width: 100%;}
 
 #footbar li {
   padding: 2px;
+  color: #fff;
 }
 
 #footbar a { padding: 2px; color: #fff; }
-#footbar a:hover { background-color: #444; }
+#footbar a:hover { background-color: #e0e0e0; color: #000; }
