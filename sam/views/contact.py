@@ -7,12 +7,11 @@ from sam.models import Post, Tag, Comment
 
 def contact(request):
     tag = Tag.objects.filter(tag="top_contact")
+    post = None
     if tag:
         posts = list(Post.objects.filter(tags=tag))
-        posts.reverse()
-        post = posts[0]
-    else:
-        post = None
+        if posts:
+            post = posts[-1]
 
     if request.method == 'POST':
         form = ContactForm(request.POST)

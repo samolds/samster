@@ -4,13 +4,9 @@ from sam.models import Post, Tag
 
 
 def about(request):
+    post = None
     if Tag.objects.filter(tag="top_about"):
         posts = list(Post.objects.filter(tags__tag="top_about"))
-        posts.reverse()
         if posts:
-            post = posts[0]
-        else:
-            post = None
-    else:
-        post = None
+            post = posts[-1]
     return render_to_response('about.html', {"post": post}, context_instance=RequestContext(request))

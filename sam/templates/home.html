@@ -4,8 +4,8 @@
 
 {% block content %}
 <div class="body wide">
-  {% if home_post.image %}
-    <div class="bannerphoto" style="background-image: url('{{ STATIC_URL }}{{ home_post.image }}');"></div>
+  {% if banner_photo %}
+    <div class="bannerphoto" style="background-image: url('{{ STATIC_URL }}{{ banner_photo }}');"></div>
   {% endif %}
   <div class="content">
     <!--

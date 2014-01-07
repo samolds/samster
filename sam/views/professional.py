@@ -9,8 +9,8 @@ def professional(request):
     post = None
     if tag:
         posts = list(Post.objects.filter(tags=tag))
-        posts.reverse()
-        post = posts[0]
+        if posts:
+        post = posts[-1]
 
     public = Q(private=False)
     professional = Q(tags__tag="professional")
