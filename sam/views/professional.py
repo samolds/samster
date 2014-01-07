@@ -10,7 +10,7 @@ def professional(request):
     if tag:
         posts = list(Post.objects.filter(tags=tag))
         if posts:
-        post = posts[-1]
+            post = posts[-1]
 
     public = Q(private=False)
     professional = Q(tags__tag="professional")

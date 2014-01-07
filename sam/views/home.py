@@ -5,34 +5,28 @@ import random
 
 
 def home(request):
+    home_post = None
+    banner_photo = None
     if Tag.objects.filter(tag="top_home"):
         posts = list(Post.objects.filter(tags__tag="top_home"))
         if posts:
             home_post = posts[-1]
-            if home_post.image:
-                banner_photo = home_post.image
-            elif SiteImage.objects.filter(tags_tag="banner_photo"):
-                banners = list(SiteImage.objects.filter(tags_tag="banner_photo"))
+            if home_post.images.filter(tags__tag="banner_photo"):
+                banners = list(home_post.images.filter(tags__tag="banner_photo"))
                 banner_photo = banners[-1]
-            else:
-                banner_photo = None
-        else:
-            home_post = None
-    else:
-        home_post = None
+            elif SiteImage.objects.filter(tags__tag="banner_photo"):
+                banners = list(SiteImage.objects.filter(tags__tag="banner_photo"))
+                banner_photo = banners[-1]
 
     posts = list(Post.objects.filter(private=False))
+    post = None
     if posts:
         post = posts[-1]
-    else:
-        post = None
 
     quotes = list(Quote.objects.filter(private=False))
+    quote = None
     if quotes:
         quote = quotes[random.randrange(len(quotes))]
-    else:
-        quote = None
-
 
     #browser = request.META.get('HTTP_USER_AGENT', 'Unknown')
     return render_to_response('home.html', {
