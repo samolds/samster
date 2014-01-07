@@ -132,8 +132,8 @@ img {max-width: 100%;}
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center -100px;
-  background-size: 100%;
-  background-color: #FFF;
+  background-size-width: 100%;
+  background-color: #000;
   height: 300px;
 }
 

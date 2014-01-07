@@ -8,7 +8,7 @@ import markdown
 class Tag(models.Model):
     """Description of the Tag model
     """
-    tag_help = "Hardcoded tags: 'top_about', 'top_contact', 'top_education', 'top_home', 'top_personal', 'top_professional'"
+    tag_help = "Hardcoded tags: 'top_about', 'top_contact', 'top_education', 'top_home', 'top_personal', 'top_professional', 'banner_photo'"
     tag = models.SlugField(max_length=50, unique=True, help_text=tag_help)
     description = models.CharField(max_length=200, blank=True, null=True)
 
@@ -58,7 +58,7 @@ class SiteImage(models.Model):
     slug = models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     description_markdown = models.TextField("Description", blank=True, null=True, help_text='<a href="http://daringfireball.net/projects/markdown/syntax">Markdown Help</a>')
-    image = models.ImageField(upload_to="images/", height_field="height", width_field="width")
+    image = models.ImageField(upload_to="images", height_field="height", width_field="width")
     content_type = models.CharField(max_length=40)
     width = models.IntegerField()
     height = models.IntegerField()

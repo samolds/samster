@@ -20,8 +20,10 @@
       {% include "art_work_header.html" %}
 
       <div class="content">
-        <img src="/{{ work.image }}" width=50% class="left" />
-        <p>{{ work.description|safe }}</p>
+        <img src="{{ MEDIA_URL }}{{ work.image }}" width=50% class="left" />
+        {% if work.description %}
+          <p>{{ work.description|safe }}</p>
+        {% endif %}
         <div class="clear"></div>
       </div>
     </div>
