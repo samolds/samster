@@ -129,7 +129,12 @@ img {max-width: 100%;}
 }
 
 .bannerphoto {
-  width: 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center -100px;
+  background-size: 100%;
+  background-color: #FFF;
+  height: 300px;
 }
 
 .helpbox {
@@ -174,7 +179,7 @@ img {max-width: 100%;}
 .filterwidth {width: 185px;}
 
 .inbetween {
-  opacity: 0.8;
+  opacity: 0.5;
 }
 
 .fieldWrapper {

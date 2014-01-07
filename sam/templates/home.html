@@ -5,7 +5,7 @@
 {% block content %}
 <div class="body wide">
   {% if home_post.image %}
-    <img src="/{{ home_post.image }}" class="bannerphoto" />
+    <div class="bannerphoto" style="background-image: url('{{ STATIC_URL }}{{ home_post.image }}');"></div>
   {% endif %}
   <div class="content">
     <!--
