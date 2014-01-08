@@ -1,8 +1,25 @@
 from django.core.mail import send_mail
+from HTMLParser import HTMLParser
 from django.conf import settings
 from django.db import models
 from PIL import Image
 import markdown
+
+
+class MLStripper(HTMLParser):
+    def __init__(self):
+        self.reset()
+        self.fed = []
+    def handle_data(self, d):
+        self.fed.append(d)
+    def get_data(self):
+        return ''.join(self.fed)
+
+
+def strip_tags(html):
+    s = MLStripper()
+    s.feed(html)
+    return s.get_data()
 
 
 class Tag(models.Model):
@@ -34,6 +51,10 @@ class Comment(models.Model):
         return "%s" % self.name
 
     def save(self, *args, **kwargs):
+        self.name = strip_tags(self.name)
+        self.email = strip_tags(self.email)
+        self.subject = strip_tags(self.subject)
+        self.message = strip_tags(self.message)
         if self.email:
             sender = self.email
         else:

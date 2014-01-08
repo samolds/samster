@@ -11,9 +11,8 @@ def art(request):
     public = Q(private=False)
     art_tag = Q(tags__tag="art")
     drawing = Q(tags__tag="drawing")
-    sketch = Q(tags__tag="sketch")
     photography = Q(tags__tag="photography")
-    art = SiteImage.objects.filter(art_tag | drawing | sketch | photography)
+    art = SiteImage.objects.filter(art_tag | drawing | photography)
     art = list(set(art.filter(public)))
     
     if len(art) > 5:
@@ -33,9 +32,8 @@ def art_archive(request):
         public = Q(private=False)
         art_tag = Q(tags__tag="art")
         drawing = Q(tags__tag="drawing")
-        sketch = Q(tags__tag="sketch")
         photography = Q(tags__tag="photography")
-        art = SiteImage.objects.filter(art_tag | drawing | sketch | photography)
+        art = SiteImage.objects.filter(art_tag | drawing | photography)
         art = list(set(art.filter(public)))
         art.reverse()
 
@@ -101,9 +99,8 @@ def filter(request, kind=None, tag=None):
             public = Q(private=False)
             art_tag = Q(tags__tag="art")
             drawing = Q(tags__tag="drawing")
-            sketch = Q(tags__tag="sketch")
             photography = Q(tags__tag="photography")
-            art = SiteImage.objects.filter(art_tag | drawing | sketch | photography)
+            art = SiteImage.objects.filter(art_tag | drawing | photography)
             if kind == "tag":
                 if art:
                     for piece in tags:

@@ -5,7 +5,12 @@
 {% block content %}
 <div class="body wide">
   {% if banner_photo %}
-    <div class="bannerphoto" style="background-image: url('{{ MEDIA_URL }}{{ banner_photo.image }}');"></div>
+    <div class="bannerphoto" style="background-image: url('{{ MEDIA_URL }}{{ banner_photo.image }}');">
+      <div class="bannertext">
+        <h1>{{ home_post.title }}</h1>
+      </div>
+      <div class="clear"></div>
+    </div>
   {% endif %}
   <div class="content">
     <!--
@@ -16,7 +21,9 @@
     <p>Include my most recent blog post</p>
     -->
     {% if home_post %}
-      <h1>{{ home_post.title }}</h1>
+      {% if not banner_photo %}
+        <h1>{{ home_post.title }}</h1>
+      {% endif %}
 
       <div class="content">
         <p>{{ home_post.content|safe }}</p>

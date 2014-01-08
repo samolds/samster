@@ -53,12 +53,14 @@
 
           {% include "art_work_header.html" %}
 
-          <div class="content">
-            <p>
-              {{ work.description|slice:":300"|safe }}...
-              <div class="clear"></div>
-            </p>
-          </div>
+          {% if work.description %}
+            <div class="content">
+              <p>
+                {{ work.description|slice:":300"|safe }}...
+                <div class="clear"></div>
+              </p>
+            </div>
+          {% endif %}
         </div>
 
         <div class="content inbetween"></div>

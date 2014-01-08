@@ -93,7 +93,7 @@ img {max-width: 100%;}
   border-style: solid;
   border-width: 5px;
   border-color: #ffffff;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
 }
 
@@ -128,13 +128,34 @@ img {max-width: 100%;}
   word-wrap: break-word;
 }
 
+.comment {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
 .bannerphoto {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center -100px;
-  background-size-width: 100%;
+  background-size: 100%;
   background-color: #000;
-  height: 300px;
+}
+
+.bannertext {
+  color: #fff;
+  background-color:rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  padding: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  font-size: 2em;
+  margin: 100px;
+  margin-bottom: 25px;
+  display: inline-block;
+  float: right;
 }
 
 .helpbox {
@@ -180,6 +201,8 @@ img {max-width: 100%;}
 
 .inbetween {
   opacity: 0.5;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
 }
 
 .fieldWrapper {

@@ -53,12 +53,14 @@
 
       {% include "blog_post_header.html" %}
 
-        <div class="content">
-          <p>
-            {{ post.content|slice:":300"|safe }}...
-            <div class="clear"></div>
-          </p>
-        </div>
+        {% if post.content %}
+          <div class="content">
+            <p>
+              {{ post.content|slice:":300"|safe }}...
+              <div class="clear"></div>
+            </p>
+          </div>
+        {% endif %}
       </div>
 
       <div class="content inbetween"></div>

@@ -6,16 +6,17 @@ import random
 
 def home(request):
     home_post = None
-    banner_photo = None
+    if SiteImage.objects.filter(tags__tag="banner_photo"):
+        banners = list(SiteImage.objects.filter(tags__tag="banner_photo"))
+        banner_photo = banners[-1]
+    else:
+        banner_photo = None
     if Tag.objects.filter(tag="top_home"):
         posts = list(Post.objects.filter(tags__tag="top_home"))
         if posts:
             home_post = posts[-1]
             if home_post.images.filter(tags__tag="banner_photo"):
                 banners = list(home_post.images.filter(tags__tag="banner_photo"))
-                banner_photo = banners[-1]
-            elif SiteImage.objects.filter(tags__tag="banner_photo"):
-                banners = list(SiteImage.objects.filter(tags__tag="banner_photo"))
                 banner_photo = banners[-1]
 
     posts = list(Post.objects.filter(private=False))
