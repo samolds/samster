@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
-from sam.models import SiteImage, Tag, Comment
+from sam.models import SiteImage, Tag, Comment, Post
 from django.db.models import Q
 from sam.forms.tag_filter import TagFilterForm
 from sam.forms.contact import ContactForm
@@ -12,9 +12,15 @@ def art(request):
     art_tag = Q(tags__tag="art")
     drawing = Q(tags__tag="drawing")
     photography = Q(tags__tag="photography")
-    art = SiteImage.objects.filter(art_tag | drawing | photography)
-    art = list(set(art.filter(public)))
-    
+    art_image = SiteImage.objects.filter(art_tag | drawing | photography)
+    art_post = Post.objects.filter(art_tag | drawing | photography)
+
+    art_image = list(set(art_image.filter(public)))
+    art_post = list(set(art_post.filter(public)))
+
+    art = art_image + art_post
+    art.sort(key=lambda x: x.creation_date)
+
     if len(art) > 5:
         art = art[len(art) - 5:]
     art.reverse()
@@ -33,8 +39,15 @@ def art_archive(request):
         art_tag = Q(tags__tag="art")
         drawing = Q(tags__tag="drawing")
         photography = Q(tags__tag="photography")
-        art = SiteImage.objects.filter(art_tag | drawing | photography)
-        art = list(set(art.filter(public)))
+        art_image = SiteImage.objects.filter(art_tag | drawing | photography)
+        art_post = Post.objects.filter(art_tag | drawing | photography)
+
+        art_image = list(set(art_image.filter(public)))
+        art_post = list(set(art_post.filter(public)))
+
+        art = art_image + art_post
+        art.sort(key=lambda x: x.creation_date)
+
         art.reverse()
 
         archive = []
@@ -95,24 +108,28 @@ def filter(request, kind=None, tag=None):
         return filterHelp(request)
     else:
         if kind and tag:
-            tags = tag.split('*')
             public = Q(private=False)
             art_tag = Q(tags__tag="art")
             drawing = Q(tags__tag="drawing")
             photography = Q(tags__tag="photography")
-            art = SiteImage.objects.filter(art_tag | drawing | photography)
-            if kind == "tag":
-                if art:
-                    for piece in tags:
-                        art = art.filter(tags__tag=piece)
-                    if art:
-                        exists = True
-                        art = art.filter(public)
-                    art = list(set(art))
-                    art.reverse()
-            elif kind == "date":
-                dates = tags
-                if art:
+
+            art_image = SiteImage.objects.filter(art_tag | drawing | photography)
+            art_post = Post.objects.filter(art_tag | drawing | photography)
+
+            if tag and "+" in tag and len(tag.split('+')) == 2:
+                dates = tag.split('+')[0]
+                dates = dates.split('*')
+                tags = tag.split('+')[1]
+                tags = tags.split('*')
+            else:
+                dates = None
+                tags = tag.split('*')
+            kinds = kind.split('+')
+
+            if "date" in kinds:
+                if not dates:
+                    dates = tags
+                if art_image or art_post:
                     good_request = True
                     for piece in dates:
                         parts = piece.split('-')
@@ -122,57 +139,39 @@ def filter(request, kind=None, tag=None):
                             month = parts[0]
                             if num_or_all(year) and num_or_all(day) and num_or_all(month):
                                 if not year == "all":
-                                    art = art.filter(creation_date__year=int(year))
+                                    art_image = art_image.filter(creation_date__year=int(year))
+                                    art_post = art_post.filter(creation_date__year=int(year))
                                 if not day == "all":
-                                    art = art.filter(creation_date__day=int(day))
+                                    art_image = art_image.filter(creation_date__day=int(day))
+                                    art_post = art_post.filter(creation_date__day=int(day))
                                 if not month == "all":
-                                    art = art.filter(creation_date__month=int(month))
+                                    art_image = art_image.filter(creation_date__month=int(month))
+                                    art_post = art_post.filter(creation_date__month=int(month))
                             else:
                                 good_request = False
                         else:
                             good_request = False
-                    if art and good_request:
+                    if (art_image or art_post) and good_request:
                         exists = True
-                        art = art.filter(public)
-                        art = list(set(art))
-                        art.reverse()
+
+            if "tag" in kinds:
+                if art_image or art_post:
+                    for piece in tags:
+                        art_image = art_image.filter(tags__tag=piece)
+                        art_post = art_post.filter(tags__tag=piece)
+                    if art_image or art_post:
+                        exists = True
                     else:
-                        art = None
-            elif kind == "date*tag":
-                if tag and len(tag.split('_')) == 2:
-                    dates = tag.split('_')[0]
-                    dates = dates.split('*')
-                    tags = tag.split('_')[1]
-                    tags = tags.split('*')
-                    if art:
-                        good_request = True
-                        for piece in dates:
-                            parts = piece.split('-')
-                            if len(parts) == 3:
-                                year = parts[2]
-                                day = parts[1]
-                                month = parts[0]
-                                if num_or_all(year) and num_or_all(day) and num_or_all(month):
-                                    if not year == "all":
-                                        art = art.filter(creation_date__year=int(year))
-                                    if not day == "all":
-                                        art = art.filter(creation_date__day=int(day))
-                                    if not month == "all":
-                                        art = art.filter(creation_date__month=int(month))
-                                else:
-                                    good_request = False
-                            else:
-                                good_request = False
-                        if art and good_request:
-                            for piece in tags:
-                                art = art.filter(tags__tag=piece)
-                            if art:
-                                exists = True
-                                art = art.filter(public)
-                                art = list(set(art))
-                                art.reverse()
-                        else:
-                            art = None
+                        exists = False
+
+            art_image = art_image.filter(public)
+            art_post = art_post.filter(public)
+            art_image = list(set(art_image))
+            art_post = list(set(art_post))
+            art = art_image + art_post
+            art.sort(key=lambda x: x.creation_date)
+            art.reverse()
+
         form = TagFilterForm()
 
     return render_to_response('art_filter.html', {
@@ -208,4 +207,4 @@ def filterHelp(request):
         elif tag and not date:
             return HttpResponseRedirect('/art/filter/tag/%s' % tag)
         elif tag and date:
-            return HttpResponseRedirect('/art/filter/date*tag/%s_%s' % (date, tag))
+            return HttpResponseRedirect('/art/filter/date+tag/%s+%s' % (date, tag))

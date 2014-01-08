@@ -2,21 +2,7 @@
   <div class="content">
     {% if post %}
       <h1>{{ post.title }}</h1>
-
-      <div class="content">
-        <p>{{ post.content|safe }}</p>
-        <div class="clear"></div>
-
-        {% if post.image %}
-          <br />
-          <p><img src="/{{ post.image }}" /></p>
-        {% endif %}
-
-        {% if post.embedded_link %}
-          <br />
-          <p>{{ post.embedded_link|safe }}</p>
-        {% endif %}
-      </div>
+      {% include "blog_post_inners.html" %}
     {% else %}
       <h2>This part has yet to be written</h2>
     {% endif %}
@@ -28,15 +14,8 @@
   <div class="body medium">
     {% for post in posts %}
       <div class="content">
-
-        {% include "blog_post_header.html" %}
-
-        <div class="content">
-          <p>{{ post.content|safe}}</p>
-          <div class="clear"></div>
-        </div>
+        {% include "blog_post_stub.html" %}
       </div>
-
       <div class="content inbetween"></div>
     {% endfor %}
     <div class="content"></div>

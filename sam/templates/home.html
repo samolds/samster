@@ -6,10 +6,14 @@
 <div class="body wide">
   {% if banner_photo %}
     <div class="bannerphoto" style="background-image: url('{{ MEDIA_URL }}{{ banner_photo.image }}');">
-      <div class="bannertext">
-        <h1>{{ home_post.title }}</h1>
-      </div>
-      <div class="clear"></div>
+      {% if home_post %}
+        <div class="bannertext">
+          <h1>{{ home_post.title }}</h1>
+        </div>
+        <div class="clear"></div>
+      {% else %}
+        <div class="bannerfiller"></div>
+      {% endif %}
     </div>
   {% endif %}
   <div class="content">
@@ -28,11 +32,6 @@
       <div class="content">
         <p>{{ home_post.content|safe }}</p>
         <div class="clear"></div>
-        <br />
-
-        {% if home_post.embedded_link %}
-          <p>{{ home_post.embedded_link|safe }}</p>
-        {% endif %}
       </div>
     {% else %}
       <h2>This part has yet to be written</h2>
@@ -51,22 +50,11 @@
 {% if post %}
   <div class="body wide">
     <div class="content">
-      {% include "blog_post_header.html" %}
-
-      <div class="content">
-        <p>
-          {{ post.content|safe }}
-        </p>
-
-        {% if post.image %}
-          <p><img src="/{{ post.image }}" /></p>
-          <br />
-        {% endif %}
-
-        {% if post.embedded_link %}
-          <p>{{ post.embedded_link|safe }}</p>
-        {% endif %}
-      </div>
+      {% if is_site_image %}
+       {% include "art_work_stub.html" %}
+      {% else %}
+       {% include "blog_post_stub.html" %}
+      {% endif %}
     </div>
   </div>
 {% endif %}

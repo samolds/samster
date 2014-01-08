@@ -23,11 +23,11 @@
     {% load months %}
     {% for entry in archive %}
       <div class="content">
-        <h2><a href="/blog/filter/date/{{ entry.month }}-all-{{ entry.year }}">{{ entry.month|months }}, {{ entry.year }}</a></h2>
+        <h2><a href="/art/filter/date/{{ entry.month }}-all-{{ entry.year }}">{{ entry.month|months }}, {{ entry.year }}</a></h2>
       </div>
     {% endfor %}
   {% else %}
-    <div class="content">There have been no blog posts!</div>
+    <div class="content">There has not been any art posted!</div>
   {% endif %}
 
   <div class="content inbetween"></div>

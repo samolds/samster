@@ -18,6 +18,7 @@ html, body {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 12px;
   height: 100%;
+  min-width: 675px;
 }
 
 img, div, ul, li, p, a, table, tr, td, form {
@@ -136,19 +137,47 @@ img {max-width: 100%;}
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
+.postimageright {
+  float: right;
+  width: 49%;
+  padding-left: 10px;
+  padding-right: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.postimageleft {
+  float: left;
+  width: 49%;
+  padding-left: 0px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.artstub {
+  width: 20%;
+}
+
+.artimage {
+  margin-bottom: 10px;
+  width: 100%;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
 .bannerphoto {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center -100px;
-  background-size: 100%;
   background-color: #000;
+  background-size: cover;
 }
 
 .bannertext {
   color: #fff;
-  background-color:rgba(0, 0, 0, 0.7);
+  background-color:rgba(25, 25, 25, 0.7);
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   padding-left: 40px;
   padding-right: 40px;
   font-size: 2em;
@@ -156,6 +185,12 @@ img {max-width: 100%;}
   margin-bottom: 25px;
   display: inline-block;
   float: right;
+  min-width: 30%;
+  text-align: center;
+}
+
+.bannerfiller {
+  height: 225px;
 }
 
 .helpbox {
@@ -199,6 +234,10 @@ img {max-width: 100%;}
 .textcenter {text-align: center;}
 .filterwidth {width: 185px;}
 
+.headertags {
+  width: 30%;
+}
+
 .inbetween {
   opacity: 0.5;
   border-top: 2px solid #fff;
@@ -241,6 +280,7 @@ img {max-width: 100%;}
 .contactform #id_private {
   padding: 5px;
   display: inline;
+  width: 25%;
 }
 
 /* -------------- FOOTER -------------- */

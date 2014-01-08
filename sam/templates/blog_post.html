@@ -32,7 +32,7 @@
         </table>
 
         {% if not post.creation_date.ctime == post.updated_date.ctime and post.tags.values %}
-        <p class="textright">
+        <p class="textright headertags right">
           <small>Tags: 
             {% for tag_data in post.tags.values %}
               <a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
@@ -43,23 +43,7 @@
 
         <div class="clear"></div>
 
-        <div class="content">
-          <p>{{ post.content|safe }}</p>
-          <br />
-          <div class="clear"></div>
-
-          {% if post.image %}
-            <p><img src="/{{ post.image }}" /></p>
-            <br />
-            <div class="clear"></div>
-          {% endif %}
-
-          {% if post.embedded_link %}
-            <p>{{ post.embedded_link|safe }}</p>
-            <br />
-            <div class="clear"></div>
-          {% endif %}
-        </div>
+        {% include "blog_post_inners.html" %}
         
         <a class="right" href="/blog">Back To Blog</a>
         <div class="clear"></div>

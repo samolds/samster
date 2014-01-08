@@ -1,0 +1,15 @@
+<div class="content">
+  {% if images %}
+    {% for image in images %}
+      <img class="postimage{% cycle 'right' 'left' %}" src="{{ MEDIA_URL }}{{ image.image }}" />
+    {% endfor %}
+  {% endif %}
+
+  <p>{{ post.content|safe }}</p>
+  <div class="clear"></div>
+
+  {% if post.embedded_link %}
+    {{ post.embedded_link|safe }}
+    <div class="clear"></div>
+  {% endif %}
+</div>

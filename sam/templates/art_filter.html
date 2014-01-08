@@ -22,7 +22,7 @@
             {% else %}
               <h1>All art work uploaded on 'None'</h1>
             {% endif %}
-          {% elif kind == "date*tag" %}
+          {% elif kind == "date+tag" %}
             {% if dates and tags %}
               <h1>All art work tagged with {% for tag in tags %}'{{ tag }}' {% endfor %}</h1>
               <h1>and uploaded on {% for date in dates %}'{{ date }}' {% endfor %}</h1>
@@ -48,23 +48,19 @@
 
   {% if exists %}
     {% if art %}
-      {% for work in art %}
+
+      {% for post in art %}
         <div class="content">
-
-          {% include "art_work_header.html" %}
-
-          {% if work.description %}
-            <div class="content">
-              <p>
-                {{ work.description|slice:":300"|safe }}...
-                <div class="clear"></div>
-              </p>
-            </div>
+          {% load type %}
+          {% if post|type == "SiteImage" %}
+            {% include "art_work_stub.html" %}
+          {% elif post|type == "Post" %}
+            {% include "blog_post_stub.html" %}
           {% endif %}
         </div>
-
         <div class="content inbetween"></div>
       {% endfor %}
+
     {% else %}
       <div class="content">
         <p>The art work with that tag are private</p>

@@ -40,26 +40,8 @@
 
   <div class="content">
     {% if post %}
-
       <h1>{{ post.title }}</h1>
-
-      <div class="content">
-        <p>
-          {{ post.content|safe }}
-          <div class="clear"></div>
-        </p>
-
-
-        {% if post.image %}
-          <img src="/{{ post.image }}" />
-          <br />
-        {% endif %}
-
-        {% if post.embedded_link %}
-          {{ post.embedded_link|safe }}
-          <br />
-        {% endif %}
-      </div>
+      {% include "blog_post_inners.html" %}
     {% else %}
       <h2>This part has yet to be written</h2>
     {% endif %}

@@ -1,10 +1,12 @@
+from sam.models import Post, Tag, Quote, SiteImage
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from sam.models import Post, Tag, Quote, SiteImage
+from django.db.models import Q
 import random
 
 
 def home(request):
+    public = Q(private=False)
     home_post = None
     if SiteImage.objects.filter(tags__tag="banner_photo"):
         banners = list(SiteImage.objects.filter(tags__tag="banner_photo"))
@@ -19,10 +21,28 @@ def home(request):
                 banners = list(home_post.images.filter(tags__tag="banner_photo"))
                 banner_photo = banners[-1]
 
-    posts = list(Post.objects.filter(private=False))
+    posts = list(Post.objects.filter(public))
+
+    art_tag = Q(tags__tag="art")
+    drawing = Q(tags__tag="drawing")
+    photography = Q(tags__tag="photography")
+    art_image = SiteImage.objects.filter(art_tag | drawing | photography)
+
+    art_image = list(set(art_image.filter(public)))
+
+    posts = art_image + posts
+    posts.sort(key=lambda x: x.creation_date)
+
     post = None
+    images = []
+    is_site_image = True
     if posts:
         post = posts[-1]
+        if type(post) == Post:
+            is_site_image = False
+            for image in post.images.values():
+                images.append(SiteImage.objects.get(image=image['image']))
+            images.reverse()
 
     quotes = list(Quote.objects.filter(private=False))
     quote = None
@@ -33,6 +53,8 @@ def home(request):
     return render_to_response('home.html', {
         "home_post": home_post,
         "post": post,
+        "images": images,
+        "is_site_image": is_site_image,
         "quote": quote,
         "banner_photo": banner_photo
     }, context_instance=RequestContext(request))

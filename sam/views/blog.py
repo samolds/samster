@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from sam.models import Post, Tag, Comment
+from sam.models import Post, Tag, Comment, SiteImage
 from django.db.models import Q
 from sam.forms.tag_filter import TagFilterForm
 from sam.forms.contact import ContactForm
@@ -58,18 +58,21 @@ def post(request, post_id=None):
 
     post = None
     exists = False
+    images = []
     if post_id:
         post = Post.objects.filter(pk=post_id)
     if post:
         exists = True
         if post.filter(pk=post_id, private=False):
             post = post.get(pk=post_id, private=False)
-        else:
-            post = None
+            for image in post.images.values():
+                images.append(SiteImage.objects.get(image=image['image']))
+            images.reverse()
 
     return render_to_response('blog_post.html', {
         "post": post,
         "exists": exists,
+        "images": images,
         "form": form,
     }, context_instance=RequestContext(request))
 
@@ -83,19 +86,21 @@ def filter(request, kind=None, tag=None):
         return filterHelp(request)
     else:
         if kind and tag:
-            tags = tag.split('*')
             posts = Post.objects.all()
-            if kind == "tag":
-                if posts:
-                    for piece in tags:
-                        posts = posts.filter(tags__tag=piece)
-                    if posts:
-                        exists = True
-                        posts = posts.filter(private=False)
-                    posts = list(posts)
-                    posts.reverse()
-            elif kind == "date":
-                dates = tags
+
+            if tag and '+' in tag and len(tag.split('+')) == 2:
+                dates = tag.split('+')[0]
+                dates = dates.split('*')
+                tags = tag.split('+')[1]
+                tags = tags.split('*')
+            else:
+                dates = None
+                tags = tag.split('*')
+            kinds = kind.split('+')
+
+            if "date" in kinds:
+                if not dates:
+                    dates = tags
                 if posts:
                     creation = posts
                     updated = posts
@@ -121,49 +126,25 @@ def filter(request, kind=None, tag=None):
                             posts = None
                     if (creation or updated) and posts:
                         exists = True
-                        creation = creation.filter(private=False)
-                        updated = updated.filter(private=False)
-                        posts = list(set(list(creation) + list(updated)))
-                        posts.reverse()
-            elif kind == "date*tag":
-                if tag and len(tag.split('_')) == 2:
-                    dates = tag.split('_')[0]
-                    dates = dates.split('*')
-                    tags = tag.split('_')[1]
-                    tags = tags.split('*')
-                    if posts:
-                        creation = posts
-                        updated = posts
-                        for piece in dates:
-                            parts = piece.split('-')
-                            if len(parts) == 3:
-                                year = parts[2]
-                                day = parts[1]
-                                month = parts[0]
-                                if num_or_all(year) and num_or_all(day) and num_or_all(month):
-                                    if not year == "all":
-                                        creation = creation.filter(creation_date__year=int(year))
-                                        updated = updated.filter(updated_date__year=int(year))
-                                    if not day == "all":
-                                        creation = creation.filter(creation_date__day=int(day))
-                                        updated = updated.filter(updated_date__day=int(day))
-                                    if not month == "all":
-                                        creation = creation.filter(creation_date__month=int(month))
-                                        updated = updated.filter(updated_date__month=int(month))
-                                else:
-                                    posts = None
-                            else:
-                                posts = None
-                        if (creation or updated) and posts:
-                            for piece in tags:
-                                creation = creation.filter(tags__tag=piece)
-                                updated = updated.filter(tags__tag=piece)
-                            if creation or updated:
-                                exists = True
-                                creation = creation.filter(private=False)
-                                updated = updated.filter(private=False)
-                                posts = list(set(list(creation) + list(updated)))
-                                posts.reverse()
+
+            if "tag" in kinds:
+                if not "date" in kinds:
+                    creation = posts
+                    updated = posts
+                if creation or updated:
+                    for piece in tags:
+                        creation = creation.filter(tags__tag=piece)
+                        updated = updated.filter(tags__tag=piece)
+                    if creation or updated:
+                        exists = True
+                    else:
+                        exists = False
+
+            creation = creation.filter(private=False)
+            updated = updated.filter(private=False)
+            posts = list(set(list(creation) + list(updated)))
+            posts.reverse()
+
         form = TagFilterForm()
 
     return render_to_response('blog_filter.html', {
@@ -199,4 +180,4 @@ def filterHelp(request):
         elif tag and not date:
             return HttpResponseRedirect('/blog/filter/tag/%s' % tag)
         elif tag and date:
-            return HttpResponseRedirect('/blog/filter/date*tag/%s_%s' % (date, tag))
+            return HttpResponseRedirect('/blog/filter/date+tag/%s+%s' % (date, tag))

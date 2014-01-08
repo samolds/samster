@@ -1,0 +1,11 @@
+{% include "art_work_header.html" %}
+
+<div class="content">
+  {% if post.description %}
+    <img src="{{ MEDIA_URL }}{{ post.image }}" class="postimageleft artstub" />
+    <p>{{ post.description|slice:":750"|safe }}...</p>
+  {% else %}
+    <img src="{{ MEDIA_URL }}{{ post.image }}" class="postimageleft artstub" />
+  {% endif %}
+</div>
+<div class="clear"></div>

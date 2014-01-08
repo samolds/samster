@@ -30,9 +30,11 @@
         <div class="clear"></div>
 
         <div class="content">
-          <img src="{{ MEDIA_URL }}{{ work.image }}" class="left" /></p>
+          <img src="{{ MEDIA_URL }}{{ work.image }}" class="artimage" />
           {% if work.description %}
-            <p>{{ work.description|safe }}</p>
+            <div class="content">
+              <p>{{ work.description|safe }}</p>
+            </div>
           {% endif %}
           <div class="clear"></div>
         </div>

@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from HTMLParser import HTMLParser
 from django.conf import settings
@@ -25,12 +26,19 @@ def strip_tags(html):
 class Tag(models.Model):
     """Description of the Tag model
     """
-    tag_help = "Hardcoded tags: 'top_about', 'top_contact', 'top_education', 'top_home', 'top_personal', 'top_professional', 'banner_photo'"
+    tag_help = "Hardcoded tags: 'top_about', 'top_contact', 'top_education', 'top_home', 'top_personal', 'top_professional', 'personal', 'thoughts', 'shower_thoughts', 'education', 'school', 'homework', 'professional', 'work', 'job', 'experience', 'project', 'banner_photo', 'art', 'drawing', 'photography'"
     tag = models.SlugField(max_length=50, unique=True, help_text=tag_help)
     description = models.CharField(max_length=200, blank=True, null=True)
 
     def __unicode__(self):
         return "%s" % self.tag
+
+    def save(self, *args, **kwargs):
+        if not Tag.objects.filter(tag=self.tag.lower()):
+            self.tag = self.tag.lower()
+            super(Tag, self).save(*args, **kwargs)
+        else:
+            raise ValidationError(u"The lowercase version of that tag already exists")
 
     class Meta:
         verbose_name = (u"Tag")
@@ -93,15 +101,17 @@ class SiteImage(models.Model):
 
     def save(self, *args, **kwargs):
         content_types = {"JPEG": "image/jpeg", "GIF": "image/gif", "PNG": "image/png"}
-        if self.image.file.multiple_chunks():
-            img = Image.open(self.image.file.temporary_file_path())
-        else:
-            img = Image.open(self.image)
 
-        if not img.format in content_types:
-            raise ValidationError('Not an accepted image format')
+        #if self.image.file.multiple_chunks():
+            #img = Image.open(self.image.file.temporary_file_path())
+        #else:
+            #img = Image.open(self.image)
 
-        self.content_type = content_types[img.format]
+        #if not img.format in content_types:
+            #raise ValidationError('Not an accepted image format')
+
+        #self.content_type = content_types[img.format]
+
         if self.description_markdown:
             self.description = markdown.markdown(self.description_markdown)
 
