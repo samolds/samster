@@ -9,8 +9,8 @@ def home(request):
     public = Q(private=False)
     home_post = None
     home_images = []
-    if SiteImage.objects.filter(tags__tag="banner_photo"):
-        banners = list(SiteImage.objects.filter(tags__tag="banner_photo"))
+    if SiteImage.objects.filter(tags__tag="banner_photo").filter(public):
+        banners = list(SiteImage.objects.filter(tags__tag="banner_photo").filter(public))
         banner_photo = banners[-1]
     else:
         banner_photo = None
@@ -18,8 +18,8 @@ def home(request):
         posts = list(Post.objects.filter(tags__tag="top_home"))
         if posts:
             home_post = posts[-1]
-            if home_post.images.filter(tags__tag="banner_photo"):
-                banners = list(home_post.images.filter(tags__tag="banner_photo"))
+            if home_post.images.filter(tags__tag="banner_photo").filter(public):
+                banners = list(home_post.images.filter(tags__tag="banner_photo").filter(public))
                 banner_photo = banners[-1]
             for image in home_post.images.values():
                 home_images.append(SiteImage.objects.get(image=image['image']))
