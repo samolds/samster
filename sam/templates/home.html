@@ -28,10 +28,22 @@
       {% if not banner_photo %}
         <h1>{{ home_post.title }}</h1>
       {% endif %}
-
       <div class="content">
+        {% if home_images %}
+          {% for image in home_images %}
+            {% if not image.image == banner_photo.image %}
+              <img class="postimage{% cycle 'right' 'left' %}" src="{{ MEDIA_URL }}{{ image.image }}" />
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
         <p>{{ home_post.content|safe }}</p>
         <div class="clear"></div>
+
+        {% if home_post.embedded_link %}
+          {{ home_post.embedded_link|safe }}
+          <div class="clear"></div>
+        {% endif %}
       </div>
     {% else %}
       <h2>This part has yet to be written</h2>

@@ -8,6 +8,7 @@ import random
 def home(request):
     public = Q(private=False)
     home_post = None
+    home_images = []
     if SiteImage.objects.filter(tags__tag="banner_photo"):
         banners = list(SiteImage.objects.filter(tags__tag="banner_photo"))
         banner_photo = banners[-1]
@@ -20,6 +21,9 @@ def home(request):
             if home_post.images.filter(tags__tag="banner_photo"):
                 banners = list(home_post.images.filter(tags__tag="banner_photo"))
                 banner_photo = banners[-1]
+            for image in home_post.images.values():
+                home_images.append(SiteImage.objects.get(image=image['image']))
+            home_images.reverse()
 
     posts = list(Post.objects.filter(public))
 
@@ -52,6 +56,7 @@ def home(request):
     #browser = request.META.get('HTTP_USER_AGENT', 'Unknown')
     return render_to_response('home.html', {
         "home_post": home_post,
+        "home_images": home_images,
         "post": post,
         "images": images,
         "is_site_image": is_site_image,
