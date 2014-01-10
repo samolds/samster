@@ -27,6 +27,7 @@ img, div, ul, li, p, a, table, tr, td, form {
   padding: 0px;
   list-style-type: none;
   text-decoration: none;
+  vertical-align: middle;
 }
 
 a:hover {color: #fff;}
@@ -34,6 +35,7 @@ a:hover {color: #fff;}
 table {width: 100%;}
 img {max-width: 100%;}
 .tdtitle {width: 75%;}
+.tdtitle h2 {font-size: 175%;}
 
 /* -------------- NAVBAR -------------- */
 
@@ -150,8 +152,7 @@ img {max-width: 100%;}
 }
 
 .postcontent p {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
 }
 
 .comment {
