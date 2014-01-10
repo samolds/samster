@@ -4,3 +4,4 @@ oauth2
 PIL
 pytz
 markdown
+django-mobility

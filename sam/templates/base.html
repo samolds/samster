@@ -12,6 +12,9 @@
 <body>
     <div id="bodywrap">
       {% include "nav_bar.html" %}
+      {% if is_mobile %}
+        {% include "mobile_warning.html" %}
+      {% endif %}
       {% block content %}{% endblock %}
       <div class="footspace"></div>
     </div>
