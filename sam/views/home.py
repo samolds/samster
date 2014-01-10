@@ -53,7 +53,6 @@ def home(request):
     if quotes:
         quote = quotes[random.randrange(len(quotes))]
 
-    #browser = request.META.get('HTTP_USER_AGENT', 'Unknown')
     return render_to_response('home.html', {
         "home_post": home_post,
         "home_images": home_images,
