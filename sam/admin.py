@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.forms import TextInput, Textarea
+from django.forms import TextInput, Textarea, SelectMultiple
 from django.db import models
 from sam.models import *
 
@@ -20,6 +20,7 @@ class SiteImageAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'168'})},
         models.TextField: {'widget': Textarea(attrs={'rows':40, 'cols':120})},
+        models.ManyToManyField: {'widget': SelectMultiple(attrs={'size':'15'})}
     }
 
     def get_actions(self, request):
@@ -46,6 +47,7 @@ class QuoteAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'168'})},
         models.TextField: {'widget': Textarea(attrs={'rows':40, 'cols':120})},
+        models.ManyToManyField: {'widget': SelectMultiple(attrs={'size':'15'})}
     }
 
 admin.site.register(Quote, QuoteAdmin)
@@ -67,6 +69,7 @@ class CommentAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'168'})},
         models.TextField: {'widget': Textarea(attrs={'rows':40, 'cols':120})},
+        models.ManyToManyField: {'widget': SelectMultiple(attrs={'size':'15'})}
     }
 
     def get_actions(self, request):
@@ -100,6 +103,7 @@ class PostAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'168'})},
         models.TextField: {'widget': Textarea(attrs={'rows':40, 'cols':120})},
+        models.ManyToManyField: {'widget': SelectMultiple(attrs={'size':'15'})}
     }
 
     def get_actions(self, request):

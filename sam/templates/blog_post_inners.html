@@ -1,12 +1,19 @@
 <div class="content">
-  {% if images %}
+  {% if images|length == 1 %}
     {% for image in images %}
-      <img class="postimage{% cycle 'right' 'left' %}" src="{{ MEDIA_URL }}{{ image.image }}" />
+      <img class="postimageright" src="{{ MEDIA_URL }}{{ image.image }}" />
     {% endfor %}
-  {% endif %}
+    <div class="postcontent">{{ post.content|safe }}</div>
+    <div class="clear"></div>
+  {% else %}
+    <div class="postcontent">{{ post.content|safe }}</div>
+    <div class="clear"></div>
 
-  <p>{{ post.content|safe }}</p>
-  <div class="clear"></div>
+    {% for image in images %}
+      <img class="postimage{% cycle 'left' 'right' %}" src="{{ MEDIA_URL }}{{ image.image }}" />
+    {% endfor %}
+    <div class="clear"></div>
+  {% endif %}
 
   {% if post.embedded_link %}
     {{ post.embedded_link|safe }}

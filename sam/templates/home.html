@@ -29,16 +29,25 @@
         <h1>{{ home_post.title }}</h1>
       {% endif %}
       <div class="content">
-        {% if home_images %}
+        {% if home_images|length == 1 %}
           {% for image in home_images %}
             {% if not image.image == banner_photo.image %}
-              <img class="postimage{% cycle 'right' 'left' %}" src="{{ MEDIA_URL }}{{ image.image }}" />
+              <img class="postimageright" src="{{ MEDIA_URL }}{{ image.image }}" />
             {% endif %}
           {% endfor %}
-        {% endif %}
+          <div class="postcontent">{{ home_post.content|safe }}</div>
+          <div class="clear"></div>
+        {% else %}
+          <div class="postcontent">{{ home_post.content|safe }}</div>
+          <div class="clear"></div>
 
-        <p>{{ home_post.content|safe }}</p>
-        <div class="clear"></div>
+          {% for image in home_images %}
+            {% if not image.image == banner_photo.image %}
+              <img class="postimage{% cycle 'left' 'right' %}" src="{{ MEDIA_URL }}{{ image.image }}" />
+            {% endif %}
+          {% endfor %}
+          <div class="clear"></div>
+        {% endif %}
 
         {% if home_post.embedded_link %}
           {{ home_post.embedded_link|safe }}

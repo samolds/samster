@@ -149,6 +149,11 @@ img {max-width: 100%;}
   word-wrap: break-word;
 }
 
+.postcontent p {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 .comment {
   border-style: solid;
   border-width: 2px;
@@ -159,7 +164,7 @@ img {max-width: 100%;}
 
 .postimageright {
   float: right;
-  width: 49%;
+  width: 48%;
   padding-left: 10px;
   padding-right: 0px;
   padding-top: 5px;
@@ -168,7 +173,7 @@ img {max-width: 100%;}
 
 .postimageleft {
   float: left;
-  width: 49%;
+  width: 48%;
   padding-left: 0px;
   padding-right: 10px;
   padding-top: 5px;

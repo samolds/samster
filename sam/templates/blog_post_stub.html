@@ -2,7 +2,7 @@
 
 {% if post.content %}
   <div class="content">
-    <p>{{ post.content|slice:":750"|safe }}...</p>
+    <div class="postcontent">{{ post.content|slice:":750"|safe }}...</div>
     <div class="clear"></div>
   </div>
 {% endif %}
