@@ -27,6 +27,7 @@ class Tag(models.Model):
     """Description of the Tag model
     """
     tag_help = "Hardcoded tags: 'top_about', 'top_contact', 'top_education', 'top_home', 'top_personal', 'top_professional', 'personal', 'thoughts', 'shower_thoughts', 'education', 'school', 'homework', 'professional', 'work', 'job', 'experience', 'project', 'banner_photo', 'art', 'drawing', 'photography'"
+
     tag = models.SlugField(max_length=50, unique=True, help_text=tag_help)
     description = models.CharField(max_length=200, blank=True, null=True)
 
@@ -43,6 +44,33 @@ class Tag(models.Model):
     class Meta:
         verbose_name = (u"Tag")
         verbose_name_plural = (u"Tags")
+
+
+class WebSite(models.Model):
+    """Description of the WebSite model
+    """
+    choices = (
+        ('prsl', 'Personal'),
+        ('mntn', 'Maintain'),
+        ('dvlp', 'Develop'),
+    )
+
+    url = models.CharField(max_length=100, unique=True)
+    display = models.CharField(max_length=50)
+    note = models.CharField(max_length=50, blank=True, null=True)
+    kind = models.CharField(max_length=4, choices=choices)
+    private = models.BooleanField()
+
+    def __unicode__(self):
+        return "%s" % self.display
+
+    def save(self, *args, **kwargs):
+        self.url = self.url.lower()
+        super(WebSite, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = (u"WebSite")
+        verbose_name_plural = (u"WebSites")
 
 
 class Comment(models.Model):

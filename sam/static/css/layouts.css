@@ -121,18 +121,18 @@ img {max-width: 100%;}
 }
 
 .wide {
-  margin-left: 90px;
-  margin-right: 90px;
+  margin-left: 9%;
+  margin-right: 9%;
 }
 
 .medium {
-  margin-left: 180px;
-  margin-right: 180px;
+  margin-left: 18%;
+  margin-right: 18%;
 }
 
 .narrow {
-  margin-left: 270px;
-  margin-right: 270px;
+  margin-left: 27%;
+  margin-right: 27%;
 }
 
 .content {

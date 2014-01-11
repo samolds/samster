@@ -4,69 +4,95 @@
 
 {% block content %}
 <div class="body narrow">
-<div class="content">
-<h1>Around the Web</h1>
-<p>A comprehensive list of everything I am on the interwebs</p>
-</div>
+  <div class="content">
+    <h1>Around the Web</h1>
+    <small>A comprehensive list of everything I am on the interwebs</small>
+  </div>
 
-<div class="content inbetween"></div>
+  {% if personals or maintains or develops %}
+    {% if personals %}
+      <div class="content inbetween"></div>
+      <div class="content">
+        <ul class="content">
+          {% for personal in personals %}
+            <li><a href="{{ personal.url }}">{{ personal.display }}</a>{% if personal.note %} {{ personal.note }}{% endif %}</li>
+          {% endfor %}
+          <!--
+          <li><a href="http://samolds.com">Sam Olds</a></li>
+          <li><a href="http://facebook.com/samolds">Facebook</a></li>
+          <li><a href="http://plus.google.com/+samolds">Google+</a></li>
+          <li><a href="http://myspace.com/samolds">Myspace</a></li>
+          <li><a href="http://about.me/samolds">About.me</a></li>
+          <li><a href="http://flavors.me/samolds">Flavors.me</a></li>
+          <li><a href="http://samolds.see.me">See.me</a></li>
+          <li><a href="http://github.com/samolds">GitHub</a></li>
+          <li><a href="http://twitter.com/samolds">Twitter</a></li>
+          <li><a href="http://snapchat.com/sam_olds">Snapchat</a></li>
+          <li><a href="http://vine.co/samolds">Vine</a></li>
+          <li style="display:none;"><a href="http://twitter.com/samuraiolds">Twitter</a></li>
+          <li style="display:none;"><a href="http://twitter.com/thesamolds">Twitter</a></li>
+          <li><a href="http://flickr.com/samolds">Flickr</a></li>
+          <li><a href="http://linkedin.com/in/samolds">LinkedIn</a></li>
+          <li><a href="http://last.fm/user/samolds">Last.fm</a></li>
+          <li><a href="http://soundcloud.com/samolds">SoundCloud</a></li>
+          <li><a href="http://open.spotify.com/user/samolds">Spotify</a></li>
+          <li><a href="http://samolds.deviantart.com">DeviantArt</a></li>
+          <li style="display:none;"><a href="http://turntable.fm/sam_olds">Turntable (Public)</a></li>
+          <li style="display:none;"><a href="http://turntable.fm/4dfa39d199968e58a6005042">Turntable (Private)</a></li>
+          <li><a href="http://grooveshark.com/samolds">Grooveshark</a></li>
+          <li><a href="http://vimeo.com/samolds">Vimeo</a></li>
+          <li><a href="http://youtube.com/samuraiolds">YouTube</a></li>
+          <li style="display:none;"><a href="http://reddit.com/user/samolds">Reddit</a></li>
+          <li><a href="http://reddit.com/user/samuraiolds">Reddit</a></li>
+          <li><a href="http://samolds.imgur.com">Imgur</a></li>
+          <li><a href="http://samolds.tumblr.com">Tumblr</a></li>
+          <li><a href="http://stumbleupon.com/stumbler/samolds">StumbleUpon</a></li>
+          <li><a href="http://myworld.ebay.com/samuraiolds">eBay</a></li>
+          <li><a href="http://spring.me/samolds">Spring.me</a></li>
+          <li><a href="http://projectinternet.weebly.com">Project Internet</a></li>
+          <li><a href="http://samolds.weebly.com">Weebly</a></li>
+          <li><a href="http://samolds.yolasite.com">YolaSite</a></li>
+          <li><a href="http://blogs.uw.edu/samolds">UW Personal Blog</a></li>
+          <li><a href="http://students.washington.edu/samolds">UW Student Page</a></li>
+          <li><a href="http://staff.washington.edu/samolds">UW Staff Page</a></li>
+          -->
+        </ul>
+      </div>
+    {% endif %}
 
-<div class="content">
-<ul class="content">
-<li><a href="http://samolds.com">Sam Olds</a></li>
-<li><a href="http://facebook.com/samolds">Facebook</a></li>
-<li><a href="http://plus.google.com/+samolds">Google+</a></li>
-<li><a href="http://myspace.com/samolds">Myspace</a></li>
-<li><a href="http://about.me/samolds">About.me</a></li>
-<li><a href="http://flavors.me/samolds">Flavors.me</a></li>
-<li><a href="http://samolds.see.me">See.me</a></li>
-<li><a href="http://github.com/samolds">GitHub</a></li>
-<li><a href="http://twitter.com/samolds">Twitter</a></li>
-<li style="display:none;"><a href="http://twitter.com/samuraiolds">Twitter</a></li>
-<li style="display:none;"><a href="http://twitter.com/thesamolds">Twitter</a></li>
-<li><a href="http://flickr.com/samolds">Flickr</a></li>
-<li><a href="http://linkedin.com/in/samolds">LinkedIn</a></li>
-<li><a href="http://last.fm/user/samolds">Last.fm</a></li>
-<li><a href="http://soundcloud.com/samolds">SoundCloud</a></li>
-<li><a href="http://open.spotify.com/user/samolds">Spotify</a></li>
-<li><a href="http://samolds.deviantart.com">DeviantArt</a></li>
-<li style="display:none;"><a href="http://turntable.fm/sam_olds">Turntable (Public)</a></li>
-<li style="display:none;"><a href="http://turntable.fm/4dfa39d199968e58a6005042">Turntable (Private)</a></li>
-<li><a href="http://grooveshark.com/samolds">Grooveshark</a></li>
-<li><a href="http://vimeo.com/samolds">Vimeo</a></li>
-<li><a href="http://youtube.com/samuraiolds">YouTube</a></li>
-<li style="display:none;"><a href="http://reddit.com/user/samolds">Reddit</a></li>
-<li><a href="http://reddit.com/user/samuraiolds">Reddit</a></li>
-<li><a href="http://samolds.imgur.com">Imgur</a></li>
-<li><a href="http://samolds.tumblr.com">Tumblr</a></li>
-<li><a href="http://stumbleupon.com/stumbler/samolds">StumbleUpon</a></li>
-<li><a href="http://myworld.ebay.com/samuraiolds">eBay</a></li>
-<li><a href="http://spring.me/samolds">Spring.me</a></li>
-<li><a href="http://projectinternet.weebly.com">Project Internet</a></li>
-<li><a href="http://samolds.weebly.com">Weebly</a></li>
-<li><a href="http://samolds.yolasite.com">YolaSite</a></li>
-<li><a href="http://blogs.uw.edu/samolds">UW Personal Blog</a></li>
-<li><a href="http://students.washington.edu/samolds">UW Student Page</a></li>
-<li><a href="http://staff.washington.edu/samolds">UW Staff Page</a></li>
-</ul>
-</div>
+    {% if maintains %}
+      <div class="content inbetween"></div>
+      <div class="content">
+        <p>Sites that are not personally mine or for me, but I have created and/or maintain</p>
+        <ul class="content">
+          {% for maintain in maintains %}
+            <li><a href="{{ maintain.url }}">{{ maintain.display }}</a>{% if maintain.note %} {{ maintain.note }}{% endif %}</li>
+          {% endfor %}
+          <!--
+          <li><a href="http://students.washington.edu/sonnis">UW Sonnis Club</a></li>
+          -->
+        </ul>
+      </div>
+    {% endif %}
 
-<div class="content inbetween"></div>
-
-<div class="content">
-<p>Sites that are not personally mine, but I help maintain</p>
-<ul class="content">
-<li><a href="http://students.washington.edu/sonnis">UW Sonnis Club</a></li>
-</ul>
-</div>
-
-<div class="content inbetween"></div>
-
-<div class="content">
-<p>Sites that I have helped develop while employed</p>
-<ul class="content">
-<li><a href="http://spacescout.uw.edu">SpaceScout</a></li>
-</ul>
-</div>
+    {% if develops %}
+      <div class="content inbetween"></div>
+      <div class="content">
+        <p>Apps that I have helped develop while employed</p>
+        <ul class="content">
+          {% for develop in develops %}
+            <li><a href="{{ develop.url }}">{{ develop.display }}</a>{% if develop.note %} {{ develop.note }}{% endif %}</li>
+          {% endfor %}
+          <!--
+          <li><a href="http://spacescout.uw.edu">SpaceScout</a></li>
+          <li><a href="http://canvas.instructure.com">Canvas</a> (Minimally)</li>
+          -->
+        </ul>
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="content inbetween"></div>
+    <div class="content">Nothing to display</div>
+  {% endif %}
 </div>
 {% endblock %}

@@ -5,15 +5,35 @@ from sam.models import *
 
 
 class TagAdmin(admin.ModelAdmin):
-    """ The admin model for an Tag
+    """ The admin model for a Tag
     """
 admin.site.register(Tag, TagAdmin)
 
 
+class WebSiteAdmin(admin.ModelAdmin):
+    """ The admin model for a WebSite
+    """
+    list_display = ("display",
+                    "url",
+                    "private")
+    list_filter = ["display",
+                   "private"]
+
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size':'168'})},
+        models.TextField: {'widget': Textarea(attrs={'rows':40, 'cols':120})},
+        models.ManyToManyField: {'widget': SelectMultiple(attrs={'size':'15'})}
+    }
+
+admin.site.register(WebSite, WebSiteAdmin)
+
+
 class SiteImageAdmin(admin.ModelAdmin):
-    """ The admin model for an SiteImage.
+    """ The admin model for a SiteImage.
     Content-type, width, and height, are all filled in on Image save.
     """
+    list_filter = ['name']
+    list_display = ("name", "private")
     exclude = ('content_type', 'width', 'height', 'comments', 'description')
     actions = ['delete_model']
 
@@ -42,7 +62,8 @@ admin.site.register(SiteImage, SiteImageAdmin)
 class QuoteAdmin(admin.ModelAdmin):
     """ The admin model for a Quote.
     """
-    list_filter = ('quote', 'author')
+    list_filter = ['quote', 'author']
+    list_display = ("author",)
 
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'168'})},
