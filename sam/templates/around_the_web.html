@@ -24,7 +24,7 @@
     {% if maintains %}
       <div class="content inbetween"></div>
       <div class="content">
-        <p>Sites that are not personally mine or for me, but I have created and/or maintain</p>
+        <p>Sites that are not personally mine, but I have created, maintain, and/or contribute to.</p>
         <ul class="content">
           {% for maintain in maintains %}
             <li><a href="{{ maintain.url }}">{{ maintain.display }}</a>{% if maintain.note %} {{ maintain.note }}{% endif %}</li>

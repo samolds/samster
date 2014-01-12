@@ -10,16 +10,20 @@
 
   <div class="content inbetween"></div>
 
-  {% for quote in quotes %}
-    <div class="content">
-      <p>"{{ quote.quote }}"</p>
-      <p>- {{ quote.author }}</p>
-    </div>
+  {% if quotes %}
+    {% for quote in quotes %}
+      <div class="content">
+        <p>"{{ quote.quote }}"</p>
+        <p>- {{ quote.author }}</p>
+      </div>
 
-    <div class="content inbetween"></div>
-  {% endfor %}
+      <div class="content inbetween"></div>
+    {% endfor %}
 
-  <div class="content"><br /></div>
+    <div class="content"><div class="content"></div></div>
+  {% else %}
+    <div class="content">Nothing to display</div>
+  {% endif %}
 </div>
 
 {% endblock %}

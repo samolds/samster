@@ -229,8 +229,8 @@ img {max-width: 100%;}
   z-index: 20;
   background-color: #e0e0e0;
   position: absolute;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
   display: none;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
 }
 
 .hbnarrow {
@@ -243,6 +243,10 @@ img {max-width: 100%;}
 
 .hbwide {
   width: 300px;
+}
+
+.hbtop {
+  margin-top: -165px;
 }
 
 .hoverhelp:hover .helpbox {
@@ -307,6 +311,37 @@ img {max-width: 100%;}
   display: inline;
   width: 25%;
 }
+
+.oembedded {
+  opacity: 1.0;
+  margin: 10px;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 5px;
+  border-color: #fff;
+  background-color: #f0f0f0;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
+  padding: 5px;
+}
+
+.oembedded li {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #000;
+  border-radius: 5px;
+  background-color: #fff;
+  margin-bottom: 2px;
+  padding: 5px;
+}
+
+.oembedded a:hover {color: #888;}
+.oembedded .lastfmnp {color: #C00000;} 
+.oembedded .embedsc iframe {max-height: 100px;}
+
+.oembedded .embedsc {
+  padding-left: 10%;
+  padding-right: 20%;
+} 
 
 /* -------------- FOOTER -------------- */
 
