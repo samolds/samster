@@ -11,6 +11,25 @@
 
   <div class="content inbetween"></div>
 
+  <div class="content">Included in this page:
+    <ul class="content">
+      <li>Most Recent Scrobbles from Last.fm</li>
+      <li>Tweets and Retweets from me</li>
+      <li>Song that I have 'liked' on SoundCloud</li>
+      <li>The most recent photos I have posted to Flickr</li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <div class="content">
+    <p>
+      I had the idea of interleaving a lot of the activity from several profiles and social media sites into one central page back in early 2013. A few days later, I discovered <a href="http://flavors.me">flavors.me</a>, which is exactly what I was trying to do. Oh well, at least I have finally completed my own flavor of flavors.me. heh heh heh
+    </p>
+  </div>
+
+  <div class="content inbetween"></div>
+
   <div class="content">
     {% if embeds %}
       <ul class="oembedded">
@@ -30,22 +49,21 @@
             </li>
           {% elif embed.type == "soundcloud" %}
             <li class="embedsc">{{ embed.html|safe }}</li>
+          {% elif embed.type == "flickr" %}
+            <li class="embedflickr">
+              <a href="http://flickr.com/photos/samolds/{{ embed.photoid }}"><img class="right" src="{{ embed.imgsrc }}" /></a>
+              <div class="flickrdesc">
+                <h3>{{ embed.title }}</h3>
+                <div class="flickrdesc">"{{ embed.description }}"</div>
+                <div>From <a href="http://flickr.com/samolds">Flickr</a></div>
+              </div>
+              <div class="clear"></div>
+            </li>
           {% else %}
             <li>{{ embed.html|safe }}</li>
           {% endif %}
         {% endfor %}
       </ul>
-      <div class="content">Included in this page:
-        <ul class="content"
-          <li>Most Recent Scrobbles from Last.fm</li>
-          <li>Tweets and Retweets from me</li>
-          <li>Song that I have 'liked' on SoundCloud</li>
-          <li>The most recent photos I have posted to Flickr</li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-      </div>
     {% endif %}
 
     <!--

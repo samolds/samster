@@ -10,3 +10,6 @@ django-mobility
 #django-facebook-api
 TwitterAPI
 soundcloud
+#lastfm uses oauth2
+flickrapi
+github3.py

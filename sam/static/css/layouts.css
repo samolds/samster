@@ -341,7 +341,22 @@ img {max-width: 100%;}
 .oembedded .embedsc {
   padding-left: 10%;
   padding-right: 20%;
-} 
+}
+
+.oembedded .embedflickr {
+  padding-left: 10%;
+  padding-right: 20%;
+}
+
+.oembedded .embedflickr img {
+  border-radius: 5px;
+  margin: 10px;
+  max-width: 213px;
+}
+
+.oembedded .embedflickr .flickrdesc {
+  padding: 10px;
+}
 
 /* -------------- FOOTER -------------- */
 
