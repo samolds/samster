@@ -1,0 +1,39 @@
+<ul>
+  <li class="top"><a href="/">samolds.com</a>
+    <ul>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </li>
+  {% if is_admin %}
+    <li class="top"><a href="/admin">Admin</a>
+      <ul>
+        <li><a href="/admin/sam/post">Posts</a> <a>/</a> <a href="/admin/sam/post/add">Add</a></li>
+        <li><a href="/admin/sam/quote">Quotes</a> <a>/</a> <a href="/admin/sam/quote/add">Add</a></li>
+        <li><a href="/admin/sam/siteimage">Images</a> <a>/</a> <a href="/admin/sam/siteimage/add">Add</a></li>
+        <li><a href="/admin/sam/tag">Tags</a> <a>/</a> <a href="/admin/sam/tag/add">Add</a></li>
+        <li><a href="/admin/sam/website">WebSites</a> <a>/</a> <a href="/admin/sam/website/add">Add</a></li>
+        <li><a href="/admin/logout">Logout</a></li>
+      </ul>
+    </li>
+  {% endif %}
+  <li class="top"><a href="/personal">Personal</a>
+    <ul>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/art">Art Work</a></li>
+      <li><a href="/blog/filter/tag/project">Projects</a></li>
+      <li><a href="/favorite_quotes">Favorite Quotes</a></li>
+      <li><a href="/front_page">The Front Page</a></li>
+      <li><a href="/around_the_web">Around The Web</a></li>
+      <li><a href="/education">Education</a></li>
+    </ul>
+  </li>
+  <li class="top"><a href="/professional">Professional</a>
+    <ul>
+      <li><a href="/blog/filter/tag/work">Work</a></li>
+      <li><a href="/blog/filter/tag/work*experience">Experience</a></li>
+      <li><a href="http://www.linkedin.com/in/samolds">LinkedIn</a></li>
+      <li><a href="http://github.com/samolds">GitHub</a></li>
+    </ul>
+  </li>
+</ul>

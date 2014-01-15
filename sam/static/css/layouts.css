@@ -100,6 +100,26 @@ img {max-width: 100%;}
   font-weight: bold;
 }
 
+.mobilenav a:hover { color: #888; }
+
+.mobilenav {
+  padding-left: 35%;
+  padding-right: 35%;
+}
+
+.mobilenav .top {
+  padding-top: 10px;
+}
+
+.mobilenav .top ul {
+  padding: 5px;
+}
+
+.mobilenav .top li {
+  padding-right: 5px;
+  display: inline;
+}
+
 /* -------------- BODY -------------- */
 
 #bodywrap {
