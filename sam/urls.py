@@ -18,6 +18,7 @@ urlpatterns = patterns('sam.views',
     url(r'^art/archive$', 'art.art_archive'),
     url(r'^art/work(?:/(?P<image_id>\d+))?$', 'art.art_work'),
     url(r'^art/filter(?:/(?P<kind>(\w+[+]*)*))?(?:/(?P<tag>(\w+[-*+]*)*))?$', 'art.filter'),
+    url(r'^password$', 'password.password'),
 )
 
 urlpatterns += patterns('',
