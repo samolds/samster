@@ -21,7 +21,7 @@ html, body {
   min-width: 675px;
 }
 
-img, div, ul, li, p, a, table, tr, td, form {
+blockquote, img, div, ul, li, p, a, table, tr, td, form, pre {
   color: #000;
   margin: 0px;
   padding: 0px;
@@ -171,9 +171,31 @@ img {max-width: 100%;}
   word-wrap: break-word;
 }
 
+.postcontent h1, .postcontent h2, .postcontent h3, .postcontent h4, .postcontent h5 {
+  padding-bottom: 20px;
+}
+
 .postcontent p {
   padding-bottom: 10px;
 }
+
+.postcontent pre {
+  font-family: monospace;
+  white-space: pre;
+  padding: 10px;
+}
+
+.postcontent blockquote {
+  padding: 15px;
+}
+
+.postcontent ul, .postcontent ol {
+  padding-bottom: 10px;
+  padding-left: 40px;
+}
+
+.postcontent ul li { list-style-type: circle; }
+.postcontent ol li { list-style-type: decimal; }
 
 .comment {
   border-style: solid;
