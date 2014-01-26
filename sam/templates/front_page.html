@@ -70,41 +70,46 @@
           {% elif embed.type == "github" %}
             <li class="embedsimple">
               <div class="right">
-                On <a href="http://github.com/samolds">GitHub</a>
+                From <a href="http://github.com/samolds">GitHub</a>
               </div>
               {% if embed.event_type == "PushEvent" %}
                 {% for commit in embed.payload.commits %}
-                  {{ commit.message }}
-                  <a href="{{ commit.url }}">{{ commit.sha }}</a>
-                  <br />
+                  <a href="{{ embed.repo_url }}/commit/{{ commit.sha }}"><i>{{ commit.sha }}</i></a>:
+                  <p class="space">{{ commit.message }}</p>
                 {% endfor %}
-                Pushed to <a href="{{ embed.repo.url }}">{{ embed.repo.name }}</a>
+                <p>Pushed to <a href="{{ embed.repo_url }}">{{ embed.repo.name }}</a></p>
               {% elif embed.event_type == "WatchEvent" %}
-                Started watching <a href="{{ embed.repo.url }}">{{ embed.repo.name }}</a>
+                <p>Started watching <a href="{{ embed.repo_url }}">{{ embed.repo.name }}</a></p>
               {% elif embed.event_type == "CreateEvent" %}
-                Created new {{ embed.payload.ref_type }}, {{ embed.payload.ref }}
-                <br />
-                {% if embed.payload.description %}
-                  {{ embed.payload.description }}
-                  <br />
-                {% endif %}
-                On <a href="{{ embed.repo.url }}">{{ embed.repo.name }}</a>
+                <p>
+                  Created new {{ embed.payload.ref_type }}: <i>{{ embed.payload.ref }}</i>
+                  {% if embed.payload.description %}
+                    <p class="space">{{ embed.payload.description }}</p>
+                  {% endif %}
+                </p>
+                On <a href="{{ embed.repo_url }}">{{ embed.repo.name }}</a>
               {% elif embed.event_type == "CommitCommentEvent" %}
-                Commented on commit <a href="{{ embed.payload.comment.html_url }}">{{ embed.payload.comment.commit_id }}</a>:
-                <br />
-                "{{ embed.payload.comment.body }}"
+                <p>
+                  Commented on commit <a href="{{ embed.payload.comment.html_url }}">{{ embed.payload.comment.commit_id }}</a>:
+                  <p class="space">{{ embed.payload.comment.body }}</p>
+                </p>
               {% elif embed.event_type == "GollumEvent" %}
-                Edited the wiki
-                {% for page in embed.payload.pages %}
-                  <li><a href="{{ page.html_url }}">{{ page.title }}</a></li>
-                {% endfor %}
+                <p>
+                  Edited
+                  <p class="space">
+                    {% for page in embed.payload.pages %}
+                      <p><a href="{{ page.html_url }}">{{ page.title }}</a></p>
+                    {% endfor %}
+                  </p>
+                  On <a href="{{ embed.repo_url }}">{{ embed.repo.name }}</a>
+                </p>
               {% else %}
-                Did some GitHub activity
+                <p>Did some GitHub activity</p>
               {% endif %}
               <div class="clear"></div>
             </li>
           {% else %}
-            <li>{{ embed.html|safe }}</li>
+            <li class="embedsimple">{{ embed.html|safe }}</li>
           {% endif %}
         {% endfor %}
       </ul>

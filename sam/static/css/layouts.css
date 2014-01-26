@@ -380,6 +380,10 @@ img {max-width: 100%;}
 .oembedded .lastfmnp {color: #C00000;} 
 .oembedded .embedsc iframe {max-height: 100px;}
 
+.oembedded .embedsimple {
+  padding: 10px;
+}
+
 .oembedded .embedsc {
   padding-left: 10%;
   padding-right: 20%;
@@ -398,6 +402,13 @@ img {max-width: 100%;}
 
 .oembedded .embedflickr .flickrdesc {
   padding: 10px;
+}
+
+.oembedded .space {
+  padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 85%;
 }
 
 /* -------------- FOOTER -------------- */

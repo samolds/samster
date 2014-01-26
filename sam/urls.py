@@ -13,7 +13,7 @@ urlpatterns = patterns('sam.views',
     url(r'^blog/post(?:/(?P<post_id>\d+))?$', 'blog.post'),
     url(r'^blog/filter(?:/(?P<kind>(\w+[+]*)*))?(?:/(?P<tag>(\w+[-*+]*)*))?$', 'blog.filter'),
     url(r'^front_page$', 'front_page.front_page'), # rename 'center' "The Center"
-    url(r'^favorite_quotes$', 'quote.quote'), # rename 'quote'
+    url(r'^favorite_quotes$', 'quote.quote'), # rename 'quotes'
     url(r'^art$', 'art.art'),
     url(r'^art/archive$', 'art.art_archive'),
     url(r'^art/work(?:/(?P<image_id>\d+))?$', 'art.art_work'),
