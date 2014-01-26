@@ -62,9 +62,45 @@
               <a href="http://flickr.com/photos/samolds/{{ embed.photoid }}"><img class="right" src="{{ embed.imgsrc }}" /></a>
               <div class="flickrdesc">
                 <h3>{{ embed.title }}</h3>
-                <div class="flickrdesc">"{{ embed.description }}"</div>
+                <div class="flickrdesc">"{{ embed.description|safe }}"</div>
                 <div>From <a href="http://flickr.com/samolds">Flickr</a></div>
               </div>
+              <div class="clear"></div>
+            </li>
+          {% elif embed.type == "github" %}
+            <li class="embedsimple">
+              <div class="right">
+                On <a href="http://github.com/samolds">GitHub</a>
+              </div>
+              {% if embed.event_type == "PushEvent" %}
+                {% for commit in embed.payload.commits %}
+                  {{ commit.message }}
+                  <a href="{{ commit.url }}">{{ commit.sha }}</a>
+                  <br />
+                {% endfor %}
+                Pushed to <a href="{{ embed.repo.url }}">{{ embed.repo.name }}</a>
+              {% elif embed.event_type == "WatchEvent" %}
+                Started watching <a href="{{ embed.repo.url }}">{{ embed.repo.name }}</a>
+              {% elif embed.event_type == "CreateEvent" %}
+                Created new {{ embed.payload.ref_type }}, {{ embed.payload.ref }}
+                <br />
+                {% if embed.payload.description %}
+                  {{ embed.payload.description }}
+                  <br />
+                {% endif %}
+                On <a href="{{ embed.repo.url }}">{{ embed.repo.name }}</a>
+              {% elif embed.event_type == "CommitCommentEvent" %}
+                Commented on commit <a href="{{ embed.payload.comment.html_url }}">{{ embed.payload.comment.commit_id }}</a>:
+                <br />
+                "{{ embed.payload.comment.body }}"
+              {% elif embed.event_type == "GollumEvent" %}
+                Edited the wiki
+                {% for page in embed.payload.pages %}
+                  <li><a href="{{ page.html_url }}">{{ page.title }}</a></li>
+                {% endfor %}
+              {% else %}
+                Did some GitHub activity
+              {% endif %}
               <div class="clear"></div>
             </li>
           {% else %}
