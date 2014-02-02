@@ -30,6 +30,7 @@ def post_archive(request):
             archive.append({"month": post.creation_date.month, "year": post.creation_date.year})
 
         archive = [dict(tupleized) for tupleized in set(tuple(item.items()) for item in archive)]
+        archive.reverse()
 
     return render_to_response('blog_archive.html', {
         'archive': archive,

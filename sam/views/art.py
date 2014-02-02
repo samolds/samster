@@ -55,6 +55,7 @@ def art_archive(request):
             archive.append({"month": work.creation_date.month, "year": work.creation_date.year})
 
         archive = [dict(tupleized) for tupleized in set(tuple(item.items()) for item in archive)]
+        archive.reverse()
 
     return render_to_response('art_archive.html', {
         'archive': archive,
