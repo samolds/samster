@@ -80,6 +80,8 @@ def post(request, post_id=None):
 
 def filter(request, kind=None, tag=None):
     posts = None
+    creation = None
+    updated = None
     exists = False
     dates = []
     tags = []
@@ -141,10 +143,11 @@ def filter(request, kind=None, tag=None):
                     else:
                         exists = False
 
-            creation = creation.filter(private=False)
-            updated = updated.filter(private=False)
-            posts = list(set(list(creation) + list(updated)))
-            posts.reverse()
+            if creation and updated and posts:
+                creation = creation.filter(private=False)
+                updated = updated.filter(private=False)
+                posts = list(set(list(creation) + list(updated)))
+                posts.reverse()
 
         form = TagFilterForm()
 
