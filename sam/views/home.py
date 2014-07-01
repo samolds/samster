@@ -25,7 +25,7 @@ def home(request):
                 home_images.append(SiteImage.objects.get(image=image['image']))
             home_images.reverse()
 
-    posts = list(Post.objects.filter(public))
+    posts = list(Post.objects.filter(public).exclude(tags__tag="top_home"))
 
     art_tag = Q(tags__tag="art")
     drawing = Q(tags__tag="drawing")
