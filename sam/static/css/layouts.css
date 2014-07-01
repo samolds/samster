@@ -74,7 +74,7 @@ img {max-width: 100%;}
   background-color: #000;
 }
 
-#navbar a:hover {
+#navbar li:hover > a {
   color: #000;
   background-color: #e0e0e0;
 }
@@ -133,6 +133,7 @@ img {max-width: 100%;}
 
 .body {
   margin: 10px;
+  margin-top: 20px;
   border-style: solid;
   border-width: 5px;
   border-color: #ffffff;
