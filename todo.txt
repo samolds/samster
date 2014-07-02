@@ -1,0 +1,15 @@
+* GET A REAL TICKET TRACKER
+* Make buttons nicer with hover-over?
+* Get the email stuff set up and working with comments
+* Get PIL working and serving jpgs (http://djangodays.com/2008/09/03/django-imagefield-validation-error-caused-by-incorrect-pil-installation-on-mac/)
+* Make sure image serving is correctly working
+* Simplify background texture
+* Add minimal texture to navbar?
+* Make a better favicon
+* Make sure github api posts look good
+* DEPLOY TO GOOGLE APP ENGINE
+* Remove SHA1 POST password generator and replace with JT's javascript one
+* Open source stuff and remove personal information stuff and add to settings.py
+* Comment Code
+
+* Facebook API?? (HAH! ...not...)
