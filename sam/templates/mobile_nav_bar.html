@@ -1,39 +1,64 @@
-<ul>
-  <li class="top"><a href="/">{{ SITENAME }}</a>
-    <ul>
-      <li><a href="/about">About</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-  </li>
-  {% if is_admin %}
-    <li class="top"><a href="/admin">Admin</a>
-      <ul>
-        <li><a href="/admin/sam/post">Posts</a> <a>/</a> <a href="/admin/sam/post/add">Add</a></li>
-        <li><a href="/admin/sam/quote">Quotes</a> <a>/</a> <a href="/admin/sam/quote/add">Add</a></li>
-        <li><a href="/admin/sam/siteimage">Images</a> <a>/</a> <a href="/admin/sam/siteimage/add">Add</a></li>
-        <li><a href="/admin/sam/tag">Tags</a> <a>/</a> <a href="/admin/sam/tag/add">Add</a></li>
-        <li><a href="/admin/sam/website">WebSites</a> <a>/</a> <a href="/admin/sam/website/add">Add</a></li>
-        <li><a href="/admin/logout">Logout</a></li>
+{% block script %}
+<script language="javascript">
+function dropdown(tab) {
+    var section = document.getElementById(tab);
+    console.log(section);
+    if (section.style.display == 'block') {
+        section.style.display = 'none';
+    } else {
+        section.style.display = 'block';
+    }
+}
+</script>
+{% endblock %}
+
+<div id="mobile_navbar">
+  <ul class="mobile_navtop right">
+    <li onclick="dropdown('personal');"><a>Personal</a>
+      <ul id="personal">
+        <li><a href="/me">Personal</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/art">Art Work</a></li>
+        <li><a href="/blog/filter/tag/project">Projects</a></li>
+        <li><a href="/quotes">Favorite Quotes</a></li>
+        <li><a href="/center">The Front Page</a></li>
+        <li><a href="/hub">Around The Web</a></li>
+        <li><a href="/school">Education</a></li>
       </ul>
     </li>
-  {% endif %}
-  <li class="top"><a href="/me">Personal</a>
-    <ul>
-      <li><a href="/blog">Blog</a></li>
-      <li><a href="/art">Art Work</a></li>
-      <li><a href="/blog/filter/tag/project">Projects</a></li>
-      <li><a href="/quotes">Favorite Quotes</a></li>
-      <li><a href="/center">The Front Page</a></li>
-      <li><a href="/hub">Around The Web</a></li>
-      <li><a href="/school">Education</a></li>
-    </ul>
-  </li>
-  <li class="top"><a href="/work">Professional</a>
-    <ul>
-      <li><a href="/blog/filter/tag/work">Work</a></li>
-      <li><a href="/blog/filter/tag/work*experience">Experience</a></li>
-      <li><a href="http://www.linkedin.com/in/{{ USERNAME }}">LinkedIn</a></li>
-      <li><a href="http://github.com/{{ USERNAME }}">GitHub</a></li>
-    </ul>
-  </li>
-</ul>
+    <li onclick="dropdown('professional')"><a>Professional</a>
+      <ul id="professional">
+        <li><a href="/work">Professional</a></li>
+        <li><a href="/blog/filter/tag/work">Work</a></li>
+        <li><a href="/blog/filter/tag/work*experience">Experience</a></li>
+        <li><a href="http://www.linkedin.com/in/{{ USERNAME }}">LinkedIn</a></li>
+        <li><a href="http://github.com/{{ USERNAME }}">GitHub</a></li>
+      </ul>
+    </li>
+  </ul>
+  
+  <ul class="mobile_navtop left">
+    <li onclick="dropdown('sitename')"><a>{{ SITENAME }}</a>
+      <ul id="sitename">
+        <li><a href="/">{{ SITENAME }}</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </li>
+    {% if is_admin %}
+      <li onclick="dropdown('admin')"><a>Admin</a>
+        <ul id="admin">
+          <li><a href="/admin">Admin</a></li>
+          <li><a href="/sha1">SHA1</a></li>
+          <li><a href="/admin/sam/post">Posts</a> <a>/</a> <a href="/admin/sam/post/add">Add</a></li>
+          <li><a href="/admin/sam/quote">Quotes</a> <a>/</a> <a href="/admin/sam/quote/add">Add</a></li>
+          <li><a href="/admin/sam/siteimage">Images</a> <a>/</a> <a href="/admin/sam/siteimage/add">Add</a></li>
+          <li><a href="/admin/sam/tag">Tags</a> <a>/</a> <a href="/admin/sam/tag/add">Add</a></li>
+          <li><a href="/admin/sam/website">WebSites</a> <a>/</a> <a href="/admin/sam/website/add">Add</a></li>
+          <li><a href="/admin/logout">Logout</a></li>
+        </ul>
+      </li>
+    {% endif %}
+  </ul>
+  <div class="mobile_navtop clear"></div>
+</div>

@@ -82,41 +82,46 @@ img {max-width: 100%;}
   background-color: #e0e0e0;
 }
 
-.mobile_warning {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 50px;
-  margin-right: 50px;
-  padding: 5px;
-  background-color: #FFFF40;
-  border-radius: 5px;
-  //box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
+#mobile_navbar {
+  background-color: #000;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.mobile_warning p {
-  color: #000;
-  text-align: center;
-  font-weight: bold;
+#mobile_navbar a {
+  color: #fff;
+  padding: 11px;
+  line-height: 40px;
 }
 
-.mobilenav a:hover { color: #888; }
-
-.mobilenav {
-  padding-left: 35%;
-  padding-right: 35%;
-}
-
-.mobilenav .top {
-  padding-top: 10px;
-}
-
-.mobilenav .top ul {
-  padding: 5px;
-}
-
-.mobilenav .top li {
-  padding-right: 5px;
+.mobile_navtop li {
+  position: relative;
   display: inline;
+}
+
+.mobile_navtop ul {
+  white-space: nowrap;
+  position: absolute;
+  display: none;
+  z-index: 10;
+  margin-top: -2.5px;
+}
+
+.mobile_navtop ul li {
+  display: block;
+}
+
+.mobile_navtop ul {
+  background-color: #000;
+}
+
+#mobile_navbar li:hover > a {
+  color: #000;
+  background-color: #e0e0e0;
+}
+
+.mobile_navtop ul li:hover {
+  background-color: #e0e0e0;
 }
 
 /* -------------- BODY -------------- */

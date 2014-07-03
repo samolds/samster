@@ -8,13 +8,14 @@
     <link href="{{ STATIC_URL }}img/favicon.ico" rel="icon" type="image/x-icon">
     {% block title %}{% endblock %}
     <title>{{ SITENAME }}</title>
-    {% block javascript %}{% endblock %}
+    {% block script %}{% endblock %}
 </head>
 <body>
     <div id="bodywrap">
-      {% include "nav_bar.html" %}
-      {% if is_mobile %}
-        {% include "mobile_warning.html" %}
+      {% if not is_mobile %}
+        {% include "nav_bar.html" %}
+      {% else %}
+        {% include "mobile_nav_bar.html" %}
       {% endif %}
       {% block content %}{% endblock %}
       <div class="footspace"></div>

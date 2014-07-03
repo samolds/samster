@@ -9,7 +9,6 @@ To Do
 * Make a better favicon
 * DEPLOY TO GOOGLE APP ENGINE
 * Restructure model.py to work with a non-relational database
-* Open source stuff and remove personal information stuff and add to settings.py
 * Comment Code
 * Make Readme file have correct setup instructions
 * Unit Test
@@ -24,3 +23,5 @@ Done
 * Make sure github api posts look good
 * Make buttons nicer with hover-over?
 * Remove SHA1 POST password generator and replace with JT's javascript one
+* Open source stuff and remove personal information stuff and add to settings.py
+* Make navbar work with mobile (and then remove mobile warning)
