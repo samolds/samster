@@ -9,7 +9,6 @@ To Do
 * DEPLOY TO GOOGLE APP ENGINE
 * Restructure model.py to work with a non-relational database
 * Comment Code
-* Make Readme file have correct setup instructions
 * Unit Test
 * Add better error pages (401, 404, 500, etc.)
 * Have "This part has yet to be written" moved out into a context_processor and not hardcoded
@@ -25,3 +24,4 @@ Done
 * Open source stuff and remove personal information stuff and add to settings.py
 * Make navbar work with mobile (and then remove mobile warning)
 * Get the email stuff set up and working with comments
+* Make Readme file have correct setup instructions
