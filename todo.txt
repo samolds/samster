@@ -8,6 +8,7 @@
 * Make a better favicon
 * Make sure github api posts look good
 * DEPLOY TO GOOGLE APP ENGINE
+* Restructure model.py to work with a non-relational database
 * Remove SHA1 POST password generator and replace with JT's javascript one
 * Open source stuff and remove personal information stuff and add to settings.py
 * Comment Code
