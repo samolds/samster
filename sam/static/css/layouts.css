@@ -332,10 +332,11 @@ img {max-width: 100%;}
   height: 150px;
   display: block;
   max-width: 100%;
+  border: 1px solid #999;
 }
 
 .contactform input:focus, .contactform textarea:focus {
-  border: 1px solid #ffffff;
+  border: 1px solid #000;
 }
 
 .alert input, .alert textarea {
@@ -352,6 +353,21 @@ img {max-width: 100%;}
   padding: 5px;
   display: inline;
   width: 25%;
+}
+
+.sha1formtext {
+  width: 375px;
+  max-width: 100%;
+  display: block;
+  border: 1px solid #999;
+}
+
+.sha1formtext:focus {
+  border: 1px solid #000;
+}
+
+.sha1btn {
+  padding: 5px;
 }
 
 .oembedded {
@@ -383,6 +399,7 @@ img {max-width: 100%;}
 .oembedded .embedsimple {
   padding: 10px;
   padding-left: 10%;
+  padding-right: 10%;
 }
 
 .oembedded .embedsc {
@@ -420,8 +437,8 @@ img {max-width: 100%;}
 
 #footer {
   position: relative;
-  margin-top: -19.5px;
-  height: 19.5px;
+  margin-top: -19px;
+  height: 19px;
   clear: both;
 }
 

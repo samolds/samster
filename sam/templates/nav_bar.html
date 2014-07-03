@@ -15,14 +15,14 @@
       <ul>
         <li><a href="/blog/filter/tag/work">Work</a></li>
         <li><a href="/blog/filter/tag/work*experience">Experience</a></li>
-        <li><a href="http://www.linkedin.com/in/samolds">LinkedIn</a></li>
-        <li><a href="http://github.com/samolds">GitHub</a></li>
+        <li><a href="http://www.linkedin.com/in/{{ USERNAME }}">LinkedIn</a></li>
+        <li><a href="http://github.com/{{ USERNAME }}">GitHub</a></li>
       </ul>
     </li>
   </ul>
   
   <ul class="navtop left">
-    <li><a href="/">samolds.com</a>
+    <li><a href="/">{{ SITENAME }}</a>
       <ul>
         <li><a href="/about">About</a></li>
         <li><a href="/contact">Contact</a></li>
@@ -31,7 +31,7 @@
     {% if is_admin %}
       <li><a href="/admin">Admin</a>
         <ul>
-          <li><a href="/password">Password</a></li>
+          <li><a href="/sha1">SHA1</a></li>
           <li><a href="/admin/sam/post">Posts</a> <a>/</a> <a href="/admin/sam/post/add">Add</a></li>
           <li><a href="/admin/sam/quote">Quotes</a> <a>/</a> <a href="/admin/sam/quote/add">Add</a></li>
           <li><a href="/admin/sam/siteimage">Images</a> <a>/</a> <a href="/admin/sam/siteimage/add">Add</a></li>

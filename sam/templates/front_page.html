@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}<title>samolds.com - The Front Page</title>{% endblock %}
+{% block title %}<title>{{ SITENAME }} - The Front Page</title>{% endblock %}
 
 {% block content %}
 <div class="body wide">
   <div class="content">
-    <h1>The Front Page of Sam Olds</h1>
+    <h1>The Front Page of {{ PROPERNAME }}</h1>
     <small>A central page for my most prominent profiles</small>
   </div>
 
@@ -50,7 +50,7 @@
                 {% else %}
                   Recently listened to
                 {% endif %}
-                on <a href="http://last.fm/user/samolds">Last.fm</a>
+                on <a href="http://last.fm/user/{{ USERNAME }}">Last.fm</a>
               </div>
               <a href="{{ embed.url }}">{{ embed.name }} - {{ embed.artist }}</a>
               <div class="clear"></div>
@@ -59,22 +59,22 @@
             <li class="embedsc">{{ embed.html|safe }}</li>
           {% elif embed.type == "flickr" %}
             <li class="embedflickr">
-              <a href="http://flickr.com/photos/samolds/{{ embed.photoid }}"><img class="right" src="{{ embed.imgsrc }}" /></a>
+              <a href="http://flickr.com/photos/{{ USERNAME }}/{{ embed.photoid }}"><img class="right" src="{{ embed.imgsrc }}" /></a>
               <div class="flickrdesc">
                   {% if embed.title %}
-                    <a href="http://flickr.com/photos/samolds/{{ embed.photoid }}"><h3>{{ embed.title }}</h3></a>
+                    <a href="http://flickr.com/photos/{{ USERNAME }}/{{ embed.photoid }}"><h3>{{ embed.title }}</h3></a>
                   {% endif %}
                   {% if embed.description %}
                     <div class="flickrdesc">{{ embed.description|safe }}</div>
                   {% endif %}
-                <div>From <a href="http://flickr.com/samolds">Flickr</a></div>
+                <div>From <a href="http://flickr.com/{{ USERNAME }}">Flickr</a></div>
               </div>
               <div class="clear"></div>
             </li>
           {% elif embed.type == "github" %}
             <li class="embedsimple">
               <div class="right">
-                From <a href="http://github.com/samolds">GitHub</a>
+                From <a href="http://github.com/{{ USERNAME }}">GitHub</a>
               </div>
               {% if embed.event_type == "PushEvent" %}
                 {% for commit in embed.payload.commits %}
