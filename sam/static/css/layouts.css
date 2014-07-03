@@ -128,6 +128,7 @@ img {max-width: 100%;}
 /* -------------- BODY -------------- */
 
 #bodywrap {
+  background-color: #444;
   background-image: url('/static/img/backgrounds/bg.jpg');
   background-size: 100% 100%;
   background-attachment: fixed;
