@@ -96,7 +96,6 @@ class Comment(models.Model):
         else:
             sender = settings.DEFAULT_FROM_EMAIL
         try:
-            #import pdb; pdb.set_trace()
             email_message = "%s \n\n - %s (%s)" % (self.message, self.name, sender)
             send_mail(settings.SITENAME + " Comment - " + self.subject, email_message, sender, settings.CONTACT_EMAIL_RECIPIENT)
         except Exception as e:

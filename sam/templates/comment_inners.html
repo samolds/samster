@@ -9,7 +9,7 @@
             {% load form_placeholder %}
             {% if field.errors %}
               {% for error in field.errors %}
-                  <div class="alert">{{ field.label_tag }}{{ field|updt_plchdr:error|escape }}</div>
+                  <div class="alert">{{ field.label_tag }}{{ field }}<span>{{ error }}</span></div>
               {% endfor %}
             {% else %}
               {{ field.label_tag }}{{ field }}

@@ -1,7 +1,6 @@
 To Do
 =====
 * GET A REAL TICKET TRACKER
-* Get the email stuff set up and working with comments
 * Get PIL working and serving jpgs (http://djangodays.com/2008/09/03/django-imagefield-validation-error-caused-by-incorrect-pil-installation-on-mac/)
 * Make sure image serving is correctly working
 * Simplify background texture
@@ -25,3 +24,4 @@ Done
 * Remove SHA1 POST password generator and replace with JT's javascript one
 * Open source stuff and remove personal information stuff and add to settings.py
 * Make navbar work with mobile (and then remove mobile warning)
+* Get the email stuff set up and working with comments

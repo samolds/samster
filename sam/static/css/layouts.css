@@ -25,6 +25,7 @@ blockquote, img, div, ul, li, p, a, table, tr, td, form, pre {
   color: #000;
   margin: 0px;
   padding: 0px;
+  border: 0px;
   list-style-type: none;
   text-decoration: none;
   vertical-align: middle;
@@ -346,6 +347,10 @@ img {max-width: 100%;}
 
 .alert input, .alert textarea {
   border-color: red;
+}
+
+.alert span {
+  color: red;
 }
 
 .contactform .submitbtn {
