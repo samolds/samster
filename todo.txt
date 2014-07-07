@@ -13,6 +13,7 @@ To Do
 * Add better error pages (401, 404, 500, etc.)
 * Have "This part has yet to be written" moved out into a context_processor and not hardcoded
 * Make The Front Page load information asynchronously and then locally cache it. Also, get it to automatically recache after the cache expires?
+* Upgrade from Django 1.4 to Django 1.7
 
 * Facebook API?? (HAH! ...not...)
 
