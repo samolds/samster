@@ -20,18 +20,24 @@ def is_admin(request):
 
 
 def username(request):
-    """ Returns the username set in settings.py
+    """ Returns the username set in local_settings.py
     """
     return {'USERNAME': settings.USERNAME}
 
 
 def sitename(request):
-    """ Returns the sitename set in settings.py
+    """ Returns the sitename set in local_settings.py
     """
     return {'SITENAME': settings.SITENAME}
 
 
 def propername(request):
-    """ Returns the propername set in settings.py
+    """ Returns the propername set in local_settings.py
     """
     return {'PROPERNAME': settings.PROPERNAME}
+
+
+def emptytext(request):
+    """ Returns the emptytext set in local_settings.py
+    """
+    return {'EMPTYTEXT': settings.EMPTYTEXT}

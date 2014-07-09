@@ -11,7 +11,6 @@ To Do
 * Comment Code
 * Unit Test
 * Add better error pages (401, 404, 500, etc.)
-* Have "This part has yet to be written" moved out into a context_processor and not hardcoded
 * Make The Front Page load information asynchronously and then locally cache it. Also, get it to automatically recache after the cache expires?
 * Upgrade from Django 1.4 to Django 1.7
 * Improve the security of the Django Admin login panel. Research Django authentication stuff
@@ -28,3 +27,4 @@ Done
 * Make navbar work with mobile (and then remove mobile warning)
 * Get the email stuff set up and working with comments
 * Make Readme file have correct setup instructions
+* Have "This part has yet to be written" moved out into a context_processor and not hardcoded
