@@ -1,4 +1,4 @@
-Django==1.4
+Django==1.5
 oauth2
 simplejson
 PIL
