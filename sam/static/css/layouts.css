@@ -397,7 +397,6 @@ img {max-width: 100%;}
   border-width: 1px;
   border-color: #000;
   border-radius: 5px;
-  background-color: #fff;
   margin-bottom: 2px;
   padding: 5px;
 }
@@ -437,6 +436,31 @@ img {max-width: 100%;}
   padding-left: 20px;
   padding-right: 20px;
   max-width: 85%;
+}
+
+.twitterbg {
+  background-color: #aaddff;
+}
+
+.lastfmbg {
+  background-color: #f49797;
+}
+
+.soundcloudbg {
+  background-color: #ffddaa;
+}
+
+.flickrbg {
+  background-color: #b99ddd;
+}
+
+.githubbg, .githubbg li, .githubbg div, .githubbg a, .githubbg p {
+  background-color: #444444;
+  color: #ffffff
+}
+
+.embedsimplebg {
+  background-color: #ffffff;
 }
 
 /* -------------- FOOTER -------------- */

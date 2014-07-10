@@ -6,7 +6,7 @@ pytz
 markdown
 django-mobility
 
-celery
+celery  # http://www.celeryproject.org/tutorials/
 # apis
 #facebook-sdk
 TwitterAPI

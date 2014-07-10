@@ -13,13 +13,12 @@ Hopes
 
 Realistic
 ---------
-* Simplify background texture
-* Add minimal texture to navbar?
+* Simplify background texture (Smaller with repeats?)
+* Add minimal texture to navbar? (Smaller with repeats?)
 * Make a better favicon
 * DEPLOY TO GOOGLE APP ENGINE
 * Restructure model.py to work with a non-relational database
-* Make The Front Page load information asynchronously (ajax?) and then locally cache it. Also, get it to automatically recache after the cache expires? http://django-cacheback.readthedocs.org/en/latest/
-* Add different background color for each front page item (soundcloud = light orange, lastfm = light red, flickr = light purple, github = light gray, twitter = light blue
+* Make The Front Page load information asynchronously (ajax, jquery, celery) and then locally cache it. Also, get it to automatically recache after the cache expires? http://django-cacheback.readthedocs.org/en/latest/
 
 
 Done
@@ -33,3 +32,4 @@ Done
 * Make Readme file have correct setup instructions
 * Have "This part has yet to be written" moved out into a context_processor and not hardcoded
 * Add better error pages (401, 404, 500, etc.)
+* Add different background color for each front page item (soundcloud = light orange, lastfm = light red, flickr = light purple, github = light gray, twitter = light blue

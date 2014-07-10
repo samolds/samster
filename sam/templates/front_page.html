@@ -43,7 +43,7 @@
       <ul class="oembedded">
         {% for embed in embeds %}
           {% if embed.type == "lastfm" %}
-            <li class="embedsimple">
+            <li class="embedsimple lastfmbg">
               <div class="right">
                 {% if embed.nowplaying %}
                   <i class="lastfmnp">Now Playing!</i>
@@ -56,9 +56,9 @@
               <div class="clear"></div>
             </li>
           {% elif embed.type == "soundcloud" %}
-            <li class="embedsc">{{ embed.html|safe }}</li>
+            <li class="embedsc soundcloudbg">{{ embed.html|safe }}</li>
           {% elif embed.type == "flickr" %}
-            <li class="embedflickr">
+            <li class="embedflickr flickrbg">
               <a href="http://flickr.com/photos/{{ USERNAME }}/{{ embed.photoid }}"><img class="right" src="{{ embed.imgsrc }}" /></a>
               <div class="flickrdesc">
                   {% if embed.title %}
@@ -72,7 +72,7 @@
               <div class="clear"></div>
             </li>
           {% elif embed.type == "github" %}
-            <li class="embedsimple">
+            <li class="embedsimple githubbg">
               <div class="right">
                 From <a href="http://github.com/{{ USERNAME }}">GitHub</a>
               </div>
@@ -112,8 +112,10 @@
               {% endif %}
               <div class="clear"></div>
             </li>
+          {% elif embed.type == "twitter" %}
+            <li class="embedsimple twitterbg">{{ embed.html|safe }}</li>
           {% else %}
-            <li class="embedsimple">{{ embed.html|safe }}</li>
+            <li class="embedsimple embedsimplebg">{{ embed.html|safe }}</li>
           {% endif %}
         {% endfor %}
       </ul>
