@@ -365,7 +365,23 @@ img {max-width: 100%;}
   width: 25%;
 }
 
-.sha1formtext {
+.filterform input {
+  width: 120px;
+  border: 1px solid #999;
+}
+
+.filterform input:focus {
+  border: 1px solid #000;
+}
+
+.filterform button {
+  padding-right: 3px;
+  padding-left: 3px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.sha1form input, .sha1form textarea, .sha1formtext {
   width: 375px;
   max-width: 100%;
   display: block;

@@ -201,8 +201,8 @@ function limitlength(val) {
                     <option value="12" selected="selected">First 12</option>
                     <option value="15">First 15</option>
                 </select>
-                <input class="sha1btn" type="button" value="Hash Hex" onclick="document.f.hash.value = limitlength(hex_sha1(document.f.prefix.value + document.f.message.value));"/>
-                <input class="sha1btn" type="button" value="Hash B64" onclick="document.f.hash.value = limitlength(b64_sha1(document.f.prefix.value + document.f.message.value));"/>
+                <button class="sha1btn" type="button" onclick="document.f.hash.value = limitlength(hex_sha1(document.f.prefix.value + document.f.message.value));"/>Hash Hex</button>
+                <button class="sha1btn" type="button" onclick="document.f.hash.value = limitlength(b64_sha1(document.f.prefix.value + document.f.message.value));"/>Hash B64</button>
             </div>
 
             <div class="fieldWrapper">

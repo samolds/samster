@@ -36,7 +36,7 @@
       {% endif %}
     </td>
     <td class="textright filterwidth">
-      <form class="right" action="/blog/filter" method="post">{% csrf_token %}
+      <form class="right filterform" action="/blog/filter" method="post">{% csrf_token %}
         {% include "inner_filter_form.html" %}</td>
       </form>
   </tr>

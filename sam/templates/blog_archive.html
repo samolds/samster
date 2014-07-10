@@ -9,7 +9,7 @@
       <tr>
         <td class="textleft" rowspan=2><h1>Blog Post Archive</h1></td>
         <td class="textright filterwidth">
-          <form class="right" action="/blog/filter" method="post">{% csrf_token %}
+          <form class="right filterform" action="/blog/filter" method="post">{% csrf_token %}
             {% include "inner_filter_form.html" %}
           </form>
         </td>
