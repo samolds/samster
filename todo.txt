@@ -18,7 +18,8 @@ Realistic
 * Make a better favicon
 * DEPLOY TO GOOGLE APP ENGINE
 * Restructure model.py to work with a non-relational database
-* Make The Front Page load information asynchronously and then locally cache it. Also, get it to automatically recache after the cache expires?
+* Make The Front Page load information asynchronously (ajax?) and then locally cache it. Also, get it to automatically recache after the cache expires? http://django-cacheback.readthedocs.org/en/latest/
+* Add different background color for each front page item (soundcloud = light orange, lastfm = light red, flickr = light purple, github = light gray, twitter = light blue
 
 
 Done
