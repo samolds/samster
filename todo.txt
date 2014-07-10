@@ -16,9 +16,17 @@ Realistic
 * Simplify background texture (Smaller with repeats?)
 * Add minimal texture to navbar? (Smaller with repeats?)
 * Make a better favicon
+* Design things to be more minimal?
 * DEPLOY TO GOOGLE APP ENGINE
 * Restructure model.py to work with a non-relational database
-* Make The Front Page load information asynchronously (ajax, jquery, celery) and then locally cache it. Also, get it to automatically recache after the cache expires? http://django-cacheback.readthedocs.org/en/latest/
+* Make The Front Page load information asynchronously (ajax, jquery, celery) and then locally cache it. Also, get it to automatically recache after the cache expires?
+  * http://django-cacheback.readthedocs.org/en/latest/
+  * http://stackoverflow.com/questions/3583534/refresh-div-element-generated-by-a-django-template
+  * https://racingtadpole.com/blog/django-ajax-and-jquery/
+  * http://codeinthehole.com/writing/cacheback-asynchronous-cache-refreshing-for-django/
+  * http://www.celeryproject.org/tutorials/
+  * http://stackoverflow.com/questions/23856259/how-to-correctly-refresh-a-div-using-jquery-ajax-in-a-django-template
+  * https://racingtadpole.com/blog/django-ajax-and-jquery/
 
 
 Done
