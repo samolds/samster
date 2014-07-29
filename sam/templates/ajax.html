@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>{{ SITENAME }} - AJAX</title>{% endblock %}
+
+{% block script %}
+  {% load dajaxice_templatetags %}
+  {% dajaxice_js_import %}
+{% endblock %}
+
+
+{% block content %}
+<div class="body narrow">
+    <div class="content">
+        <h1>AJAX Example</h1>
+        <noscript>
+          <p>You need to enable Javascript for this to work.</p>
+        </noscript>
+
+        <div id="refresh-me" style="display: none;">
+          <p>Should hide and then display!</p>
+          {% for embed in embeds %}
+            <p>{{ embed }}</p><br />
+          {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script language="javascript">
+{% load set_var %}
+  function callback(data) {
+    document.getElementById("refresh-me").style.display = "block";
+    console.log(data);
+  }
+  Dajaxice.sam.views.front_page.tweets(callback)
+  Dajaxice.sam.views.front_page.sc_tracks(callback)
+  Dajaxice.sam.views.front_page.lfm_tracks(callback)
+  Dajaxice.sam.views.front_page.flickrs(callback)
+  Dajaxice.sam.views.front_page.githubs(callback)
+</script>
+{% endblock %}
