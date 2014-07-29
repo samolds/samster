@@ -16,11 +16,17 @@
           <p>You need to enable Javascript for this to work.</p>
         </noscript>
 
-        <div id="refresh-me" style="display: none;">
-          <p>Should hide and then display!</p>
+        <div id="hide">
+          <p>Please wait while the API calls are made and the data is loaded.</p>
+        </div>
+        <div id="show" style="display: none;">
+          <p>Show data here!</p>
+          <div id="embeds"></div>
+          {% comment %}
           {% for embed in embeds %}
             <p>{{ embed }}</p><br />
           {% endfor %}
+          {% endcomment %}
         </div>
     </div>
 </div>
@@ -28,13 +34,19 @@
 <script language="javascript">
 {% load set_var %}
   function callback(data) {
-    document.getElementById("refresh-me").style.display = "block";
-    console.log(data);
+    document.getElementById("hide").style.display = "none";
+    document.getElementById("show").style.display = "block";
+    data.forEach(function(embed) {
+      var ni = document.getElementById('embeds');
+      var newdiv = document.createElement('div');
+      newdiv.setAttribute('class', 'oembed');
+      newdiv.setAttribute('class', embed.type);
+      newdiv.innerHTML = embed.html
+      ni.appendChild(newdiv);
+      console.log(embed);
+    });
   }
-  Dajaxice.sam.views.front_page.tweets(callback)
-  Dajaxice.sam.views.front_page.sc_tracks(callback)
-  Dajaxice.sam.views.front_page.lfm_tracks(callback)
-  Dajaxice.sam.views.front_page.flickrs(callback)
-  Dajaxice.sam.views.front_page.githubs(callback)
+  Dajaxice.sam.views.front_page.embeds(callback)
 </script>
+
 {% endblock %}
