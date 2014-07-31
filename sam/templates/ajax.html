@@ -20,12 +20,14 @@
     <div class="content inbetween"></div>
 
     <div class="content">
-        <img id="hide" src="/static/img/gorillaz_loading.gif">
+        <div id="hide" class="aligncenter">
+            <p class="textcenter"><strong>Making API Calls...</strong></p>
+            <img class="aligncenter" src="/static/img/gorillaz_loading.gif" height="150px;"/>
+        </div>
         <ul id="embeds" class="oembedded" style="display: none;"></ul>
     </div>
 </div>
 
-<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script language="javascript">
 function callback(data) {
     document.getElementById("hide").style.display = "none";
@@ -106,5 +108,6 @@ function callback(data) {
 }
 Dajaxice.sam.views.front_page.embeds(callback);
 </script>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 {% endblock %}

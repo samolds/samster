@@ -13,15 +13,12 @@ Hopes
 
 Realistic
 ---------
+* CLEAN UP CODE
 * Make loading gif on front page randomly select one of my favorite gifs (compress and make same height)
-* Center loading gif
 * Combine front_page.html and ajax.html
 * On mobile, make content section not have much side padding. Have everything fill horizontally
-* On front page, make the border of each thing the color instead of the background
-* Check what happens when front page is cached. Are AJAX calls still made?
 * Have each API call made individually and then weaved together (include json-able date)
 * Include any lastfm "Now Playing" on the front page under random quote?
-* Locally cache lastfm stuff every 3 minutes
 * Make sure I only have necessary dependencies in settings.py (Don't need cucumber anymore?)
 * Get Imgur API working: https://api.imgur.com/oauth2#auth_url
 * Simplify background texture (Smaller with repeats?)
@@ -43,6 +40,10 @@ Realistic
 
 Done
 ====
+* Locally cache lastfm stuff every 1 minute
+* Check what happens when front page is cached. Are AJAX calls still made?
+* On front page, make the border of each thing the color instead of the background
+* Center loading gif
 * Make sure github api posts look good
 * Make buttons nicer with hover-over?
 * Remove SHA1 POST password generator and replace with JT's javascript one
