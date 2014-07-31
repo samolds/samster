@@ -32,9 +32,10 @@
 function callback(data) {
     document.getElementById("hide").style.display = "none";
     document.getElementById("embeds").style.display = "block";
+    var ni = document.getElementById('embeds');
     data.embeds.forEach(function(embed) {
-        var ni = document.getElementById('embeds');
         var newdiv = document.createElement('li');
+        newdiv.setAttribute('id', embed.date);
         if (embed.type == "lastfm") {
             newdiv.setAttribute('class', 'embedsimple lastfmbg');
             var embednowplaying = "Recently listened to";
@@ -43,11 +44,9 @@ function callback(data) {
             }
             newdiv.innerHTML = "<div class=\"right\">" + embednowplaying + " on <a href=\"http://last.fm/user/" + data.USERNAME + "\">Last.fm</a></div><a href=\"" + 
                         embed.url + "\">" + embed.name + " - " + embed.artist + "</a><div class=\"clear\"></div>";
-            ni.appendChild(newdiv);
         } else if (embed.type == "soundcloud") {
             newdiv.setAttribute('class', 'embedsc soundcloudbg');
             newdiv.innerHTML = embed.html;
-            ni.appendChild(newdiv);
         } else if (embed.type == "flickr") {
             newdiv.setAttribute('class', 'embedflickr flickrbg');
             var embedtitle = "";
@@ -58,11 +57,9 @@ function callback(data) {
             if (embed.description) {
                 embeddescription = "<div class=\"flickrdesc\">" + embed.description + "</div>";
             }
-
             newdiv.innerHTML = "<a href=\"http://flickr.com/photos/" + data.USERNAME + "/" + embed.photoid + "\"><img class=\"right\" src=\"" + embed.imgsrc + "\" /></a>" +
                         "<div class=\"flickrdesc\">" + embedtitle + embeddescription + "<div>From <a href=\"http://flickr.com/" + data.USERNAME + "\">Flickr</a></div>" +
                         "</div><div class=\"clear\"></div>";
-            ni.appendChild(newdiv);
         } else if (embed.type == "github") {
             newdiv.setAttribute('class', 'embedsimple githubbg');
             var embedeventtype = "<p>Did some GitHub activity</p>";
@@ -94,19 +91,23 @@ function callback(data) {
             }
             newdiv.innerHTML = "<div class=\"right\">From <a href=\"http://github.com/" + data.USERNAME + "\">GitHub</a>" +
                       "</div>" + embedeventtype + "<div class=\"clear\"></div>";
-            ni.appendChild(newdiv);
         } else if (embed.type == "twitter") {
             newdiv.setAttribute('class', 'embedsimple twitterbg');
             newdiv.innerHTML = embed.html;
-            ni.appendChild(newdiv);
         } else {
             newdiv.setAttribute('class', 'embedsimple embedsimplebg');
             newdiv.innerHTML = embed.html;
-            ni.appendChild(newdiv);
         }
+        ni.appendChild(newdiv);
     });
 }
-Dajaxice.sam.views.front_page.embeds(callback);
+Dajaxice.sam.views.front_page.soundclouds(callback);
+Dajaxice.sam.views.front_page.flickrs(callback);
+Dajaxice.sam.views.front_page.tweets(callback);
+Dajaxice.sam.views.front_page.githubs(callback);
+Dajaxice.sam.views.front_page.lastfms(callback);
+//Dajaxice.sam.views.front_page.imgurs(callback);
+//Dajaxice.sam.views.front_page.facebooks(callback);
 </script>
 <script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
