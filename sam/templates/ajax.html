@@ -77,7 +77,11 @@ function callback(data) {
                 if (embed.payload.description) {
                     description = "<p class=\"space\">" + embed.payload.description + "</p>";
                 }
-                embedeventtype = "<p>Created new " + embed.payload.ref_type + ": <i>" + embed.payload.ref + "</i>" + description + 
+                var ref = embed.payload.ref;
+                if (!ref) {
+                    ref = "<a href=\"" + embed.repo_url + "\">" + embed.repo.name + "</a>";
+                }
+                embedeventtype = "<p>Created new " + embed.payload.ref_type + ": <i>" + ref + "</i>" + description + 
                     "</p>On <a href=\"" + embed.repo_url +"\">" + embed.repo.name + "</a>";
             } else if (embed.event_type == "CommitCommentEvent") {
                 embedeventtype = "<p>Commented on commit <a href=\"" + embed.payload.comment.html_url + "\">" + embed.payload.comment.commit_id + "</a>:" +
