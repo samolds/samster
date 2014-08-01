@@ -14,6 +14,7 @@ Hopes
 Realistic
 ---------
 * CLEAN UP CODE
+* Standardize camelCase and under_score variable names
 * Get api calls on front_page to actually weave together correctly based on time
 * Get the real email stuff set up and working with comments
 * Add thank you to JT, Craig, Zach (dude who pointed me in the right direction for github api) and a handful of various stack overflow people for help

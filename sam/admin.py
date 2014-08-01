@@ -10,8 +10,8 @@ class TagAdmin(admin.ModelAdmin):
 admin.site.register(Tag, TagAdmin)
 
 
-class WebSiteAdmin(admin.ModelAdmin):
-    """ The admin model for a WebSite
+class WebsiteAdmin(admin.ModelAdmin):
+    """ The admin model for a Website
     """
     list_display = ("display",
                     "url",
@@ -25,7 +25,7 @@ class WebSiteAdmin(admin.ModelAdmin):
         models.ManyToManyField: {'widget': SelectMultiple(attrs={'size':'15'})}
     }
 
-admin.site.register(WebSite, WebSiteAdmin)
+admin.site.register(Website, WebsiteAdmin)
 
 
 class SiteImageAdmin(admin.ModelAdmin):

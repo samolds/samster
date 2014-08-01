@@ -1,10 +1,10 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from sam.models import WebSite
+from sam.models import Website
 
 
 def around_the_web(request):
-    sites = WebSite.objects.filter(private=False)
+    sites = Website.objects.filter(private=False)
     personals = []
     maintains = []
     develops = []

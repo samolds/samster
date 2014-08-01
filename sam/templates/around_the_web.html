@@ -13,7 +13,7 @@
     {% if personals %}
       <div class="content inbetween"></div>
       <div class="content">
-        <h3>Apps on the web where I have an account or profile, or apps that I developed for my personal use.</h3>
+        <h3>Apps on the web where I have an account or profile, or apps that I developed for my personal use</h3>
         <ul class="content">
           {% for personal in personals %}
             <li class="website"><a href="{{ personal.url }}">{{ personal.display }}</a>{% if personal.note %} {{ personal.note }}{% endif %}</li>
@@ -25,7 +25,7 @@
     {% if maintains %}
       <div class="content inbetween"></div>
       <div class="content">
-        <h3>Apps that are not personally mine, but I have created, maintain, and/or contribute to them.</h3>
+        <h3>Apps that are not personally mine, but I have created, maintain, and/or contribute to them</h3>
         <ul class="content">
           {% for maintain in maintains %}
             <li class="website"><a href="{{ maintain.url }}">{{ maintain.display }}</a>{% if maintain.note %} {{ maintain.note }}{% endif %}</li>

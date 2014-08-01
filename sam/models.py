@@ -46,8 +46,8 @@ class Tag(models.Model):
         verbose_name_plural = (u"Tags")
 
 
-class WebSite(models.Model):
-    """Description of the WebSite model
+class Website(models.Model):
+    """Description of the Website model
     """
     choices = (
         ('prsl', 'Personal'),
@@ -66,11 +66,11 @@ class WebSite(models.Model):
 
     def save(self, *args, **kwargs):
         self.url = self.url.lower()
-        super(WebSite, self).save(*args, **kwargs)
+        super(Website, self).save(*args, **kwargs)
 
     class Meta:
-        verbose_name = (u"WebSite")
-        verbose_name_plural = (u"WebSites")
+        verbose_name = (u"Website")
+        verbose_name_plural = (u"Websites")
 
 
 class Comment(models.Model):
