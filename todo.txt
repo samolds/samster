@@ -14,12 +14,12 @@ Hopes
 Realistic
 ---------
 * CLEAN UP CODE
-* Remove set_var templatetag
-* Move javascript in front_page.html to js file
+* Get api calls on front_page to actually weave together correctly based on time
+* Get the real email stuff set up and working with comments
+* Add thank you to JT, Craig, Zach (dude who pointed me in the right direction for github api) and a handful of various stack overflow people for help
 * Make loading gif on front page randomly select one of my favorite gifs (compress and make same height)
 * Combine front_page.html and ajax.html
 * On mobile, make content section not have much side padding. Have everything fill horizontally
-* Weave API call line items on front_page together (http://www.w3schools.com/jsref/dom_obj_all.asp)
 * Include any lastfm "Now Playing" on the front page under random quote?
 * Make sure I only have necessary dependencies in settings.py (Don't need cucumber anymore?)
 * Get Imgur API working: https://api.imgur.com/oauth2#auth_url
@@ -42,6 +42,9 @@ Realistic
 
 Done
 ====
+* Weave API call line items on front_page together (http://www.w3schools.com/jsref/dom_obj_all.asp)
+* Move javascript in front_page.html to js file
+* Remove set_var templatetag
 * Locally cache lastfm stuff every 1 minute
 * Check what happens when front page is cached. Are AJAX calls still made?
 * On front page, make the border of each thing the color instead of the background
@@ -51,7 +54,6 @@ Done
 * Remove SHA1 POST password generator and replace with JT's javascript one
 * Open source stuff and remove personal information stuff and add to settings.py
 * Make navbar work with mobile (and then remove mobile warning)
-* Get the email stuff set up and working with comments
 * Make Readme file have correct setup instructions
 * Have "This part has yet to be written" moved out into a context_processor and not hardcoded
 * Add better error pages (401, 404, 500, etc.)
