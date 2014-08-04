@@ -9,6 +9,7 @@ function embed(data) {
     data.embeds.forEach(function(embed) {
         var newdiv = document.createElement('li');
         newdiv.setAttribute('id', embed.date);
+        newdiv.setAttribute('title', embed.print_date);
         embedIds.push(embed.date);
         embedIds.sort(function(a, b) {
           return b - a;
