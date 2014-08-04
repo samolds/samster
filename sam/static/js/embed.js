@@ -1,4 +1,7 @@
 var embedIds = [];
+function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
 function embed(data) {
     document.getElementById("hide").style.display = "none";
     document.getElementById("embeds").style.display = "block";
@@ -7,7 +10,9 @@ function embed(data) {
         var newdiv = document.createElement('li');
         newdiv.setAttribute('id', embed.date);
         embedIds.push(embed.date);
-        embedIds.sort();
+        embedIds.sort(function(a, b) {
+          return b - a;
+        });
         var index = embedIds.indexOf(embed.date);
         var priorLi = null;
         if (index > 0) {
