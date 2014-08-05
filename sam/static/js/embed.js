@@ -1,7 +1,17 @@
 var embedIds = [];
-function insertAfter(newNode, referenceNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+
+function toggleDisplay(className) {
+    var elements = document.getElementsByClassName(className);
+    for (var i = 0; i < elements.length; i++) {
+        var checked = document.getElementById(className + '-toggle').checked
+        if (!checked) {
+            elements[i].style.display = "none";
+        } else { 
+            elements[i].style.display = "block";
+        }
+    }
 }
+
 function embed(data) {
     document.getElementById("hide").style.display = "none";
     document.getElementById("embeds").style.display = "block";
@@ -22,7 +32,7 @@ function embed(data) {
             priorLi = document.getElementById(embedIds[index]);
         }
         if (embed.type == "lastfm") {
-            newdiv.setAttribute('class', 'embedsimple lastfmbg');
+            newdiv.setAttribute('class', 'embedsimple lastfm');
             var embednowplaying = "Recently listened to";
             if (embed.nowplaying) {
                 embednowplaying = "<i class=\"lastfmnp\">Now Playing!</i>";
@@ -30,10 +40,10 @@ function embed(data) {
             newdiv.innerHTML = "<div class=\"right\">" + embednowplaying + " on <a href=\"http://last.fm/user/" + data.USERNAME + "\">Last.fm</a></div><a href=\"" + 
                         embed.url + "\">" + embed.name + " - " + embed.artist + "</a><div class=\"clear\"></div>";
         } else if (embed.type == "soundcloud") {
-            newdiv.setAttribute('class', 'embedsc soundcloudbg');
+            newdiv.setAttribute('class', 'embedsc soundcloud');
             newdiv.innerHTML = embed.html;
         } else if (embed.type == "flickr") {
-            newdiv.setAttribute('class', 'embedflickr flickrbg');
+            newdiv.setAttribute('class', 'embedflickr flickr');
             var embedtitle = "";
             if (embed.title) {
                 embedtitle= "<a href=\"http://flickr.com/photos/" + data.USERNAME + "/" + embed.photoid + "\"><h3>" + embed.title + "</h3></a>";
@@ -46,7 +56,7 @@ function embed(data) {
                         "<div class=\"flickrdesc\">" + embedtitle + embeddescription + "<div>From <a href=\"http://flickr.com/" + data.USERNAME + "\">Flickr</a></div>" +
                         "</div><div class=\"clear\"></div>";
         } else if (embed.type == "github") {
-            newdiv.setAttribute('class', 'embedsimple githubbg');
+            newdiv.setAttribute('class', 'embedsimple github');
             var embedeventtype = "<p>Did some GitHub activity</p>";
             if (embed.event_type == "PushEvent") {
                 embedeventtype = "";
@@ -81,10 +91,10 @@ function embed(data) {
             newdiv.innerHTML = "<div class=\"right\">From <a href=\"http://github.com/" + data.USERNAME + "\">GitHub</a>" +
                       "</div>" + embedeventtype + "<div class=\"clear\"></div>";
         } else if (embed.type == "twitter") {
-            newdiv.setAttribute('class', 'embedsimple twitterbg');
+            newdiv.setAttribute('class', 'embedsimple twitter');
             newdiv.innerHTML = embed.html;
         } else {
-            newdiv.setAttribute('class', 'embedsimple embedsimplebg');
+            newdiv.setAttribute('class', 'embedsimple embedsimple');
             newdiv.innerHTML = embed.html;
         }
         if (priorLi) {

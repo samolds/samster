@@ -422,6 +422,7 @@ img {max-width: 100%;}
   border-radius: 5px;
   margin-bottom: 2px;
   padding: 5px;
+  background-color: #ffffff;
 }
 
 .oembedded a:hover {color: #888;}
@@ -461,61 +462,33 @@ img {max-width: 100%;}
   max-width: 85%;
 }
 
-.oembedded li.twitterbg {
-  border-color: #0044ff;
-}
-
-.oembedded li.lastfmbg {
-  border-color: #ff0000;
-}
-
-.oembedded li.soundcloudbg {
-  border-color: #ff8800;
-}
-
-.oembedded li.flickrbg {
-  border-color: #cc22cc;
-}
-
-.oembedded li.githubbg {
-  border-color: #666666;
-}
-
-.oembedded li.embedsimplebg {
+.oembedded li.embedsimple {
   border-color: #000000;
 }
 
-.twitterbg {
-  //background-color: #aaddff;
-  background-color: #fff;
+.oembedded li.twitter {
+  border-color: #0044ff;
 }
 
-.lastfmbg {
-  //background-color: #f49797;
-  background-color: #fff;
+.oembedded li.lastfm {
+  border-color: #ff0000;
 }
 
-.soundcloudbg {
-  //background-color: #ffddaa;
-  background-color: #fff;
+.oembedded li.soundcloud {
+  border-color: #ff8800;
 }
 
-.flickrbg {
-  //background-color: #b99ddd;
-  background-color: #fff;
+.oembedded li.flickr {
+  border-color: #cc22cc;
 }
 
-.githubbg, .githubbg li, .githubbg div, .githubbg a, .githubbg p {
-  //background-color: #444444;
-  //color: #ffffff
+.oembedded li.github {
+  border-color: #666666;
 }
 
-.githubbg {
-  background-color: #fff;
-}
-
-.embedsimplebg {
-  background-color: #ffffff;
+.table-pad {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /* -------------- FOOTER -------------- */

@@ -2,13 +2,57 @@
 
 {% block title %}<title>{{ SITENAME }} - The Front Page</title>{% endblock %}
 
+{% block script %}
+  {% load dajaxice_templatetags %}
+  {% dajaxice_js_import %}
+  <script async="" src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script src="{{ STATIC_URL }}js/embed.js" language="javascript" type="text/javascript"></script>
+{% endblock %}
+
 {% block content %}
 <div class="body wide">
   <div class="content">
+    <div class="right">
+      <p>Display:</p>
+      <small>
+        <table>
+          <tr>
+            <td><label for="facebook-toggle">Facebook</label></td>
+            <td><input id="facebook-toggle" name="facebook-toggle" type="checkbox" checked="checked" onclick="toggleDisplay('facebook')"/></td>
+            <td></td>
+            <td><label for="flickr-toggle">Flickr</label></td>
+            <td><input id="flickr-toggle" name="flickr-toggle" type="checkbox" checked="checked" onclick="toggleDisplay('flickr')"/></td>
+          </tr>
+          <tr>
+            <td><label for="github-toggle">Github</label></td>
+            <td><input id="github-toggle" name="github-toggle" type="checkbox" checked="checked" onclick="toggleDisplay('github')"/></td>
+            <td></td>
+            <td><label for="imgur-toggle">Imgur</label></td>
+            <td><input id="imgur-toggle" name="imgur-toggle" type="checkbox" checked="checked" onclick="toggleDisplay('imgur')"/></td>
+          </tr>
+          <tr>
+            <td><label for="lastfm-toggle">LastFm</label></td>
+            <td><input id="lastfm-toggle" name="lastfm-toggle" type="checkbox" checked="checked" onclick="toggleDisplay('lastfm')"/></td>
+            <td class="table-pad"></td>
+            <td><label for="soundcloud-toggle">Soundcloud</label></td>
+            <td><input id="soundcloud-toggle" name="soundcloud-toggle" type="checkbox" checked="checked" onclick="toggleDisplay('soundcloud')"/></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td class="table-pad"></td>
+            <td><label for="twitter-toggle">Twitter</label></td>
+            <td><input id="twitter-toggle" name="twitter-toggle" type="checkbox" checked="checked" onclick="toggleDisplay('twitter')"/></td>
+          </tr>
+        </table>
+      </small>
+    </div>
     <h1>The Front Page of {{ PROPERNAME }}</h1>
     <small>A central page for my most prominent profiles</small>
-  </div>
 
+    <div class="clear"></div>
+  </div>
+  {% comment %}
   <div class="content inbetween"></div>
 
   <div class="content">Included in this page:
@@ -121,6 +165,33 @@
       </ul>
     {% endif %}
   </div>
+  {% endcomment %}
+
+
+  <div class="content">
+    <noscript>
+      <p>You need to enable Javascript for this to work.</p>
+    </noscript>
+  </div>
+
+  <div class="content inbetween"></div>
+
+  <div class="content">
+    <div id="hide" class="aligncenter">
+      <img class="aligncenter" src="/static/img/loading.gif" />
+    </div>
+    <ul id="embeds" class="oembedded" style="display: none;"></ul>
+  </div>
 </div>
-<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<script language="javascript">
+Dajaxice.sam.views.front_page.soundclouds(embed);
+Dajaxice.sam.views.front_page.flickrs(embed);
+Dajaxice.sam.views.front_page.twitters(embed);
+Dajaxice.sam.views.front_page.githubs(embed);
+Dajaxice.sam.views.front_page.lastfms(embed);
+//Dajaxice.sam.views.front_page.imgurs(embed);
+//Dajaxice.sam.views.front_page.facebooks(embed);
+</script>
+
 {% endblock %}
