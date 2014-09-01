@@ -3,7 +3,7 @@ var embedIds = [];
 function toggleDisplay(className) {
     var elements = document.getElementsByClassName(className);
     for (var i = 0; i < elements.length; i++) {
-        var checked = document.getElementById(className + '-toggle').checked
+        var checked = document.getElementById(className + '-toggle').checked;
         if (!checked) {
             elements[i].style.display = "none";
         } else { 
@@ -43,10 +43,10 @@ function embed(data) {
             newdiv.setAttribute('class', 'embedsc soundcloud');
             newdiv.innerHTML = embed.html;
         } else if (embed.type == "flickr") {
-            newdiv.setAttribute('class', 'embedflickr flickr');
+            newdiv.setAttribute('class', 'embed-photo flickr');
             var embedtitle = "";
             if (embed.title) {
-                embedtitle= "<a href=\"http://flickr.com/photos/" + data.USERNAME + "/" + embed.photoid + "\"><h3>" + embed.title + "</h3></a>";
+                embedtitle = "<a href=\"http://flickr.com/photos/" + data.USERNAME + "/" + embed.photoid + "\"><h3>" + embed.title + "</h3></a>";
             }
             var embeddescription = "";
             if (embed.description) {
@@ -93,6 +93,15 @@ function embed(data) {
         } else if (embed.type == "twitter") {
             newdiv.setAttribute('class', 'embedsimple twitter');
             newdiv.innerHTML = embed.html;
+        } else if (embed.type == "imgur") {
+            newdiv.setAttribute('class', 'embed-photo imgur');
+            var embedtitle = "";
+            if (embed.title) {
+                embedtitle = "<h3>" + embed.title + "</h3>";
+            }
+            newdiv.innerHTML = "<a href=\"" + embed.link + "\">" + embedtitle + "<img src=\"" + embed.imgsrc + "\" /></a>" +
+                        "<div>Favorited on <a href=\"http://imgur.com\">Imgur</a></div>" +
+                        "<div class=\"clear\"></div>";
         } else {
             newdiv.setAttribute('class', 'embedsimple embedsimple');
             newdiv.innerHTML = embed.html;
@@ -103,4 +112,7 @@ function embed(data) {
             ni.appendChild(newdiv);
         }
     });
+    if (data.embeds.length > 0) {
+        toggleDisplay(data.embeds[0].type);
+    }
 }

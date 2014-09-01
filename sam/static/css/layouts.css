@@ -440,18 +440,24 @@ img {max-width: 100%;}
   padding-right: 20%;
 }
 
-.oembedded .embedflickr {
+.oembedded .embed-photo {
+  padding: 10px;
   padding-left: 10%;
   padding-right: 20%;
 }
 
-.oembedded .embedflickr img {
+.oembedded .embed-photo img {
   border-radius: 5px;
   margin: 10px;
   max-width: 213px;
 }
 
-.oembedded .embedflickr .flickrdesc {
+.oembedded .imgur img {
+  max-width: 300px;
+  width: 300px;
+}
+
+.oembedded .embed-photo .flickrdesc {
   padding: 10px;
 }
 
@@ -468,6 +474,10 @@ img {max-width: 100%;}
 
 .oembedded li.twitter {
   border-color: #0044ff;
+}
+
+.oembedded li.imgur {
+  border-color: #85bf25;
 }
 
 .oembedded li.lastfm {
