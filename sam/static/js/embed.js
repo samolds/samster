@@ -2,19 +2,18 @@ var embedIds = [];
 
 function toggleDisplay(className) {
     var elements = document.getElementsByClassName(className);
+    var checked = document.getElementById(className + '-toggle').checked;
     for (var i = 0; i < elements.length; i++) {
-        var checked = document.getElementById(className + '-toggle').checked;
         if (!checked) {
             elements[i].style.display = "none";
         } else { 
             elements[i].style.display = "block";
         }
     }
+    return checked;
 }
 
 function embed(data) {
-    document.getElementById("hide").style.display = "none";
-    document.getElementById("embeds").style.display = "block";
     var ni = document.getElementById('embeds');
     data.embeds.forEach(function(embed) {
         var newdiv = document.createElement('li');
@@ -113,6 +112,9 @@ function embed(data) {
         }
     });
     if (data.embeds.length > 0) {
-        toggleDisplay(data.embeds[0].type);
+        if (toggleDisplay(data.embeds[0].type)) {
+            document.getElementById("hide").style.display = "none";
+            document.getElementById("embeds").style.display = "block";
+        }
     }
 }
