@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}<title>{{ SITENAME }} - The Front Page</title>{% endblock %}
+{% block title %}<title>{{ SITENAME }} - The River</title>{% endblock %}
 
 {% block script %}
   {% load dajaxice_templatetags %}
@@ -47,8 +47,8 @@
         </table>
       </small>
     </div>
-    <h1>The Front Page of {{ PROPERNAME }}</h1>
-    <small>A central page for my most prominent profiles</small>
+    <h1>The River</h1>
+    <small>A collection of my most prominent activity streams.</small>
 
     <noscript>
       <p>You need to enable Javascript for this to work.</p>
@@ -181,13 +181,13 @@
 </div>
 
 <script language="javascript">
-Dajaxice.sam.views.front_page.soundclouds(embed);
-Dajaxice.sam.views.front_page.flickrs(embed);
-Dajaxice.sam.views.front_page.twitters(embed);
-Dajaxice.sam.views.front_page.githubs(embed);
-Dajaxice.sam.views.front_page.lastfms(embed);
-Dajaxice.sam.views.front_page.imgurs(embed);
-//Dajaxice.sam.views.front_page.facebooks(embed);
+Dajaxice.sam.views.river.soundclouds(embed);
+Dajaxice.sam.views.river.flickrs(embed);
+Dajaxice.sam.views.river.twitters(embed);
+Dajaxice.sam.views.river.githubs(embed);
+Dajaxice.sam.views.river.lastfms(embed);
+//Dajaxice.sam.views.river.imgurs(embed);
+//Dajaxice.sam.views.river.facebooks(embed);
 </script>
 
 {% endblock %}

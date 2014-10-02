@@ -3,7 +3,7 @@ from django.template import RequestContext
 from sam.models import Website
 
 
-def around_the_web(request):
+def hub(request):
     sites = Website.objects.filter(private=False)
     personals = []
     maintains = []
@@ -16,7 +16,7 @@ def around_the_web(request):
         elif site.kind == "dvlp":
             develops.append(site)
 
-    return render_to_response('around_the_web.html', {
+    return render_to_response('hub.html', {
         "personals": personals,
         "maintains": maintains,
         "develops": develops,
