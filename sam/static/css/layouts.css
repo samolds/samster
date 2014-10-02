@@ -460,6 +460,12 @@ img {max-width: 100%;}
   padding: 10px;
 }
 
+/*
+.flickrdesc div, .flickrdesc a, .flickrdesc p {
+  color: #ffffff;
+}
+*/
+
 .oembedded .space {
   padding-bottom: 5px;
   padding-left: 20px;
@@ -472,23 +478,24 @@ img {max-width: 100%;}
 }
 
 .oembedded li.twitter {
-  border-color: #0044ff;
+  border-color: #002280; //#0044ff #002280
 }
 
 .oembedded li.imgur {
-  border-color: #85bf25;
+  border-color: #426012; //#85bf25 #426012
 }
 
 .oembedded li.lastfm {
-  border-color: #ff0000;
+  border-color: #800000; //#ff0000 #800000
 }
 
 .oembedded li.soundcloud {
-  border-color: #ff8800;
+  border-color: #804400; //#ff8800 #804400
 }
 
 .oembedded li.flickr {
-  border-color: #cc22cc;
+  //background-color: #000000;
+  border-color: #cc22cc; //#cc22cc #661166
 }
 
 .oembedded li.github {
