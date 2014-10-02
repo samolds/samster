@@ -31,13 +31,13 @@ def sitename(request):
     return {'SITENAME': settings.SITENAME}
 
 
-def propername(request):
+def proper_name(request):
     """ Returns the propername set in local_settings.py
     """
-    return {'PROPERNAME': settings.PROPERNAME}
+    return {'PROPER_NAME': settings.PROPER_NAME}
 
 
-def emptytext(request):
+def empty_text(request):
     """ Returns the emptytext set in local_settings.py
     """
-    return {'EMPTYTEXT': settings.EMPTYTEXT}
+    return {'EMPTY_TEXT': settings.EMPTY_TEXT}
