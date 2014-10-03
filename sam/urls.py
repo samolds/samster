@@ -19,6 +19,10 @@ urlpatterns = patterns('sam.views',
     url(r'^art/work(?:/(?P<image_id>\d+))?$', 'art.art_work'),
     url(r'^art/filter(?:/(?P<kind>(\w+[+]*)*))?(?:/(?P<tag>(\w+[-*+]*)*))?$', 'art.filter'),
     url(r'^sha1$', 'sha1.sha1'),
+
+    #url(r'^403$', 'error.err_403'),  # for testing
+    #url(r'^404$', 'error.err_404'),  # for testing
+    #url(r'^500$', 'error.err_500'),  # for testing
 )
 
 urlpatterns += patterns('',

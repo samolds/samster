@@ -4,15 +4,15 @@
 
 {% block content %}
 <div class="body narrow">
+  {% comment %}
   <div class="content">
-    <img src="{{ STATIC_URL }}img/{{ top }}.gif" />
-    {% comment %}
     <h1>{{ top }}</h1>
+    <p>{{ message }}</p>
   </div>
   <div class="content inbetween"></div>
+  {% endcomment %}
   <div class="content">
-    <p>{{ message }}</p>
-    {% endcomment %}
+    <img src="{{ STATIC_URL }}img/{{ top }}.gif" class="round-corners full-width" />
   </div>
 </div>
 {% endblock %}

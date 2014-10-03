@@ -296,6 +296,11 @@ img {max-width: 100%;}
 
 .filterwidth {width: 200px;}
 
+.round-corners {border-radius: 5px;}
+.full-width {width: 100%;}
+.black-border {border-color: #000000;}
+.white-background {background-color: #ffffff;}
+
 .headertags {
   width: 30%;
 }
