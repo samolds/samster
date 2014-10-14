@@ -122,6 +122,7 @@ class SiteImage(models.Model):
     comments = models.ManyToManyField(Comment, related_name='siteimage', blank=True, null=True)
     tags = models.ManyToManyField(Tag, max_length=50, related_name='siteimage', blank=True, null=True)
     private = models.BooleanField()
+    view_count = models.IntegerField(default=0, blank=True, null=True)
 
     def __unicode__(self):
         return "%s" % self.name
@@ -188,6 +189,7 @@ class Post(models.Model):
     comments = models.ManyToManyField(Comment, related_name='post', blank=True, null=True)
     creation_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
+    view_count = models.IntegerField(default=0, blank=True, null=True)
 
     def __unicode__(self):
         return "%s" % self.title

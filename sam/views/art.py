@@ -90,6 +90,8 @@ def art_work(request, image_id=None):
         exists = True
         if work.filter(pk=image_id, private=False):
             work = work.get(pk=image_id, private=False)
+            work.view_count += 1
+            work.save()
         else:
             work = None
 

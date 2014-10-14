@@ -66,6 +66,8 @@ def post(request, post_id=None):
         exists = True
         if post.filter(pk=post_id, private=False):
             post = post.get(pk=post_id, private=False)
+            post.view_count += 1
+            post.save()
             for image in post.images.values():
                 images.append(SiteImage.objects.get(image=image['image']))
             images.reverse()

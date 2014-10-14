@@ -35,6 +35,7 @@ class SiteImageAdmin(admin.ModelAdmin):
     list_filter = ['name']
     list_display = ("name", "private")
     exclude = ('content_type', 'width', 'height', 'comments', 'description')
+    readonly_fields = ('view_count',)
     actions = ['delete_model']
 
     formfield_overrides = {
@@ -113,6 +114,7 @@ class PostAdmin(admin.ModelAdmin):
     """ The admin model for a Blog Post.
     """
     exclude = ('content', 'comments')
+    readonly_fields = ('view_count',)
     list_display = ("title",
                     "creation_date")
     list_filter = ["title",
