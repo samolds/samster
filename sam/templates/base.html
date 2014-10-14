@@ -4,10 +4,12 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <link href="{{ STATIC_URL }}css/base.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/basic.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/footer.css" rel="stylesheet">
     {% if is_mobile %}
       <link href="{{ STATIC_URL }}css/mobile.css" rel="stylesheet">
     {% else %}
-      <link href="{{ STATIC_URL }}css/layouts.css" rel="stylesheet">
+      <link href="{{ STATIC_URL }}css/desktop.css" rel="stylesheet">
     {% endif %}
     <link href="{{ STATIC_URL }}img/favicon.ico" rel="icon" type="image/x-icon">
     {% block title %}{% endblock %}
