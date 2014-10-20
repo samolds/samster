@@ -9,6 +9,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
+    (r'^admin/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     url(r'', include('sam.urls')),
     url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
 )

@@ -24,7 +24,3 @@ urlpatterns = patterns('sam.views',
     #url(r'^404$', 'error.err_404'),  # for testing
     #url(r'^500$', 'error.err_500'),  # for testing
 )
-
-urlpatterns += patterns('',
-    (r'^admin/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
-)

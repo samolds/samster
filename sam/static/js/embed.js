@@ -40,6 +40,8 @@ function embed(data) {
             github(data, newdiv, embed);
         } else if (embed.type == "twitter") {
             twitter(data, newdiv, embed);
+        } else if (embed.type == "blog") {
+            blog(data, newdiv, embed);
         } else if (embed.type == "imgur") {
             imgur(data, newdiv, embed);
         } else {
@@ -129,6 +131,12 @@ function github(data, newdiv, embed) {
 function twitter(data, newdiv, embed) {
     newdiv.setAttribute('class', 'embedsimple twitter');
     newdiv.innerHTML = embed.html;
+}
+
+function blog(data, newdiv, embed) {
+    newdiv.setAttribute('class', 'embedsimple blog');
+    newdiv.innerHTML = "<h3><a href=\"" + embed.link + "\">" + embed.title + "</a></h3><div class=\"content\">" + 
+              embed.stub + "<div class=\"clear\"></div></div><small>A recent <a href=\"/blog\">Blog Post</a></small>";
 }
 
 function imgur(data, newdiv, embed) {

@@ -19,14 +19,14 @@
           <tr>
             <td><label title="Coming Soon" for="facebook-toggle">Facebook</label></td>
             <td><input title="Coming Soon" id="facebook-toggle" disabled name="facebook-toggle" type="checkbox" onclick="toggleDisplay('facebook')"/></td>
-            <td></td>
+            <td class="table-pad"></td>
             <td><label for="flickr-toggle">Flickr</label></td>
             <td><input id="flickr-toggle" name="flickr-toggle" type="checkbox" checked="checked" onclick="toggleDisplay('flickr')"/></td>
           </tr>
           <tr>
             <td><label for="github-toggle">Github</label></td>
             <td><input id="github-toggle" name="github-toggle" type="checkbox" onclick="toggleDisplay('github')"/></td>
-            <td></td>
+            <td class="table-pad"></td>
             <td><label title="Coming Soon" for="imgur-toggle">Imgur</label></td>
             <td><input title="Coming Soon" id="imgur-toggle" disabled name="imgur-toggle" type="checkbox" onclick="toggleDisplay('imgur')"/></td>
           </tr>
@@ -38,8 +38,8 @@
             <td><input id="soundcloud-toggle" name="soundcloud-toggle" type="checkbox" onclick="toggleDisplay('soundcloud')"/></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td><label for="blog-toggle">Blog</label></td>
+            <td><input id="blog-toggle" name="blog-toggle" type="checkbox" onclick="toggleDisplay('blog')"/></td>
             <td class="table-pad"></td>
             <td><label for="twitter-toggle">Twitter</label></td>
             <td><input id="twitter-toggle" name="twitter-toggle" type="checkbox" checked="checked" onclick="toggleDisplay('twitter')"/></td>
@@ -159,6 +159,7 @@ Dajaxice.sam.views.river.flickrs(embed);
 Dajaxice.sam.views.river.twitters(embed);
 Dajaxice.sam.views.river.githubs(embed);
 Dajaxice.sam.views.river.lastfms(embed);
+Dajaxice.sam.views.river.blogs(embed);
 //Dajaxice.sam.views.river.imgurs(embed);
 //Dajaxice.sam.views.river.facebooks(embed);
 </script>

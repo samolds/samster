@@ -291,6 +291,10 @@ img {max-width: 100%;}
   background-color: #ffffff;
 }
 
+.oembedded .content {
+  background-color: #ffffff;
+}
+
 .oembedded a:hover {color: #888;}
 .oembedded .lastfmnp {color: #C00000;} 
 .oembedded .embedsc iframe {max-height: 100px;}
@@ -345,28 +349,32 @@ img {max-width: 100%;}
 }
 
 .oembedded li.twitter {
-  border-color: #002280; //#0044ff #002280
+  border-color: #002280; /*#0044ff #002280*/
 }
 
 .oembedded li.imgur {
-  border-color: #426012; //#85bf25 #426012
+  border-color: #426012; /*#85bf25 #426012*/
 }
 
 .oembedded li.lastfm {
-  border-color: #800000; //#ff0000 #800000
+  border-color: #800000; /*#ff0000 #800000*/
 }
 
 .oembedded li.soundcloud {
-  border-color: #804400; //#ff8800 #804400
+  border-color: #804400; /*#ff8800 #804400*/
 }
 
 .oembedded li.flickr {
-  //background-color: #000000;
-  border-color: #cc22cc; //#cc22cc #661166
+  /*background-color: #000000;*/
+  border-color: #cc22cc; /*#cc22cc #661166*/
 }
 
 .oembedded li.github {
   border-color: #666666;
+}
+
+.oembedded li.blog {
+  border-color: #000000;
 }
 
 .table-pad {

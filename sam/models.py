@@ -180,8 +180,10 @@ class Post(models.Model):
     """Description of the Post model
     """
     title = models.CharField("title", max_length=100)
-    content = models.TextField(blank=True, null=True)
     content_markdown = models.TextField("Content", help_text='<a href="http://daringfireball.net/projects/markdown/syntax">Markdown Help</a>')
+    content = models.TextField(blank=True, null=True)
+    small_stub = models.TextField(blank=True, null=True)
+    large_stub = models.TextField(blank=True, null=True)
     tags = models.ManyToManyField(Tag, max_length=50, related_name='post', blank=True, null=True)
     images = models.ManyToManyField(SiteImage, related_name='post', blank=True, null=True)
     embedded_link = models.CharField(max_length=500, blank=True, null=True)
@@ -196,6 +198,8 @@ class Post(models.Model):
 
     def save(self):
         self.content = markdown.markdown(self.content_markdown)
+        self.small_stub = markdown.markdown(self.content_markdown[:200].strip() + '...')
+        self.large_stub = markdown.markdown(self.content_markdown[:750].strip() + '...')
         super(Post, self).save()
 
     class Meta:
