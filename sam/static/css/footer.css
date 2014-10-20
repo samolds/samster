@@ -9,6 +9,10 @@
   clear: both;
 }
 
+.foottop li {
+  display: inline;
+}
+
 #footbar {
   background-color: #000;
   color: #fff;

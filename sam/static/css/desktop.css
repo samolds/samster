@@ -43,7 +43,7 @@ html, body {
 
 #navbar a {
   color: #fff;
-  padding: 11px;
+  padding: 12px;
   line-height: 40px;
 }
 
@@ -57,7 +57,7 @@ html, body {
   position: absolute;
   display: none;
   z-index: 10;
-  margin-top: -2.5px;
+  margin-top: -1.5px;
 }
 
 .navtop ul li {
