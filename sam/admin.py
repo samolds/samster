@@ -113,7 +113,7 @@ class CommentAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     """ The admin model for a Blog Post.
     """
-    exclude = ('comments', 'small_stub', 'large_stub',)
+    exclude = ('comments',)
     readonly_fields = ('view_count', 'content',)
     list_display = ("title",
                     "creation_date")

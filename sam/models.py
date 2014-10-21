@@ -198,8 +198,10 @@ class Post(models.Model):
 
     def save(self):
         self.content = markdown.markdown(self.content_markdown)
-        self.small_stub = markdown.markdown(self.content_markdown[:200].strip() + '...')
-        self.large_stub = markdown.markdown(self.content_markdown[:750].strip() + '...')
+        if self.small_stub == "":
+            self.small_stub = markdown.markdown(self.content_markdown[:200].strip() + '...')
+        if self.large_stub == "":
+            self.large_stub = markdown.markdown(self.content_markdown[:750].strip() + '...')
         super(Post, self).save()
 
     class Meta:
