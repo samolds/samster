@@ -71,6 +71,7 @@ class Website(models.Model):
     class Meta:
         verbose_name = (u"Website")
         verbose_name_plural = (u"Websites")
+        ordering = ['pk']
 
 
 class Comment(models.Model):

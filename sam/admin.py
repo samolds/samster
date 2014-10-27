@@ -15,15 +15,39 @@ class WebsiteAdmin(admin.ModelAdmin):
     """
     list_display = ("display",
                     "url",
+                    "kind",
                     "private")
     list_filter = ["display",
                    "private"]
+    actions = ["mark_private",
+               "mark_public"]
 
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'168'})},
         models.TextField: {'widget': Textarea(attrs={'rows':40, 'cols':120})},
         models.ManyToManyField: {'widget': SelectMultiple(attrs={'size':'15'})}
     }
+
+    def mark_private(self, request, queryset):
+        if type(queryset) == Website:
+            queryset.private = True
+            queryset.save()
+        else:
+            for site in queryset.all():
+                site.private = True
+                site.save()
+    mark_private.short_description = "Mark all as private"
+
+    def mark_public(self, request, queryset):
+        if type(queryset) == Website:
+            queryset.private = False
+            queryset.save()
+        else:
+            for site in queryset.all():
+                site.private = False
+                site.save()
+    mark_public.short_description = "Mark all as public"
+
 
 admin.site.register(Website, WebsiteAdmin)
 
@@ -36,13 +60,35 @@ class SiteImageAdmin(admin.ModelAdmin):
     list_display = ("name", "private")
     exclude = ('content_type', 'width', 'height', 'comments', 'description')
     readonly_fields = ('view_count',)
-    actions = ['delete_model']
+    actions = ["mark_private",
+               "mark_public",
+               "delete_model"]
 
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'168'})},
         models.TextField: {'widget': Textarea(attrs={'rows':40, 'cols':120})},
         models.ManyToManyField: {'widget': SelectMultiple(attrs={'size':'15'})}
     }
+
+    def mark_private(self, request, queryset):
+        if type(queryset) == SiteImage:
+            queryset.private = True
+            queryset.save()
+        else:
+            for image in queryset.all():
+                image.private = True
+                image.save()
+    mark_private.short_description = "Mark all as private"
+
+    def mark_public(self, request, queryset):
+        if type(queryset) == SiteImage:
+            queryset.private = False
+            queryset.save()
+        else:
+            for image in queryset.all():
+                image.private = False
+                image.save()
+    mark_public.short_description = "Mark all as public"
 
     def get_actions(self, request):
         actions = super(SiteImageAdmin, self).get_actions(request)
@@ -55,7 +101,7 @@ class SiteImageAdmin(admin.ModelAdmin):
         else:
             for image in queryset.all():
                 image.delete()
-    delete_model.short_description = "Delete selected images"
+    delete_model.short_description = "Delete selected Images"
 
 admin.site.register(SiteImage, SiteImageAdmin)
 
@@ -63,14 +109,36 @@ admin.site.register(SiteImage, SiteImageAdmin)
 class QuoteAdmin(admin.ModelAdmin):
     """ The admin model for a Quote.
     """
-    list_filter = ['quote', 'author']
-    list_display = ("author",)
+    list_filter = ['author']
+    list_display = ("author", "quote")
+    actions = ["mark_private",
+               "mark_public"]
 
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'168'})},
         models.TextField: {'widget': Textarea(attrs={'rows':40, 'cols':120})},
         models.ManyToManyField: {'widget': SelectMultiple(attrs={'size':'15'})}
     }
+
+    def mark_private(self, request, queryset):
+        if type(queryset) == Quote:
+            queryset.private = True
+            queryset.save()
+        else:
+            for quote in queryset.all():
+                quote.private = True
+                quote.save()
+    mark_private.short_description = "Mark all as private"
+
+    def mark_public(self, request, queryset):
+        if type(queryset) == Quote:
+            queryset.private = False
+            queryset.save()
+        else:
+            for quote in queryset.all():
+                quote.private = False
+                quote.save()
+    mark_public.short_description = "Mark all as public"
 
 admin.site.register(Quote, QuoteAdmin)
 
@@ -85,8 +153,9 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ["name",
                    "email",
                    "date"]
-
-    actions = ['delete_model']
+    actions = ["mark_private",
+               "mark_public",
+               "delete_model"]
 
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'168'})},
@@ -94,18 +163,25 @@ class CommentAdmin(admin.ModelAdmin):
         models.ManyToManyField: {'widget': SelectMultiple(attrs={'size':'15'})}
     }
 
-    def get_actions(self, request):
-        actions = super(CommentAdmin, self).get_actions(request)
-        del actions['delete_selected']
-        return actions
-
-    def delete_model(self, request, comments):
-        if type(comments) is Comment:
-            comments.delete()
+    def mark_private(self, request, queryset):
+        if type(queryset) == Comment:
+            queryset.private = True
+            queryset.save()
         else:
-            for comment in comments.all():
-                comment.delete()
-    delete_model.short_description = "Delete selected comments"
+            for comment in queryset.all():
+                comment.private = True
+                comment.save()
+    mark_private.short_description = "Mark all as private"
+
+    def mark_public(self, request, queryset):
+        if type(queryset) == Comment:
+            queryset.private = False
+            queryset.save()
+        else:
+            for comment in queryset.all():
+                comment.private = False
+                comment.save()
+    mark_public.short_description = "Mark all as public"
 
 #admin.site.register(Comment, CommentAdmin)
 
@@ -120,8 +196,8 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ["title",
                    "tags",
                    "creation_date"]
-
-    actions = ['delete_model']
+    actions = ["mark_private",
+               "mark_public",]
 
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'168'})},
@@ -129,17 +205,24 @@ class PostAdmin(admin.ModelAdmin):
         models.ManyToManyField: {'widget': SelectMultiple(attrs={'size':'15'})}
     }
 
-    def get_actions(self, request):
-        actions = super(PostAdmin, self).get_actions(request)
-        del actions['delete_selected']
-        return actions
-
-    def delete_model(self, request, posts):
-        if type(posts) is Post:
-            posts.delete()
+    def mark_private(self, request, queryset):
+        if type(queryset) == Post:
+            queryset.private = True
+            queryset.save()
         else:
-            for post in posts.all():
-                post.delete()
-    delete_model.short_description = "Delete selected posts"
+            for post in queryset.all():
+                post.private = True
+                post.save()
+    mark_private.short_description = "Mark all as private"
+
+    def mark_public(self, request, queryset):
+        if type(queryset) == Post:
+            queryset.private = False
+            queryset.save()
+        else:
+            for post in queryset.all():
+                post.private = False
+                post.save()
+    mark_public.short_description = "Mark all as public"
 
 admin.site.register(Post, PostAdmin)

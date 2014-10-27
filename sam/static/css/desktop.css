@@ -26,6 +26,16 @@ html, body {
   margin-right: 27%;
 }
 
+.sub-medium {
+  margin-left: 9%;
+  margin-right: 27%;
+}
+
+.sub-narrow {
+  margin-left: 9%;
+  margin-right: 45%;
+}
+
 .content {
   padding-top: 10px;
   padding-bottom: 10px;
