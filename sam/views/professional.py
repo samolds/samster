@@ -26,9 +26,11 @@ def professional(request):
     if len(posts) > 2:
         posts = posts[len(posts) - 2:]
     posts.reverse()
+    full_post_stub = False
 
     return render_to_response('professional.html', {
         "post": post,
         "posts": posts,
         "images": images,
+        "full_post_stub": full_post_stub
     }, context_instance=RequestContext(request))

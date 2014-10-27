@@ -6,7 +6,7 @@
   </tr>
   <tr>
     <td class="textright">
-      {% if post.tags.values %}
+      {% if full_post_stub and post.tags.values %}
         <small>Tags: 
           {% for tag_data in post.tags.values %}
             <a href="/art/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>

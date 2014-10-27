@@ -22,8 +22,9 @@ a:hover {color: #fff;}
 
 table {width: 100%;}
 img {max-width: 100%;}
-.tdtitle {width: 75%;}
+.tdtitle {width: 70%;}
 .tdtitle h2 {font-size: 175%;}
+.post-header-right {min-width: 160px;}
 
 #bodywrap {
   background-image: url('/static/img/bg.png');
@@ -109,9 +110,10 @@ img {max-width: 100%;}
 .bannerphoto {
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-position: center -100px;
+  //background-position: center -100px;
   background-color: #000;
   background-size: cover;
+  background
 }
 
 .bannertext {

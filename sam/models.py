@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
+from django.utils import timezone
 from HTMLParser import HTMLParser
 from django.conf import settings
 from django.db import models
@@ -115,6 +116,8 @@ class SiteImage(models.Model):
     slug = models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     description_markdown = models.TextField("Description", blank=True, null=True, help_text='<a href="http://daringfireball.net/projects/markdown/syntax">Markdown Help</a>')
+    small_stub = models.TextField(blank=True, null=True)
+    large_stub = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to="images", height_field="height", width_field="width")
     content_type = models.CharField(max_length=40)
     width = models.IntegerField()
@@ -143,7 +146,10 @@ class SiteImage(models.Model):
 
         if self.description_markdown:
             self.description = markdown.markdown(self.description_markdown)
-
+        if self.small_stub == "":
+            self.small_stub = markdown.markdown(self.description_markdown[:200].strip() + '...')
+        if self.large_stub == "":
+            self.large_stub = markdown.markdown(self.description_markdown[:750].strip() + '...')
         super(SiteImage, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
@@ -196,13 +202,15 @@ class Post(models.Model):
     private = models.BooleanField()
     comments = models.ManyToManyField(Comment, related_name='post', blank=True, null=True)
     creation_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
+    updated_date = models.DateTimeField(auto_now_add=True)
     view_count = models.IntegerField(default=0, blank=True, null=True)
 
     def __unicode__(self):
         return "%s" % self.title
 
-    def save(self):
+    def save(self, *args, **kwargs):
+        if 'ignore_update_date' in kwargs and kwargs['ignore_update_date']:
+            self.updated_date = timezone.now()
         self.content = markdown.markdown(self.content_markdown)
         if self.small_stub == "":
             self.small_stub = markdown.markdown(self.content_markdown[:200].strip() + '...')

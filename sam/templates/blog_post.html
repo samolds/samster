@@ -9,40 +9,7 @@
     <div class="body wide">
       <div class="content">
 
-        <table>
-          <tr>
-            <td class="textleft tdtitle" rowspan=2><h1><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h1></td>
-            {% load time_localization %}
-            <td class="textright"><small>Created on <a href="/blog/filter/date/{{ post.creation_date.month }}-{{ post.creation_date.day }}-{{ post.creation_date.year }}">{{ post.creation_date|mtn_time }}</a></small></td>
-          </tr>
-          <tr>
-            <td class="textright">
-              <small>
-                {% if not post.creation_date.ctime == post.updated_date.ctime %}
-                  Updated on <a href="/blog/filter/date/{{ post.updated_date.month }}-{{ post.updated_date.day }}-{{ post.updated_date.year }}">{{ post.updated_date|mtn_time }}</a>
-                {% elif post.tags.values %}
-                  Tags: 
-                  {% for tag_data in post.tags.values %}
-                    <a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
-                  {% endfor %}
-                {% endif %}
-              </small>
-            </td>
-          </tr>
-        </table>
-
-        {% if not post.creation_date.ctime == post.updated_date.ctime and post.tags.values %}
-        <p class="textright headertags right">
-          <small>Tags: 
-            {% for tag_data in post.tags.values %}
-              <a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
-            {% endfor %}
-          </small>
-        </p>
-        {% endif %}
-
-        <div class="clear"></div>
-
+        {% include "blog_post_header.html" %}
         {% include "blog_post_inners.html" %}
         
         <a class="right" href="/blog">Back To Blog</a>

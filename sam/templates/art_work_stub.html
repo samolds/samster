@@ -3,7 +3,7 @@
 <div class="content">
   {% if post.description %}
     <img src="{{ MEDIA_URL }}{{ post.image }}" class="postimageleft artstub" />
-    <div class="postcontent">{{ post.description|slice:":750"|safe }}...</div>
+    <div class="postcontent">{{ post.large_stub|safe }}</div>
   {% else %}
     <img src="{{ MEDIA_URL }}{{ post.image }}" class="postimageleft artstub" />
   {% endif %}

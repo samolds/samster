@@ -25,8 +25,11 @@ def art(request):
         art = art[len(art) - 5:]
     art.reverse()
 
+    full_post_stub = True
+
     return render_to_response('art.html', {
         "art": art,
+        "full_post_stub": full_post_stub
     }, context_instance=RequestContext(request))
 
 
@@ -176,6 +179,7 @@ def filter(request, kind=None, tag=None):
             art.reverse()
 
         form = TagFilterForm()
+        full_post_stub = True
 
     return render_to_response('art_filter.html', {
         'art': art,
@@ -185,6 +189,7 @@ def filter(request, kind=None, tag=None):
         'tags': tags,
         'dates': dates,
         'form': form,
+        'full_post_stub': full_post_stub
     }, context_instance=RequestContext(request))
 
 

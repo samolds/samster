@@ -1,33 +1,32 @@
 <table>
   <tr>
-    <td class="textleft tdtitle" rowspan=2><h2><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h2></td>
+    <td class="textleft tdtitle" rowspan=3><h2><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h2></td>
     {% load time_localization %}
-    <td class="textright"><small>Created <a href="/blog/filter/date/{{ post.creation_date.month }}-{{ post.creation_date.day }}-{{ post.creation_date.year }}">{{ post.creation_date|mtn_time }}</a></small></td>
+    <td class="textright post-header-right">
+      {% if full_post_stub or not full_post_stub and post.creation_date|to_str == post.updated_date|to_str %}
+        <small>Created <a href="/blog/filter/date/{{ post.creation_date.month }}-{{ post.creation_date.day }}-{{ post.creation_date.year }}">{{ post.creation_date|mtn_time }}</a></small>
+      {% endif %}
+    </td>
   </tr>
   <tr>
-    <td class="textright">
-      <small>
-        {% if not post.creation_date.ctime == post.updated_date.ctime %}
-          Updated <a href="/blog/filter/date/{{ post.updated_date.month }}-{{ post.updated_date.day }}-{{ post.updated_date.year }}">{{ post.updated_date|mtn_time }}</a>
-        {% elif post.tags.values %}
+    <td class="textright post-header-right">
+      {% if not post.creation_date|to_str == post.updated_date|to_str %}
+        <small>Updated <a href="/blog/filter/date/{{ post.updated_date.month }}-{{ post.updated_date.day }}-{{ post.updated_date.year }}">{{ post.updated_date|mtn_time }}</a></small>
+      {% endif %}
+    </td>
+  </tr>
+  <tr>
+    <td class="textright post-header-right">
+      {% if full_post_stub and post.tags.values %}
+        <small>
           Tags: 
           {% for tag_data in post.tags.values %}
             <a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
           {% endfor %}
-        {% endif %}
-      </small>
+          </small>
+      {% endif %}
     </td>
   </tr>
 </table>
-
-{% if not post.creation_date.ctime == post.updated_date.ctime and post.tags.values %}
-<p class="textright headertags right">
-  <small>Tags: 
-    {% for tag_data in post.tags.values %}
-      <a href="/blog/filter/tag/{{ tag_data.tag }}">{{ tag_data.tag }}</a>
-    {% endfor %}
-  </small>
-</p>
-{% endif %}
 
 <div class="clear"></div>

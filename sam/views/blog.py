@@ -12,9 +12,11 @@ def blog(request):
     if len(posts) > 5:
         posts = posts[len(posts) - 5:]
     posts.reverse()
+    full_post_stub = True
 
     return render_to_response('blog.html', {
         "posts": posts,
+        "full_post_stub": full_post_stub
     }, context_instance=RequestContext(request))
 
 
@@ -60,6 +62,7 @@ def post(request, post_id=None):
     post = None
     exists = False
     images = []
+    full_post_stub = True
     if post_id:
         post = Post.objects.filter(pk=post_id)
     if post:
@@ -67,7 +70,7 @@ def post(request, post_id=None):
         if post.filter(pk=post_id, private=False):
             post = post.get(pk=post_id, private=False)
             post.view_count += 1
-            post.save()
+            post.save(ignore_update_date=True)
             for image in post.images.values():
                 images.append(SiteImage.objects.get(image=image['image']))
             images.reverse()
@@ -77,6 +80,7 @@ def post(request, post_id=None):
         "exists": exists,
         "images": images,
         "form": form,
+        "full_post_stub": full_post_stub
     }, context_instance=RequestContext(request))
 
 
@@ -152,6 +156,7 @@ def filter(request, kind=None, tag=None):
                 posts.reverse()
 
         form = TagFilterForm()
+        full_post_stub = True
 
     return render_to_response('blog_filter.html', {
         'posts': posts,
@@ -161,6 +166,7 @@ def filter(request, kind=None, tag=None):
         'tags': tags,
         'dates': dates,
         'form': form,
+        'full_post_stub': full_post_stub
     }, context_instance=RequestContext(request))
 
 

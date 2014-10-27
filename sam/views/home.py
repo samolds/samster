@@ -48,6 +48,8 @@ def home(request):
                 images.append(SiteImage.objects.get(image=image['image']))
             images.reverse()
 
+    full_post_stub = False
+
     quotes = list(Quote.objects.filter(public).filter(length__lt = 200))
     quote = None
     if quotes:
@@ -60,5 +62,6 @@ def home(request):
         "images": images,
         "is_site_image": is_site_image,
         "quote": quote,
-        "banner_photo": banner_photo
+        "banner_photo": banner_photo,
+        "full_post_stub": full_post_stub
     }, context_instance=RequestContext(request))

@@ -15,3 +15,7 @@ def mtn_time(value, arg=None):
         return date.day
     elif arg == "year":
         return date.year
+
+@register.filter
+def to_str(value):
+    return value.strftime("%m/%d/%Y %H")
