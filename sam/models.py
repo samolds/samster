@@ -209,13 +209,14 @@ class Post(models.Model):
         return "%s" % self.title
 
     def save(self, *args, **kwargs):
-        if 'ignore_update_date' in kwargs and kwargs['ignore_update_date']:
+        if not('ignore_update_date' in kwargs and kwargs['ignore_update_date']):
+            import pdb; pdb.set_trace()
             self.updated_date = timezone.now()
-        self.content = markdown.markdown(self.content_markdown)
-        if self.small_stub == "":
-            self.small_stub = markdown.markdown(self.content_markdown[:200].strip() + '...')
-        if self.large_stub == "":
-            self.large_stub = markdown.markdown(self.content_markdown[:750].strip() + '...')
+            self.content = markdown.markdown(self.content_markdown)
+            if self.small_stub == "":
+                self.small_stub = markdown.markdown(self.content_markdown[:200].strip() + '...')
+            if self.large_stub == "":
+                self.large_stub = markdown.markdown(self.content_markdown[:750].strip() + '...')
         super(Post, self).save()
 
     class Meta:
