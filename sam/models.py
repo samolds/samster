@@ -178,7 +178,7 @@ class Quote(models.Model):
     class Meta:
         verbose_name = (u"Quote")
         verbose_name_plural = (u"Quotes")
-        ordering = ['-name']
+        ordering = ['author']
 
 
 class Post(models.Model):
