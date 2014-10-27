@@ -36,7 +36,7 @@ class WebsiteAdmin(admin.ModelAdmin):
             for site in queryset.all():
                 site.private = True
                 site.save()
-    mark_private.short_description = "Mark all as private"
+    mark_private.short_description = "Mark selected as private"
 
     def mark_public(self, request, queryset):
         if type(queryset) == Website:
@@ -46,7 +46,7 @@ class WebsiteAdmin(admin.ModelAdmin):
             for site in queryset.all():
                 site.private = False
                 site.save()
-    mark_public.short_description = "Mark all as public"
+    mark_public.short_description = "Mark selected as public"
 
 
 admin.site.register(Website, WebsiteAdmin)
@@ -78,7 +78,7 @@ class SiteImageAdmin(admin.ModelAdmin):
             for image in queryset.all():
                 image.private = True
                 image.save()
-    mark_private.short_description = "Mark all as private"
+    mark_private.short_description = "Mark selected as private"
 
     def mark_public(self, request, queryset):
         if type(queryset) == SiteImage:
@@ -88,7 +88,7 @@ class SiteImageAdmin(admin.ModelAdmin):
             for image in queryset.all():
                 image.private = False
                 image.save()
-    mark_public.short_description = "Mark all as public"
+    mark_public.short_description = "Mark selected as public"
 
     def get_actions(self, request):
         actions = super(SiteImageAdmin, self).get_actions(request)
@@ -110,7 +110,7 @@ class QuoteAdmin(admin.ModelAdmin):
     """ The admin model for a Quote.
     """
     list_filter = ['author']
-    list_display = ("author", "quote")
+    list_display = ("author", "quote", "private")
     actions = ["mark_private",
                "mark_public"]
 
@@ -128,7 +128,7 @@ class QuoteAdmin(admin.ModelAdmin):
             for quote in queryset.all():
                 quote.private = True
                 quote.save()
-    mark_private.short_description = "Mark all as private"
+    mark_private.short_description = "Mark selected as private"
 
     def mark_public(self, request, queryset):
         if type(queryset) == Quote:
@@ -138,7 +138,7 @@ class QuoteAdmin(admin.ModelAdmin):
             for quote in queryset.all():
                 quote.private = False
                 quote.save()
-    mark_public.short_description = "Mark all as public"
+    mark_public.short_description = "Mark selected as public"
 
 admin.site.register(Quote, QuoteAdmin)
 
@@ -171,7 +171,7 @@ class CommentAdmin(admin.ModelAdmin):
             for comment in queryset.all():
                 comment.private = True
                 comment.save()
-    mark_private.short_description = "Mark all as private"
+    mark_private.short_description = "Mark selected as private"
 
     def mark_public(self, request, queryset):
         if type(queryset) == Comment:
@@ -181,7 +181,7 @@ class CommentAdmin(admin.ModelAdmin):
             for comment in queryset.all():
                 comment.private = False
                 comment.save()
-    mark_public.short_description = "Mark all as public"
+    mark_public.short_description = "Mark selected as public"
 
 #admin.site.register(Comment, CommentAdmin)
 
@@ -213,7 +213,7 @@ class PostAdmin(admin.ModelAdmin):
             for post in queryset.all():
                 post.private = True
                 post.save()
-    mark_private.short_description = "Mark all as private"
+    mark_private.short_description = "Mark selected as private"
 
     def mark_public(self, request, queryset):
         if type(queryset) == Post:
@@ -223,6 +223,6 @@ class PostAdmin(admin.ModelAdmin):
             for post in queryset.all():
                 post.private = False
                 post.save()
-    mark_public.short_description = "Mark all as public"
+    mark_public.short_description = "Mark selected as public"
 
 admin.site.register(Post, PostAdmin)
