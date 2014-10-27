@@ -146,9 +146,9 @@ class SiteImage(models.Model):
 
         if self.description_markdown:
             self.description = markdown.markdown(self.description_markdown)
-        if self.small_stub == "":
+        if self.small_stub == "" and not self.description_markdown == "":
             self.small_stub = markdown.markdown(self.description_markdown[:200].strip() + '...')
-        if self.large_stub == "":
+        if self.large_stub == "" and not self.description_markdown == "":
             self.large_stub = markdown.markdown(self.description_markdown[:750].strip() + '...')
         super(SiteImage, self).save(*args, **kwargs)
 

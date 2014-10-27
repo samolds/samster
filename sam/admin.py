@@ -58,8 +58,8 @@ class SiteImageAdmin(admin.ModelAdmin):
     """
     list_filter = ['name']
     list_display = ("name", "private")
-    exclude = ('content_type', 'width', 'height', 'comments', 'description')
-    readonly_fields = ('view_count',)
+    exclude = ('content_type', 'width', 'height', 'comments',)
+    readonly_fields = ('view_count', 'description',)
     actions = ["mark_private",
                "mark_public",
                "delete_model"]
