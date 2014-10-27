@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 
 
 def blog(request):
-    posts = list(Post.objects.filter(private=False))
+    posts = list(Post.objects.filter(private=False).exclude(tags__tag__startswith="top_"))
     if len(posts) > 5:
         posts = posts[len(posts) - 5:]
     posts.reverse()

@@ -25,7 +25,7 @@ def home(request):
                 home_images.append(SiteImage.objects.get(image=image['image']))
             home_images.reverse()
 
-    posts = list(Post.objects.filter(public).exclude(tags__tag="top_home"))
+    posts = list(Post.objects.filter(public).exclude(tags__tag__startswith="top_"))
 
     art_tag = Q(tags__tag="art")
     drawing = Q(tags__tag="drawing")
@@ -48,7 +48,7 @@ def home(request):
                 images.append(SiteImage.objects.get(image=image['image']))
             images.reverse()
 
-    quotes = list(Quote.objects.filter(private=False))
+    quotes = list(Quote.objects.filter(public).filter(length__lt = 200))
     quote = None
     if quotes:
         quote = quotes[random.randrange(len(quotes))]

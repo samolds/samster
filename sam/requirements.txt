@@ -1,7 +1,7 @@
 Django==1.5
 oauth2
 simplejson
-PIL
+pillow  # a maintained fork of PIL
 pytz
 markdown
 django-mobility

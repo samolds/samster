@@ -163,6 +163,11 @@ class Quote(models.Model):
     quote = models.TextField()
     tags = models.ManyToManyField(Tag, max_length=50, related_name='quote', blank=True, null=True)
     private = models.BooleanField()
+    length = models.IntegerField(blank=True, null=True)
+
+    def save(self):
+        self.length = len(self.author) + len(self.quote)
+        super(Quote, self).save()
 
     def __unicode__(self):
         if self.name:
