@@ -1,5 +1,19 @@
 var embedIds = [];
 
+// Requires jQuery
+function ajaxCall(embedType) {
+  $.ajax({
+    type: "GET",
+    url: "/river/async/" + embedType,
+    success: function(data) {
+      embed(data);
+    },
+    error: function() {
+      console.log(embedType + ' failed to load');
+    }
+  })
+}
+
 function toggleDisplay(className) {
     var elements = document.getElementsByClassName(className);
     var checked = document.getElementById(className + '-toggle').checked;

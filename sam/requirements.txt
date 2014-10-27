@@ -6,13 +6,9 @@ pytz
 markdown
 django-mobility
 
-#celery  # http://www.celeryproject.org/tutorials/
 # apis
 #facebook-sdk
 TwitterAPI
 soundcloud
-#lastfm uses oauth2
 flickrapi
 github3.py
-#imgur uses oauth2
-django-dajaxice

@@ -3,9 +3,8 @@
 {% block title %} - The River{% endblock %}
 
 {% block script %}
-  {% load dajaxice_templatetags %}
-  {% dajaxice_js_import %}
   <script async="" src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="{{ STATIC_URL }}js/embed.js" language="javascript" type="text/javascript"></script>
 {% endblock %}
 
@@ -154,14 +153,14 @@
 </div>
 
 <script language="javascript">
-Dajaxice.sam.views.river.soundclouds(embed);
-Dajaxice.sam.views.river.flickrs(embed);
-Dajaxice.sam.views.river.twitters(embed);
-Dajaxice.sam.views.river.githubs(embed);
-Dajaxice.sam.views.river.lastfms(embed);
-Dajaxice.sam.views.river.blogs(embed);
-//Dajaxice.sam.views.river.imgurs(embed);
-//Dajaxice.sam.views.river.facebooks(embed);
+ajaxCall('soundclouds');
+ajaxCall('flickrs');
+ajaxCall('twitters');
+ajaxCall('githubs');
+ajaxCall('lastfms');
+ajaxCall('blogs');
+//ajaxCall('imgurs');
+//ajaxCall('facebooks');
 </script>
 
 {% endblock %}

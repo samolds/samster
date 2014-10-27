@@ -20,7 +20,12 @@ urlpatterns = patterns('sam.views',
     url(r'^art/filter(?:/(?P<kind>(\w+[+]*)*))?(?:/(?P<tag>(\w+[-*+]*)*))?$', 'art.filter'),
     url(r'^sha1$', 'sha1.sha1'),
 
-    #url(r'^403$', 'error.err_403'),  # for testing
-    #url(r'^404$', 'error.err_404'),  # for testing
-    #url(r'^500$', 'error.err_500'),  # for testing
+    url(r'^river/async/blogs$', 'river.blogs'),
+    url(r'^river/async/flickrs$', 'river.flickrs'),
+    url(r'^river/async/githubs$', 'river.githubs'),
+    url(r'^river/async/lastfms$', 'river.lastfms'),
+    url(r'^river/async/soundclouds$', 'river.soundclouds'),
+    url(r'^river/async/twitters$', 'river.twitters'),
+    #url(r'^river/async/$', 'river.imgurs'),
+    #url(r'^river/async/$', 'river.facebooks'),
 )
