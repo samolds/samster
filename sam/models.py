@@ -210,7 +210,6 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         if not('ignore_update_date' in kwargs and kwargs['ignore_update_date']):
-            import pdb; pdb.set_trace()
             self.updated_date = timezone.now()
             self.content = markdown.markdown(self.content_markdown)
             if self.small_stub == "":
