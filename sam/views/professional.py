@@ -22,7 +22,7 @@ def professional(request):
     job = Q(tags__tag="job")
 
     posts = Post.objects.filter(professional | work | job)
-    posts = list(posts.filter(public))
+    posts = list(set(posts.filter(public)))
     if len(posts) > 2:
         posts = posts[len(posts) - 2:]
     posts.reverse()

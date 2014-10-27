@@ -22,7 +22,7 @@ def personal(request):
     shower_thoughts = Q(tags__tag="shower_thoughts")
 
     posts = Post.objects.filter(personal | thoughts | shower_thoughts)
-    posts = list(posts.filter(public))
+    posts = list(set(posts.filter(public)))
 
     if len(posts) > 2:
         posts = posts[len(posts) - 2:]

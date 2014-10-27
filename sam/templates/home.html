@@ -11,7 +11,7 @@
   {% endif %}
   <div class="content">
     {% if home_post %}
-      <h1>{{ home_post.title }}</h1>
+      <h1 class="content">{{ home_post.title }}</h1>
       <div class="content">
         {% if home_images|length == 1 %}
           {% for image in home_images %}

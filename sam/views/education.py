@@ -22,7 +22,7 @@ def education(request):
     homework = Q(tags__tag="homework")
 
     posts = Post.objects.filter(education | school | homework)
-    posts = list(posts.filter(public))
+    posts = list(set(posts.filter(public)))
     if len(posts) > 2:
         posts = posts[len(posts) - 2:]
     posts.reverse()
