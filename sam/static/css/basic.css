@@ -110,10 +110,9 @@ img {max-width: 100%;}
 .bannerphoto {
   background-attachment: fixed;
   background-repeat: no-repeat;
-  //background-position: center -100px;
-  background-color: #000;
+  background-position: center -100px;
+  //background-color: #000;
   background-size: cover;
-  background
 }
 
 .bannertext {

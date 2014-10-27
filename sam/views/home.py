@@ -11,7 +11,7 @@ def home(request):
     home_images = []
     if SiteImage.objects.filter(tags__tag="banner_photo").filter(public):
         banners = list(SiteImage.objects.filter(tags__tag="banner_photo").filter(public))
-        banner_photo = banners[-1]
+        banner_photo = banners[random.randrange(len(banners))]
     else:
         banner_photo = None
     if Tag.objects.filter(tag="top_home"):
