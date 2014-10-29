@@ -17,8 +17,7 @@ class WebsiteAdmin(admin.ModelAdmin):
                     "url",
                     "kind",
                     "private")
-    list_filter = ["display",
-                   "private"]
+    list_filter = ["private", "kind"]
     actions = ["mark_private",
                "mark_public"]
 
@@ -56,7 +55,9 @@ class SiteImageAdmin(admin.ModelAdmin):
     """ The admin model for a SiteImage.
     Content-type, width, and height, are all filled in on Image save.
     """
-    list_filter = ['name']
+    list_filter = ["private",
+                   "tags",
+                   "creation_date"]
     list_display = ("name", "private")
     exclude = ('content_type', 'width', 'height', 'comments',)
     readonly_fields = ('view_count', 'description',)
@@ -109,7 +110,7 @@ admin.site.register(SiteImage, SiteImageAdmin)
 class QuoteAdmin(admin.ModelAdmin):
     """ The admin model for a Quote.
     """
-    list_filter = ['author']
+    list_filter = ['private', 'tags', 'author']
     list_display = ("author", "quote", "private")
     actions = ["mark_private",
                "mark_public"]
@@ -151,8 +152,8 @@ class CommentAdmin(admin.ModelAdmin):
                     "email",
                     "date")
     list_filter = ["name",
-                   "email",
-                   "date"]
+                   "date",
+                   "private"]
     actions = ["mark_private",
                "mark_public",
                "delete_model"]
@@ -183,7 +184,7 @@ class CommentAdmin(admin.ModelAdmin):
                 comment.save()
     mark_public.short_description = "Mark selected as public"
 
-#admin.site.register(Comment, CommentAdmin)
+admin.site.register(Comment, CommentAdmin)
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -193,7 +194,7 @@ class PostAdmin(admin.ModelAdmin):
     readonly_fields = ('view_count', 'content',)
     list_display = ("title",
                     "creation_date")
-    list_filter = ["title",
+    list_filter = ["private",
                    "tags",
                    "creation_date"]
     actions = ["mark_private",

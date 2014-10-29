@@ -5,14 +5,27 @@ from django.db.models import Q
 from sam.forms.tag_filter import TagFilterForm
 from sam.forms.contact import ContactForm
 from django.http import HttpResponseRedirect
+from django.core.cache import cache
+from django.conf import settings
 
 
 def blog(request):
-    posts = list(Post.objects.filter(private=False).exclude(tags__tag__startswith="top_"))
-    if len(posts) > 5:
-        posts = posts[len(posts) - 5:]
-    posts.reverse()
-    full_post_stub = True
+    blog = cache.get("blog")
+    if not blog:
+        posts = list(Post.objects.filter(private=False).exclude(tags__tag__startswith="top_"))
+        if len(posts) > 5:
+            posts = posts[len(posts) - 5:]
+        posts.reverse()
+        full_post_stub = True
+
+        cache_obj = {
+            "posts": posts,
+            "full_post_stub": full_post_stub
+        }
+        cache.set("blog", cache_obj, settings.CACHE_LENGTH)
+    else:
+        posts = blog['posts']
+        full_post_stub = blog['full_post_stub']
 
     return render_to_response('blog.html', {
         "posts": posts,
@@ -25,14 +38,17 @@ def post_archive(request):
         return filterHelp(request)
     else:
         form = TagFilterForm()
-        posts = list(Post.objects.filter(private=False))
-        posts.reverse()
-        archive = []
-        for post in posts:
-            archive.append({"month": post.creation_date.month, "year": post.creation_date.year})
+        archive = cache.get("blog_archive")
+        if not archive:
+            posts = list(Post.objects.filter(private=False))
+            posts.reverse()
+            archive = []
+            for post in posts:
+                archive.append({"month": post.creation_date.month, "year": post.creation_date.year})
 
-        archive = [dict(tupleized) for tupleized in set(tuple(item.items()) for item in archive)]
-        archive.reverse()
+            archive = [dict(tupleized) for tupleized in set(tuple(item.items()) for item in archive)]
+            archive.reverse()
+            cache.set("blog_archive", archive, settings.CACHE_LENGTH)
 
     return render_to_response('blog_archive.html', {
         'archive': archive,

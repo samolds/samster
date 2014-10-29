@@ -5,39 +5,13 @@ from sam.models import SiteImage, Tag, Comment, Post
 from django.db.models import Q
 from sam.forms.tag_filter import TagFilterForm
 from sam.forms.contact import ContactForm
+from django.core.cache import cache
+from django.conf import settings
 
 
 def art(request):
-    public = Q(private=False)
-    art_tag = Q(tags__tag="art")
-    drawing = Q(tags__tag="drawing")
-    photography = Q(tags__tag="photography")
-    art_image = SiteImage.objects.filter(art_tag | drawing | photography)
-    art_post = Post.objects.filter(art_tag | drawing | photography)
-
-    art_image = list(set(art_image.filter(public)))
-    art_post = list(set(art_post.filter(public)))
-
-    art = art_image + art_post
-    art.sort(key=lambda x: x.creation_date)
-
-    if len(art) > 5:
-        art = art[len(art) - 5:]
-    art.reverse()
-
-    full_post_stub = True
-
-    return render_to_response('art.html', {
-        "art": art,
-        "full_post_stub": full_post_stub
-    }, context_instance=RequestContext(request))
-
-
-def art_archive(request):
-    if request.method == 'POST':
-        return filterHelp(request)
-    else:
-        form = TagFilterForm()
+    art_work = cache.get("art_work")
+    if not art_work:
         public = Q(private=False)
         art_tag = Q(tags__tag="art")
         drawing = Q(tags__tag="drawing")
@@ -51,14 +25,54 @@ def art_archive(request):
         art = art_image + art_post
         art.sort(key=lambda x: x.creation_date)
 
+        if len(art) > 5:
+            art = art[len(art) - 5:]
         art.reverse()
+        full_post_stub = True
 
-        archive = []
-        for work in art:
-            archive.append({"month": work.creation_date.month, "year": work.creation_date.year})
+        cache_obj = {
+            "art": art,
+            "full_post_stub": full_post_stub
+        }
+        cache.set("art_work", cache_obj, settings.CACHE_LENGTH)
+    else:
+        art = art_work['art']
+        full_post_stub = art_work['full_post_stub']
 
-        archive = [dict(tupleized) for tupleized in set(tuple(item.items()) for item in archive)]
-        archive.reverse()
+    return render_to_response('art.html', {
+        "art": art,
+        "full_post_stub": full_post_stub
+    }, context_instance=RequestContext(request))
+
+
+def art_archive(request):
+    if request.method == 'POST':
+        return filterHelp(request)
+    else:
+        form = TagFilterForm()
+        archive = cache.get("art_archive")
+        if not archive:
+            public = Q(private=False)
+            art_tag = Q(tags__tag="art")
+            drawing = Q(tags__tag="drawing")
+            photography = Q(tags__tag="photography")
+            art_image = SiteImage.objects.filter(art_tag | drawing | photography)
+            art_post = Post.objects.filter(art_tag | drawing | photography)
+
+            art_image = list(set(art_image.filter(public)))
+            art_post = list(set(art_post.filter(public)))
+
+            art = art_image + art_post
+            art.sort(key=lambda x: x.creation_date)
+            art.reverse()
+
+            archive = []
+            for work in art:
+                archive.append({"month": work.creation_date.month, "year": work.creation_date.year})
+
+            archive = [dict(tupleized) for tupleized in set(tuple(item.items()) for item in archive)]
+            archive.reverse()
+            cache.set("art_archive", archive, settings.CACHE_LENGTH)
 
     return render_to_response('art_archive.html', {
         'archive': archive,

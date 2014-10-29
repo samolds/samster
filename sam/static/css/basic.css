@@ -138,7 +138,7 @@ img {max-width: 100%;}
   text-align: left;
   border-style: solid;
   border-radius: 5px;
-  border-width: 5px;
+  border-width: 2px;
   border-color: #ffffff;
   margin-top: 2px;
   padding: 5px;
@@ -275,7 +275,7 @@ img {max-width: 100%;}
   margin: 10px;
   border-style: solid;
   border-radius: 5px;
-  border-width: 5px;
+  border-width: 2px;
   border-color: #fff;
   background-color: #f0f0f0;
   //box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
