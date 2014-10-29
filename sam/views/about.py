@@ -2,7 +2,6 @@ from django.shortcuts import render_to_response
 from sam.models import Post, Tag, SiteImage
 from django.template import RequestContext
 from django.core.cache import cache
-from django.conf import settings
 
 
 def about(request):
@@ -22,7 +21,7 @@ def about(request):
             "post": post,
             "images": images,
         }
-        cache.set("about", cache_obj, settings.CACHE_LENGTH)
+        cache.set("about", cache_obj)
     else:
         post = about['post']
         images = about['images']

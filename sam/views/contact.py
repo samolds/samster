@@ -3,7 +3,6 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from sam.forms.contact import ContactForm
 from django.core.cache import cache
-from django.conf import settings
 from sam.models import Post, Tag, Comment, SiteImage
 
 
@@ -25,7 +24,7 @@ def contact(request):
             'post': post,
             "images": images,
         }
-        cache.set("contact", cache_obj, settings.CACHE_LENGTH)
+        cache.set("contact", cache_obj)
     else:
         post = contact['post']
         images = contact['images']

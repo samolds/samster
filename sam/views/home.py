@@ -2,7 +2,6 @@ from sam.models import Post, Tag, Quote, SiteImage
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.cache import cache
-from django.conf import settings
 from django.db.models import Q
 import random
 
@@ -69,7 +68,7 @@ def home(request):
             "banner_photo": banner_photo,
             "full_post_stub": full_post_stub
         }
-        cache.set("home", cache_obj, settings.CACHE_LENGTH)
+        cache.set("home", cache_obj)
     else:
         home_post = home["home_post"]
         home_images = home["home_images"]

@@ -6,7 +6,6 @@ from django.db.models import Q
 from sam.forms.tag_filter import TagFilterForm
 from sam.forms.contact import ContactForm
 from django.core.cache import cache
-from django.conf import settings
 
 
 def art(request):
@@ -34,7 +33,7 @@ def art(request):
             "art": art,
             "full_post_stub": full_post_stub
         }
-        cache.set("art_work", cache_obj, settings.CACHE_LENGTH)
+        cache.set("art_work", cache_obj)
     else:
         art = art_work['art']
         full_post_stub = art_work['full_post_stub']
@@ -72,7 +71,7 @@ def art_archive(request):
 
             archive = [dict(tupleized) for tupleized in set(tuple(item.items()) for item in archive)]
             archive.reverse()
-            cache.set("art_archive", archive, settings.CACHE_LENGTH)
+            cache.set("art_archive", archive)
 
     return render_to_response('art_archive.html', {
         'archive': archive,

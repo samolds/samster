@@ -1,7 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.cache import cache
-from django.conf import settings
 from sam.models import Website
 
 
@@ -25,7 +24,7 @@ def hub(request):
             "maintains": maintains,
             "develops": develops,
         }
-        cache.set("hub", cache_obj, settings.CACHE_LENGTH)
+        cache.set("hub", cache_obj)
     else:
         personals = hub['personals']
         maintains = hub['maintains']

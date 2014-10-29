@@ -6,7 +6,6 @@ from sam.forms.tag_filter import TagFilterForm
 from sam.forms.contact import ContactForm
 from django.http import HttpResponseRedirect
 from django.core.cache import cache
-from django.conf import settings
 
 
 def blog(request):
@@ -22,7 +21,7 @@ def blog(request):
             "posts": posts,
             "full_post_stub": full_post_stub
         }
-        cache.set("blog", cache_obj, settings.CACHE_LENGTH)
+        cache.set("blog", cache_obj)
     else:
         posts = blog['posts']
         full_post_stub = blog['full_post_stub']
@@ -48,7 +47,7 @@ def post_archive(request):
 
             archive = [dict(tupleized) for tupleized in set(tuple(item.items()) for item in archive)]
             archive.reverse()
-            cache.set("blog_archive", archive, settings.CACHE_LENGTH)
+            cache.set("blog_archive", archive)
 
     return render_to_response('blog_archive.html', {
         'archive': archive,

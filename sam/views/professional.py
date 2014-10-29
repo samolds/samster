@@ -2,7 +2,6 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from sam.models import Tag, Post, SiteImage
 from django.core.cache import cache
-from django.conf import settings
 from django.db.models import Q
 
 
@@ -38,7 +37,7 @@ def professional(request):
             "images": images,
             "full_post_stub": full_post_stub
         }
-        cache.set("professional", cache_obj, settings.CACHE_LENGTH)
+        cache.set("professional", cache_obj)
     else:
         post = professional['post']
         posts = professional['posts']
