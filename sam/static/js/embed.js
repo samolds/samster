@@ -27,9 +27,9 @@ function toggleDisplay(className) {
     return checked;
 }
 
-function embed(data) {
+function embed(embeds) {
     var ni = document.getElementById('embeds');
-    data.embeds.forEach(function(embed) {
+    embeds.forEach(function(embed) {
         var newdiv = document.createElement('li');
         newdiv.setAttribute('id', embed.date);
         newdiv.setAttribute('title', embed.print_date);
@@ -45,21 +45,21 @@ function embed(data) {
             priorLi = document.getElementById(embedIds[index]);
         }
         if (embed.type == "lastfm") {
-            lastfm(data, newdiv, embed);
+            lastfm(newdiv, embed);
         } else if (embed.type == "soundcloud") {
-            soundcloud(data, newdiv, embed);
+            soundcloud(newdiv, embed);
         } else if (embed.type == "flickr") {
-            flickr(data, newdiv, embed);
+            flickr(newdiv, embed);
         } else if (embed.type == "github") {
-            github(data, newdiv, embed);
+            github(newdiv, embed);
         } else if (embed.type == "twitter") {
-            twitter(data, newdiv, embed);
+            twitter(newdiv, embed);
         } else if (embed.type == "blog") {
-            blog(data, newdiv, embed);
+            blog(newdiv, embed);
         } else if (embed.type == "imgur") {
-            imgur(data, newdiv, embed);
+            imgur(newdiv, embed);
         } else {
-            simple(data, newdiv, embed);
+            simple(newdiv, embed);
         }
         if (priorLi) {
             ni.insertBefore(newdiv, priorLi);
@@ -67,45 +67,45 @@ function embed(data) {
             ni.appendChild(newdiv);
         }
     });
-    if (data.embeds.length > 0) {
-        if (toggleDisplay(data.embeds[0].type)) {
+    if (embeds.length > 0) {
+        if (toggleDisplay(embeds[0].type)) {
             document.getElementById("hide").style.display = "none";
             document.getElementById("embeds").style.display = "block";
         }
     }
 }
 
-function lastfm(data, newdiv, embed) {
+function lastfm(newdiv, embed) {
     newdiv.setAttribute('class', 'embedsimple lastfm');
     var embednowplaying = "Recently listened to";
     if (embed.nowplaying) {
         embednowplaying = "<i class=\"lastfmnp\">Now Playing!</i>";
     }
-    newdiv.innerHTML = "<div class=\"right\">" + embednowplaying + " on <a href=\"http://last.fm/user/" + data.USERNAME + "\">Last.fm</a></div><a href=\"" + 
+    newdiv.innerHTML = "<div class=\"right\">" + embednowplaying + " on <a href=\"http://last.fm/user/" + embed.USERNAME + "\">Last.fm</a></div><a href=\"" + 
                 embed.url + "\">" + embed.name + " - " + embed.artist + "</a><div class=\"clear\"></div>";
 }
 
-function soundcloud(data, newdiv, embed) {
+function soundcloud(newdiv, embed) {
     newdiv.setAttribute('class', 'embedsc soundcloud');
     newdiv.innerHTML = embed.html;
 }
 
-function flickr(data, newdiv, embed) {
+function flickr(newdiv, embed) {
     newdiv.setAttribute('class', 'embed-photo flickr');
     var embedtitle = "";
     if (embed.title) {
-        embedtitle = "<a href=\"http://flickr.com/photos/" + data.USERNAME + "/" + embed.photoid + "\"><h3>" + embed.title + "</h3></a>";
+        embedtitle = "<a href=\"http://flickr.com/photos/" + embed.USERNAME + "/" + embed.photoid + "\"><h3>" + embed.title + "</h3></a>";
     }
     var embeddescription = "";
     if (embed.description) {
         embeddescription = "<div class=\"flickrdesc\">" + embed.description + "</div>";
     }
-    newdiv.innerHTML = "<a href=\"http://flickr.com/photos/" + data.USERNAME + "/" + embed.photoid + "\"><img class=\"right\" src=\"" + embed.imgsrc + "\" /></a>" +
-                "<div class=\"flickrdesc\">" + embedtitle + embeddescription + "<div>From <a href=\"http://flickr.com/" + data.USERNAME + "\">Flickr</a></div>" +
+    newdiv.innerHTML = "<a href=\"http://flickr.com/photos/" + embed.USERNAME + "/" + embed.photoid + "\"><img class=\"right\" src=\"" + embed.imgsrc + "\" /></a>" +
+                "<div class=\"flickrdesc\">" + embedtitle + embeddescription + "<div>From <a href=\"http://flickr.com/" + embed.USERNAME + "\">Flickr</a></div>" +
                 "</div><div class=\"clear\"></div>";
 }
 
-function github(data, newdiv, embed) {
+function github(newdiv, embed) {
     newdiv.setAttribute('class', 'embedsimple github');
     var embedeventtype = "<p>Did some GitHub activity</p>";
     if (embed.event_type == "PushEvent") {
@@ -138,22 +138,22 @@ function github(data, newdiv, embed) {
         });
         embedeventtype += "</p>On <a href=\"" + embed.repo_url + "\">" + embed.repo.name + "</a></p>";
     }
-    newdiv.innerHTML = "<div class=\"right\">From <a href=\"http://github.com/" + data.USERNAME + "\">GitHub</a>" +
+    newdiv.innerHTML = "<div class=\"right\">From <a href=\"http://github.com/" + embed.USERNAME + "\">GitHub</a>" +
               "</div>" + embedeventtype + "<div class=\"clear\"></div>";
 }
 
-function twitter(data, newdiv, embed) {
+function twitter(newdiv, embed) {
     newdiv.setAttribute('class', 'embedsimple twitter');
     newdiv.innerHTML = embed.html;
 }
 
-function blog(data, newdiv, embed) {
+function blog(newdiv, embed) {
     newdiv.setAttribute('class', 'embedsimple blog');
     newdiv.innerHTML = "<h3><a href=\"" + embed.link + "\">" + embed.title + "</a></h3><div class=\"content\">" + 
               embed.stub + "<div class=\"clear\"></div></div><small>A recent <a href=\"/blog\">Blog Post</a></small>";
 }
 
-function imgur(data, newdiv, embed) {
+function imgur(newdiv, embed) {
     newdiv.setAttribute('class', 'embed-photo imgur');
     var embedtitle = "";
     if (embed.title) {
@@ -168,7 +168,7 @@ function imgur(data, newdiv, embed) {
                 "<div class=\"clear\"></div>";
 }
 
-function simple(data, newdiv, embed) {
+function simple(newdiv, embed) {
     newdiv.setAttribute('class', 'embedsimple embedsimple');
     newdiv.innerHTML = embed.html;
 }
