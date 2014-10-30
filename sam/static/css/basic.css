@@ -3,8 +3,8 @@ html, body {
   padding: 0px;
   background-color: #666;
   color: #000;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
   height: 100%;
 }
 
@@ -162,7 +162,7 @@ img {max-width: 100%;}
 }
 
 .hbtop {
-  margin-top: -165px;
+  margin-top: -195px;
 }
 
 .hoverhelp:hover .helpbox {

@@ -67,7 +67,7 @@ html, body {
   position: absolute;
   display: none;
   z-index: 10;
-  margin-top: -1.5px;
+  margin-top: -0.5px;
 }
 
 .navtop ul li {
