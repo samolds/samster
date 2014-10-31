@@ -19,10 +19,16 @@ def is_admin(request):
         return {'is_admin': False}
 
 
-def username(request):
+def github_username(request):
     """ Returns the username set in local_settings.py
     """
-    return {'USERNAME': settings.USERNAME}
+    return {'GITHUB_USERNAME': settings.GITHUB['USERNAME']}
+
+
+def linkedin_username(request):
+    """ Returns the username set in local_settings.py
+    """
+    return {'LINKEDIN_USERNAME': settings.LINKEDIN['USERNAME']}
 
 
 def sitename(request):
