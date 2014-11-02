@@ -1,14 +1,14 @@
 html, body {
-  min-width: 675px;
+  min-width: 56.25em;
 }
 
 .body {
-  margin: 10px;
-  margin-top: 20px;
+  margin: 0.83em;
+  margin-top: 1.67em;
   border-style: solid;
-  border-width: 2px;
+  border-width: 0.17em;
   border-color: #ffffff;
-  border-radius: 5px;
+  border-radius: 0.42em;
 }
 
 .wide {
@@ -37,24 +37,24 @@ html, body {
 }
 
 .content {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-top: 0.83em;
+  padding-bottom: 0.83em;
+  padding-left: 1.67em;
+  padding-right: 1.67em;
 }
 
 /* -------------- NAVBAR -------------- */
 
 #navbar {
   background-color: #000;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 1.67em;
+  padding-right: 1.67em;
 }
 
 #navbar a {
   color: #fff;
-  padding: 12px;
-  line-height: 40px;
+  padding: 1em;
+  line-height: 3.33em;
 }
 
 .navtop li {
@@ -67,7 +67,7 @@ html, body {
   position: absolute;
   display: none;
   z-index: 10;
-  margin-top: -0.5px;
+  margin-top: -0.042em;
 }
 
 .navtop ul li {

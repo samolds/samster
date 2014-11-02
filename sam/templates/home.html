@@ -11,7 +11,7 @@
   {% endif %}
   <div class="content">
     {% if home_post %}
-      <h1 class="content">{{ home_post.title }}</h1>
+      <div class="content"><h1>{{ home_post.title }}</h1></div>
       <div class="content">
         {% if home_images|length == 1 %}
           {% for image in home_images %}
@@ -47,7 +47,7 @@
     <div class="content inbetween"></div>
 
     <div class="content textright">
-        <a href="/quotes"><small>"{{ quote.quote }}"</small><br /><small>- {{ quote.author }}</small></a>
+        <a href="/quotes#{{ quote.pk }}"><small>"{{ quote.quote }}"<br />- {{ quote.author }}</small></a>
     </div>
   {% endif %}
 </div>
@@ -55,11 +55,13 @@
 {% if post %}
   <div class="body sub-medium">
     <div class="content">
-      {% if is_site_image %}
-       {% include "art_work_stub.html" %}
-      {% else %}
-       {% include "blog_post_stub.html" %}
-      {% endif %}
+      <div class="content">
+        {% if is_site_image %}
+         {% include "art_work_stub.html" %}
+        {% else %}
+         {% include "blog_post_stub.html" %}
+        {% endif %}
+      </div>
     </div>
   </div>
 {% endif %}

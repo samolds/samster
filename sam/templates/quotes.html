@@ -12,7 +12,7 @@
 
   {% if quotes %}
     {% for quote in quotes %}
-      <div class="content">
+      <div id="{{ quote.pk }}" class="content">
         <p>"{{ quote.quote }}"</p>
         <p>- {{ quote.author }}</p>
       </div>
