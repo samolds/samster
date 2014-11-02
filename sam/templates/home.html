@@ -46,8 +46,10 @@
   {% if quote %}
     <div class="content inbetween"></div>
 
-    <div class="content textright">
+    <div class="content">
+      <div class="content textright">
         <a href="/quotes#{{ quote.pk }}"><small>"{{ quote.quote }}"<br />- {{ quote.author }}</small></a>
+      </div>
     </div>
   {% endif %}
 </div>

@@ -1,6 +1,6 @@
 <table>
   <tr>
-    <td class="textleft tdtitle" rowspan=3><h2><a href="/blog/post/{{ post.pk }}">{{ post.title }}</a></h2></td>
+    <td class="textleft tdtitle" rowspan=3><a href="/blog/post/{{ post.pk }}"><h2>{{ post.title }}</h2></a></td>
     {% load time_localization %}
     <td class="textright post-header-right">
       {% if full_post_stub or not full_post_stub and post.creation_date|to_str == post.updated_date|to_str %}

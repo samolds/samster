@@ -9,11 +9,23 @@ html, body {
   height: 100%;
 }
 
-div, p, th, td, dd, dt, ol, q, li, ul, acronym, abbr, input, select, textarea, pre, blockquote, img, table, tr, td, form, pre {
+div, p, dd, dt, ol, q, li, ul, acronym, abbr, input, select, textarea, pre, blockquote, img, form, pre {
   color: #000;
-  margin: 0px;
-  padding: 0px;
-  border: 0px;
+  margin: 0em;
+  padding: 0em;
+  border: 0em;
+  list-style-type: none;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+th, td, table, tr, td {
+  color: #000;
+  margin: 0em;
+  padding: 0em;
+  border: 0em;
   list-style-type: none;
   text-decoration: none;
   font-family: Arial, Helvetica, sans-serif;
@@ -26,15 +38,16 @@ p {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    padding: 0;
-    font-weight: normal;
-    font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 a, a:link, a:visited, a:active, a:hover {
-    text-decoration: none;
-    color: #000;
+  font-size: 1em;
+  text-decoration: none;
+  color: #000;
 }
 
 a:hover {color: #fff;}
