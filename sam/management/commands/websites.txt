@@ -1,0 +1,6 @@
+http://mysite.com -=- My Site -=- prsl
+http://facebook.com/me -=- Facebook -=- prsl
+
+http://school.school.edu/project -=- School Project -=- mntn
+
+http://whereiwork.com -=- Work Project -=- dvlp
