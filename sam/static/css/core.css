@@ -52,6 +52,10 @@ a, a:link, a:visited, a:active, a:hover {
 
 a:hover {color: #fff;}
 
+p a, p a:link, p a:visited, p a:active, p a:hover {
+  text-decoration: underline;
+}
+
 #bodywrap {
   background-image: url('/static/img/bg.png');
   background-size: 100% 100%;
