@@ -1,5 +1,1 @@
-#User-agent: Google
-#Disallow:
-
-#User-agent: *
-#Disallow: /
+# Meh. Allow all of the site crawlers, I guess.
