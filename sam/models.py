@@ -65,10 +65,6 @@ class Website(models.Model):
     def __unicode__(self):
         return "%s" % self.display
 
-    def save(self, *args, **kwargs):
-        self.url = self.url.lower()
-        super(Website, self).save(*args, **kwargs)
-
     class Meta:
         verbose_name = (u"Website")
         verbose_name_plural = (u"Websites")
