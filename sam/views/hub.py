@@ -19,6 +19,10 @@ def hub(request):
             elif site.kind == "dvlp":
                 develops.append(site)
 
+        personals.sort(key=lambda site: site.display)
+        maintains.sort(key=lambda site: site.display)
+        develops.sort(key=lambda site: site.display)
+
         cache_obj = {
             "personals": personals,
             "maintains": maintains,
