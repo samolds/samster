@@ -28,6 +28,7 @@
   ServerAdmin myemail@email.com
   DocumentRoot /full/path/samster/root
 
+  Alias /favicon.ico /full/path/samster/static/img/favicon.ico
   Alias /robots.txt /full/path/samster/robots.txt
   Alias /images/ /full/path/samster/images/images/
   Alias /static/ /full/path/samster/static/
