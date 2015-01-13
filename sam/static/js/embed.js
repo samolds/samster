@@ -145,7 +145,9 @@ function github(newdiv, embed) {
 function twitter(newdiv, embed) {
     newdiv.setAttribute('class', 'embedsimple twitter');
     newdiv.innerHTML = embed.html;
-    twttr.widgets.load(newdiv);
+    if (twttr && twttr.widgets) {
+      twttr.widgets.load(newdiv);
+    }
 }
 
 function blog(newdiv, embed) {
