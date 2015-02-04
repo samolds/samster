@@ -193,7 +193,9 @@ class PostAdmin(admin.ModelAdmin):
     exclude = ('comments',)
     readonly_fields = ('view_count', 'content',)
     list_display = ("title",
-                    "creation_date")
+                    "view_count",
+                    "creation_date",
+                    "private")
     list_filter = ["private",
                    "tags",
                    "creation_date"]
