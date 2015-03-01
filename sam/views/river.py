@@ -22,7 +22,7 @@ def river(request):
 
 def embeds(embeds):
     too_old = []
-    no_older_than = 30
+    no_older_than = 90
     for embed in embeds:
         embed['date'] = embed['date'].replace(tzinfo=None)
         if embed['date'] < (datetime.now() - timedelta(days=no_older_than)):

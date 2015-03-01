@@ -57,10 +57,10 @@ p a, p a:link, p a:visited, p a:active, p a:hover {
 }
 
 #bodywrap {
-  background-image: url('/static/img/bg.png');
-  background-size: 100% 100%;
+  background-image: url('/static/img/bg.jpg');
+  /*background-size: 100% 100%;*/
   background-attachment: fixed;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-position: center top;
   min-height: 100%;
 }
@@ -194,7 +194,7 @@ img {max-width: 100%;}
 }
 
 .hbtop {
-  margin-top: -16.25em;
+  margin-top: -11em;
 }
 
 .hoverhelp:hover .helpbox {
@@ -224,8 +224,8 @@ img {max-width: 100%;}
 
 .inbetween {
   opacity: 0.5;
-  border-top: 0.17em solid #fff;
-  border-bottom: 0.17em solid #fff;
+  border-top: 0.17em solid #e0e0e0;
+  border-bottom: 0.17em solid #e0e0e0;
 }
 
 .fieldWrapper {

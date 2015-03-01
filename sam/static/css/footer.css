@@ -14,7 +14,7 @@
 }
 
 #footbar {
-  background-color: #000;
+  /*background-color: #000;*/
   color: #fff;
   padding: 0.17em;
   padding-left: 1.67em;
@@ -32,6 +32,6 @@
 }
 
 #footbar a:hover {
-  background-color: #e0e0e0;
-  color: #000;
+  /*background-color: #e0e0e0;*/
+  color: #aaa;
 }

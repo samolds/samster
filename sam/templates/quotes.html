@@ -5,7 +5,7 @@
 {% block content %}
 <div class="body narrow">
   <div class="content">
-    <h1>My Favorite Quotes</h1>
+    <h1 id="top">My Favorite Quotes</h1>
   </div>
 
   <div class="content inbetween"></div>
@@ -20,7 +20,9 @@
       <div class="content inbetween"></div>
     {% endfor %}
 
-    <div class="content"><div class="content"></div></div>
+    <div class="content">
+      <a href="#top">Back To Top</a>
+    </div>
   {% else %}
     <div class="content">Nothing to display</div>
   {% endif %}

@@ -1,4 +1,5 @@
 var embedIds = [];
+var displayed = [];
 
 // Requires jQuery
 function ajaxCall(embedType) {
@@ -14,15 +15,32 @@ function ajaxCall(embedType) {
   })
 }
 
-function toggleDisplay(className) {
+function adjustEmpty() {
+  var inbetween = document.getElementById('river-inbetween');
+  var content = document.getElementById('river-content');
+  if (displayed.length == 0) {
+    content.style.display = "none";
+    inbetween.style.display = "none";
+  } else {
+    inbetween.style.display = "block";
+    content.style.display = "block";
+  }
+}
+
+function toggleDisplay(className, fromButtonClick) {
     var elements = document.getElementsByClassName(className);
     var checked = document.getElementById(className + '-toggle').checked;
     for (var i = 0; i < elements.length; i++) {
         if (!checked) {
             elements[i].style.display = "none";
+            displayed.pop(elements[i]);
         } else { 
             elements[i].style.display = "block";
+            displayed.push(elements[i]);
         }
+    }
+    if (fromButtonClick) {
+        adjustEmpty();
     }
     return checked;
 }
@@ -68,7 +86,7 @@ function embed(embeds) {
         }
     });
     if (embeds.length > 0) {
-        if (toggleDisplay(embeds[0].type)) {
+        if (toggleDisplay(embeds[0].type, false)) {
             document.getElementById("hide").style.display = "none";
             document.getElementById("embeds").style.display = "block";
         }
