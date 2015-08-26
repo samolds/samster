@@ -78,6 +78,7 @@ def post(request, post_id=None):
     exists = False
     images = []
     full_post_stub = True
+    banner_photo = None
     if post_id:
         post = Post.objects.filter(pk=post_id)
     if post:
@@ -87,15 +88,21 @@ def post(request, post_id=None):
             post.view_count += 1
             post.save(ignore_update_date=True)
             for image in post.images.values():
-                images.append(SiteImage.objects.get(image=image['image']))
+                photo = SiteImage.objects.get(image=image['image'])
+                if photo.tags.filter(tag="banner_photo"):
+                    banner_photo = photo
+                else:
+                    images.append(photo)
             images.reverse()
 
     return render_to_response('blog_post.html', {
         "post": post,
+        "banner_photo": banner_photo,
         "exists": exists,
         "images": images,
         "form": form,
-        "full_post_stub": full_post_stub
+        "full_post_stub": full_post_stub,
+        "full_post_page": True
     }, context_instance=RequestContext(request))
 
 

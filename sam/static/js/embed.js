@@ -169,7 +169,7 @@ function twitter(newdiv, embed) {
 }
 
 function blog(newdiv, embed) {
-    newdiv.setAttribute('class', 'embedsimple blog');
+    newdiv.setAttribute('class', 'embedsimple blog riverpost');
     newdiv.innerHTML = "<h3><a href=\"" + embed.link + "\">" + embed.title + "</a></h3><div class=\"content\">" + 
               embed.stub + "<div class=\"clear\"></div></div><small>A recent <a href=\"/blog\">Blog Post</a></small>";
 }

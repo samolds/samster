@@ -33,10 +33,6 @@ th, td, table, tr, td {
   vertical-align: middle;
 }
 
-p {
-  line-height: 1.5em;
-}
-
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
@@ -52,12 +48,21 @@ a, a:link, a:visited, a:active, a:hover {
 
 a:hover {color: #fff;}
 
-p a, p a:link, p a:visited, p a:active, p a:hover {
+p, ol, ul, li, input, select, textarea, pre, blockquote, img, form {
+  line-height: 1.5em;
+}
+
+.content a, .content a:link, .content a:visited, .content a:active, .content a:hover {
   text-decoration: underline;
 }
 
+.content-header a, .content-header a:link, .content-header a:visited, .content-header a:active, .content-header a:hover {
+  text-decoration: none;
+}
+
 #bodywrap {
-  background-image: url('/static/img/bg.jpg');
+  background: #393939;
+  background-image: url('/static/img/bg.png');
   /*background-size: 100% 100%;*/
   background-attachment: fixed;
   background-repeat: repeat;
@@ -76,8 +81,24 @@ img {max-width: 100%;}
   word-wrap: break-word;
 }
 
-.postcontent h1, .postcontent h2, .postcontent h3, .postcontent h4, .postcontent h5 {
-  padding-bottom: 1.66em;
+.postcontent h1 {
+  font-size: 1.7em;
+}
+
+.postcontent h2 {
+  font-size: 1.3em;
+}
+
+.postcontent h3 {
+  font-size: 1em;
+}
+
+.postcontent h4 {
+  font-size: 0.8em;
+}
+
+.postcontent h5 {
+  font-size: 0.75em;
 }
 
 .postcontent p {
@@ -99,8 +120,12 @@ img {max-width: 100%;}
   padding-left: 3.33em;
 }
 
-.postcontent ul li { list-style-type: circle; }
-.postcontent ol li { list-style-type: decimal; }
+.riverpost ul li, .postcontent ul li { list-style-type: circle; }
+.riverpost ol li, .postcontent ol li { list-style-type: decimal; }
+
+.riverpost ul, .riverpost ol {
+  padding-left: 3.33em;
+}
 
 .comment {
   border-style: solid;
@@ -313,7 +338,7 @@ img {max-width: 100%;}
   padding: 0.42em;
 }
 
-.oembedded li {
+.oembedded > li {
   border-style: solid;
   border-width: 0.17em;
   border-color: #000;

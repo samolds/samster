@@ -1,4 +1,4 @@
-from sam.models import Post, Tag, Quote, SiteImage
+from sam.models import Post, Tag, SiteImage
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.cache import cache
@@ -12,11 +12,7 @@ def home(request):
         public = Q(private=False)
         home_post = None
         home_images = []
-        if SiteImage.objects.filter(tags__tag="banner_photo").filter(public):
-            banners = list(SiteImage.objects.filter(tags__tag="banner_photo").filter(public))
-            banner_photo = banners[random.randrange(len(banners))]
-        else:
-            banner_photo = None
+        banner_photo = None
         if Tag.objects.filter(tag="top_home"):
             posts = list(Post.objects.filter(tags__tag="top_home"))
             if posts:
@@ -53,18 +49,12 @@ def home(request):
 
         full_post_stub = False
 
-        quotes = list(Quote.objects.filter(public).filter(length__lt = 200))
-        quote = None
-        if quotes:
-            quote = quotes[random.randrange(len(quotes))]
-
         cache_obj = {
             "home_post": home_post,
             "home_images": home_images,
             "post": post,
             "images": images,
             "is_site_image": is_site_image,
-            "quote": quote,
             "banner_photo": banner_photo,
             "full_post_stub": full_post_stub
         }
@@ -75,7 +65,6 @@ def home(request):
         post = home["post"]
         images = home["images"]
         is_site_image = home["is_site_image"]
-        quote = home["quote"]
         banner_photo = home["banner_photo"]
         full_post_stub = home["full_post_stub"]
 
@@ -85,7 +74,6 @@ def home(request):
         "post": post,
         "images": images,
         "is_site_image": is_site_image,
-        "quote": quote,
         "banner_photo": banner_photo,
         "full_post_stub": full_post_stub
     }, context_instance=RequestContext(request))

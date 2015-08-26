@@ -1,6 +1,10 @@
-<table>
+<table {% if full_post_page %}class="content-header"{% endif %}>
   <tr>
-    <td class="textleft tdtitle" rowspan=3><a href="/blog/post/{{ post.pk }}"><h2>{{ post.title }}</h2></a></td>
+    {% if full_post_page %}
+      <td class="textleft tdtitle" rowspan=3><a href="/blog/post/{{ post.pk }}"><h1>{{ post.title }}</h1></a></td>
+    {% else %}
+      <td class="textleft tdtitle" rowspan=3><a href="/blog/post/{{ post.pk }}"><h2>{{ post.title }}</h2></a></td>
+    {% endif %}
     {% load time_localization %}
     <td class="textright post-header-right">
       {% if full_post_stub or not full_post_stub and post.creation_date|to_str == post.updated_date|to_str %}

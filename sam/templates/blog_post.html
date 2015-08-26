@@ -7,6 +7,11 @@
 {% if exists %}
   {% if post %}
     <div class="body wide">
+      {% if banner_photo %}
+        <div class="bannerphoto" style="background-image: url('{{ MEDIA_URL }}{{ banner_photo.image }}');">
+            <div class="bannerfiller"></div>
+        </div>
+      {% endif %}
       <div class="content">
 
         {% include "blog_post_header.html" %}
