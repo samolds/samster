@@ -81,6 +81,10 @@ img {max-width: 100%;}
   word-wrap: break-word;
 }
 
+.site-title {
+  font-size: 2.5em;
+}
+
 .postcontent h1 {
   font-size: 1.7em;
 }
@@ -176,16 +180,16 @@ img {max-width: 100%;}
 .bannertext {
   color: #fff;
   background-color:rgba(25, 25, 25, 0.7);
-  border-radius: 0.42em;
-  padding: 0.83em;
-  padding-left: 3.33em;
-  padding-right: 3.33em;
   font-size: 1.75em;
-  margin: 8.33em;
-  margin-bottom: 2.08em;
+  margin-top: 10em;
   display: inline-block;
-  min-width: 30%;
-  text-align: center;
+  width: 100%;
+  text-align: left;
+}
+
+.bannertext h1 {
+  padding: 0.1em;
+  padding-left: 1em;
 }
 
 .bannerfiller {

@@ -6,12 +6,18 @@
 <div class="body wide">
   {% if banner_photo %}
     <div class="bannerphoto" style="background-image: url('{{ MEDIA_URL }}{{ banner_photo.image }}');">
-        <div class="bannerfiller"></div>
+      <div class="bannerfiller">
+        <div class="bannertext">
+          <h1 class="site-title">{{ home_post.title }}</h1>
+        </div>
+      </div>
     </div>
   {% endif %}
   <div class="content">
     {% if home_post %}
-      <div class="content"><h1>{{ home_post.title }}</h1></div>
+      {% if not banner_photo %}
+        <div class="content"><h1 class="site-title">{{ home_post.title }}</h1></div>
+      {% endif %}
       <div class="content">
         {% if home_images|length == 1 %}
           {% for image in home_images %}
